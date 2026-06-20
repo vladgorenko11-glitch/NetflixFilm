@@ -12,8 +12,8 @@
   },
   "videoUrl": "",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/aow0ryv3.jpg"
   },
   "bgPosition": {
     "x": 50,
