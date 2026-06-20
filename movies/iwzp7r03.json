@@ -6,7 +6,8 @@
     "badge-1": "2023",
     "badge-3": "122 минути",
     "badge-4": "1080p",
-    "hero-eyebrow": "| NETFLIX ORIGINAL"
+    "hero-eyebrow": "| NETFLIX ORIGINAL",
+    "hero-desc": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
