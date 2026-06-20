@@ -2,8 +2,9 @@
   "title": "Сердце Стоун",
   "poster": "posters/iwzp7r03.jpg",
   "fields": {
-    "badge-2": "HDRezka Studio<br><br>",
-    "badge-1": "2023"
+    "badge-2": "HDRezka Studio<br>",
+    "badge-1": "2023",
+    "badge-3": "X"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
