@@ -3,7 +3,8 @@
   "poster": "posters/r5d8wgt3.jpg",
   "fields": {
     "badge-1": "2021",
-    "hero-eyebrow": "| NETFLIX ORIGINAL"
+    "hero-eyebrow": "| NETFLIX ORIGINAL",
+    "badge-2": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
