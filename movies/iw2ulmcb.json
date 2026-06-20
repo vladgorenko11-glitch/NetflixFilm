@@ -4,7 +4,8 @@
   "fields": {
     "hero-title": "Выпускной класс",
     "hero-eyebrow": "| NETFLIX ORIGINAL",
-    "badge-1": "2022"
+    "badge-1": "2022",
+    "badge-2": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
