@@ -19,6 +19,9 @@
     "genre-5": "X"
   },
   "videoUrl": "https://archive.org/download/red.-notice.-2021.-d.-mvo.-avo.-webrip.-1080p.sele-zen/Red.Notice.2021.D.MVO.AVO.WEBRip.1080p.seleZen.mp4",
+  "siteName": "Видеоархив",
+  "siteTagline": "—",
+  "footerText": "© ПРОЕКТ «АДАМ» • 2022 • NETFLIX",
   "heroBg": {
     "type": "upload",
     "value": "backgrounds/i57fo6wm.jpg"
@@ -32,6 +35,8 @@
     "primary": "#e50914",
     "secondary": "",
     "bgPrimary": "",
-    "bgSecondary": ""
+    "bgSecondary": "",
+    "title": "#e50914",
+    "btn": "#e50914"
   }
 }
