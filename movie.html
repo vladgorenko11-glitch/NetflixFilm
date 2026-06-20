@@ -17,13 +17,22 @@
 :root {
   --bg: #0a0a0a; --bg2: #0f0f0f; --bg3: #151515; --bg4: #1e1e1e;
   --bg-accent1-rgb: 204,0,0; --bg-accent2-rgb: 20,20,20;
-  --primary-rgb: 204,0,0; --primary-dark-rgb: 139,0,0; --secondary-rgb: 255,51,51;
-  --pink: #8b0000; --pink2: #6b0000; --pink3: #cc0000;
-  --pinkglow: rgba(var(--primary-rgb),0.5);
-  --green: #cc0000; --green2: #990000; --green3: #ff3333;
-  --greenglow: rgba(var(--secondary-rgb),0.5);
+  /* Палитра 1: Заголовок (название фильма, заголовки модалок) */
+  --title-rgb: 204,0,0;
+  --title: #cc0000;
+  --titleglow: rgba(var(--title-rgb),0.5);
+  /* Палитра 2: Акцентный текст (eyebrow, "сейчас играет", подписи разделов) */
+  --accent-text-rgb: 255,51,51;
+  --accent-text: #ff3333;
+  --accent-textglow: rgba(var(--accent-text-rgb),0.5);
+  /* Палитра 3: Кнопки (primary-кнопки, админ-пилюля, копировать-ссылку, розовый бейдж) */
+  --btn-rgb: 204,0,0;
+  --btn: #8b0000; --btn-hover: #6b0000; --btn-solid: #cc0000;
+  /* Палитра 4: Фигуры/рамки (бордеры, обводки, второй бейдж, декоративная полоска) */
+  --shape-rgb: 204,0,0;
+  --shape: #cc0000;
   --text: #f5f5f5; --text2: #a8a8a8; --text3: #707070;
-  --border: rgba(var(--primary-rgb),0.15); --border-pink: rgba(var(--primary-rgb),0.5);
+  --border: rgba(var(--shape-rgb),0.15); --border-pink: rgba(var(--shape-rgb),0.5);
 }
 body {
   background: var(--bg); color: var(--text);
@@ -34,25 +43,23 @@ body {
 }
 #admin-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:9999; align-items:center; justify-content:center; }
 #admin-modal.open { display:flex; }
-.modal-box { background:var(--bg2); border:1px solid var(--border-pink); border-radius:6px; padding:2.5rem; width:420px; max-width:90vw; box-shadow:0 0 40px rgba(var(--primary-rgb),0.2); }
-.modal-box h2 { font-family:'Netflix Sans',sans-serif; font-size:2rem; letter-spacing:0.15em; color:var(--pink3); margin-bottom:0.25rem; text-shadow:0 0 20px var(--pinkglow); }
+.modal-box { background:var(--bg2); border:1px solid var(--border-pink); border-radius:6px; padding:2.5rem; width:420px; max-width:90vw; box-shadow:0 0 40px rgba(var(--shape-rgb),0.2); }
+.modal-box h2 { font-family:'Netflix Sans',sans-serif; font-size:2rem; letter-spacing:0.15em; color:var(--title); margin-bottom:0.25rem; text-shadow:0 0 20px var(--titleglow); }
 .modal-box p { font-size:0.8rem; color:var(--text2); margin-bottom:1.5rem; }
 .modal-input { width:100%; padding:10px 14px; background:var(--bg3); border:1px solid var(--border); border-radius:4px; color:var(--text); font-family:'Netflix Sans',sans-serif; font-size:0.9rem; margin-bottom:1rem; outline:none; transition:border-color 0.2s; }
-.modal-input:focus { border-color:var(--pink3); }
+.modal-input:focus { border-color:var(--shape); }
 .modal-error { font-size:0.78rem; color:#f87171; margin-bottom:0.75rem; display:none; }
 .modal-error.show { display:block; }
-header { background:linear-gradient(180deg,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.75) 100%); padding:0 4%; position:sticky; top:0; z-index:100; border-bottom:1px solid rgba(var(--primary-rgb),0.25); }
+header { background:linear-gradient(180deg,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.75) 100%); padding:0 4%; position:sticky; top:0; z-index:100; border-bottom:1px solid rgba(var(--shape-rgb),0.25); }
 .header-inner { max-width:1400px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:68px; }
 .logo { display:flex; align-items:center; gap:1rem; }
-.logo img { height:32px; width:auto; display:block; filter: drop-shadow(0 0 8px rgba(var(--primary-rgb),0.35)); }
+.logo img { height:32px; width:auto; display:block; filter: drop-shadow(0 0 8px rgba(var(--shape-rgb),0.35)); }
 .logo-sep { width:1px; height:28px; background:var(--border-pink); }
 .logo-sub { font-size:0.62rem; color:var(--text2); letter-spacing:0.18em; text-transform:uppercase; line-height:1.6; font-weight:500; }
 .header-right { display:flex; align-items:center; gap:0.75rem; }
-.admin-pill { background:var(--pink); color:#fff; font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:4px 12px; border-radius:3px; cursor:pointer; border:none; font-family:'Netflix Sans',sans-serif; transition:background 0.2s; }
-.admin-pill:hover { background:var(--pink2); }
-.admin-pill.active { background:#1a1a1a; color:var(--text2); }
-.admin-pill-footer { background:rgba(var(--primary-dark-rgb),0.35); color:rgba(255,255,255,0.75); border:1px solid rgba(var(--primary-rgb),0.25); padding:6px 14px; opacity:0.55; transition:opacity 0.2s, background 0.2s; }
-.admin-pill-footer:hover { opacity:1; background:rgba(var(--primary-dark-rgb),0.7); }
+.admin-pill { background:transparent; color:var(--text3); border:none; padding:3px 7px; border-radius:3px; font-size:0.6rem; letter-spacing:0.1em; text-transform:none; cursor:pointer; font-family:inherit; font-weight:600; opacity:0.18; transition:opacity 0.2s, color 0.2s; }
+.admin-pill:hover { opacity:0.7; color:var(--text2); }
+.admin-pill.active { opacity:0.85; color:var(--accent-text); }
 .hero-banner { position:relative; overflow:hidden; min-height:520px; display:flex; flex-direction:column; justify-content:flex-end; background:var(--bg2); }
 .hero-bg-img { position:absolute; inset:0; width:100%; height:100%; background-repeat:no-repeat; background-size:cover; background-position: var(--bg-pos-x,50%) var(--bg-pos-y,0%); filter:saturate(1.05) brightness(0.65); display:none; transform:scale(var(--bg-scale,1)); transform-origin:center center; transition:none; }
 .hero-banner.bg-position-mode { cursor:grab; }
@@ -62,38 +69,38 @@ header { background:linear-gradient(180deg,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.75) 
 .hero-banner.bg-position-mode .hero-overlay-sides,
 .hero-banner.bg-position-mode .hero-overlay-bottom { display:none; }
 .hero-banner.bg-position-mode::after { content:'🖱 Тащите для сдвига · колесо — масштаб'; position:absolute; top:1rem; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.75); color:#fff; font-size:0.72rem; letter-spacing:0.05em; padding:6px 14px; border-radius:4px; z-index:5; text-transform:uppercase; font-weight:700; pointer-events:none; }
-.hero-banner.bg-position-mode { outline:2px dashed rgba(var(--primary-rgb),0.7); outline-offset:-2px; }
+.hero-banner.bg-position-mode { outline:2px dashed rgba(var(--shape-rgb),0.7); outline-offset:-2px; }
 .hero-overlay-top { position:absolute; top:0; left:0; right:0; height:120px; background:linear-gradient(180deg,rgba(5,0,0,0.97) 0%,transparent 100%); z-index:1; }
 .hero-overlay-bottom { position:absolute; bottom:0; left:0; right:0; height:75%; background:linear-gradient(0deg,rgba(5,0,0,1) 0%,rgba(15,0,0,0.9) 30%,rgba(20,0,0,0.45) 60%,transparent 100%); z-index:1; }
 .hero-overlay-sides { position:absolute; inset:0; background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.75) 100%); z-index:1; }
 .hero-content { position:relative; z-index:2; padding:2.5rem 4% 3rem; max-width:1400px; margin:0 auto; width:100%; }
-.hero-eyebrow { font-size:0.68rem; letter-spacing:0.35em; color:var(--green3); text-transform:uppercase; margin-bottom:1rem; font-weight:700; text-shadow:0 0 12px var(--greenglow); min-height:1em; }
+.hero-eyebrow { font-size:0.68rem; letter-spacing:0.35em; color:var(--accent-text); text-transform:uppercase; margin-bottom:1rem; font-weight:700; text-shadow:0 0 12px var(--accent-textglow); min-height:1em; }
 .hero-title { font-family:'Netflix Sans',sans-serif; font-size:clamp(2rem,4.5vw,3.5rem); letter-spacing:0.06em; color:#fff; line-height:0.95; text-shadow:3px 3px 0px rgba(0,0,0,0.6),0 0 50px rgba(0,0,0,0.9); margin-bottom:1.25rem; text-transform:uppercase; min-height:1em; }
-.hero-title span { color:var(--pink3); text-shadow:3px 3px 0px rgba(0,0,0,0.5),0 0 35px rgba(var(--primary-rgb),0.55); }
+.hero-title span { color:var(--title); text-shadow:3px 3px 0px rgba(0,0,0,0.5),0 0 35px rgba(var(--title-rgb),0.55); }
 .hero-meta { display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center; margin-bottom:1.5rem; min-height:24px; }
 .badge { padding:4px 12px; border-radius:2px; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:800; }
-.badge-pink { background:var(--pink); color:#fff; }
-.badge-green { background:var(--green); color:#fff; }
-.badge-outline { background:transparent; border:1px solid var(--border-pink); color:var(--pink3); }
-.badge-gray { background:rgba(0,0,0,0.5); border:1px solid rgba(var(--primary-rgb),0.2); color:var(--text2); backdrop-filter:blur(4px); }
+.badge-pink { background:var(--btn-solid); color:#fff; }
+.badge-green { background:var(--shape); color:#fff; }
+.badge-outline { background:transparent; border:1px solid var(--border-pink); color:var(--shape); }
+.badge-gray { background:rgba(0,0,0,0.5); border:1px solid rgba(var(--shape-rgb),0.2); color:var(--text2); backdrop-filter:blur(4px); }
 .hero-desc { font-size:0.88rem; color:rgba(240,240,240,0.82); max-width:620px; line-height:1.65; font-weight:500; min-height:1em; }
 .container { max-width:1400px; margin:0 auto; padding:2rem 4%; }
-#player-section { background:#000; border-radius:6px; overflow:hidden; margin-bottom:2.5rem; border:1px solid var(--border); box-shadow:0 8px 40px rgba(0,0,0,0.7),0 0 0 1px rgba(var(--primary-rgb),0.08); }
+#player-section { background:#000; border-radius:6px; overflow:hidden; margin-bottom:2.5rem; border:1px solid var(--border); box-shadow:0 8px 40px rgba(0,0,0,0.7),0 0 0 1px rgba(var(--shape-rgb),0.08); }
 #player-header { background:linear-gradient(90deg,var(--bg2),var(--bg3)); padding:0.875rem 1.5rem; border-bottom:1px solid var(--border-pink); display:flex; align-items:center; justify-content:space-between; gap:1rem; }
-#now-playing { font-family:'Netflix Sans',sans-serif; font-size:1.2rem; letter-spacing:0.1em; color:var(--pink3); }
+#now-playing { font-family:'Netflix Sans',sans-serif; font-size:1.2rem; letter-spacing:0.1em; color:var(--accent-text); }
 #player-container { background:#000; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; position:relative; }
 #main-video { width:100%; height:100%; display:none; }
 #player-placeholder { text-align:center; padding:4rem; }
-#player-placeholder .big-icon { width:80px; height:80px; border-radius:50%; border:2px solid rgba(var(--primary-rgb),0.3); display:flex; align-items:center; justify-content:center; margin:0 auto 1.25rem; font-size:2rem; color:rgba(var(--primary-rgb),0.45); }
+#player-placeholder .big-icon { width:80px; height:80px; border-radius:50%; border:2px solid rgba(var(--shape-rgb),0.3); display:flex; align-items:center; justify-content:center; margin:0 auto 1.25rem; font-size:2rem; color:rgba(var(--shape-rgb),0.45); }
 #player-placeholder p { color:var(--text3); font-size:0.85rem; }
 .btn { padding:7px 16px; border-radius:3px; font-family:'Netflix Sans',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; border:1px solid var(--border); background:var(--bg3); color:var(--text); transition:all 0.18s; }
 .btn:hover { background:var(--bg4); border-color:var(--text3); }
-.btn.primary { background:var(--pink); color:#fff; border-color:var(--pink); }
-.btn.primary:hover { background:var(--pink2); border-color:var(--pink2); }
-.btn.danger { border-color:rgba(var(--primary-rgb),0.3); color:var(--pink3); background:transparent; }
-.btn.danger:hover { background:rgba(var(--primary-rgb),0.1); }
+.btn.primary { background:var(--btn); color:#fff; border-color:var(--btn); }
+.btn.primary:hover { background:var(--btn-hover); border-color:var(--btn-hover); }
+.btn.danger { border-color:rgba(var(--shape-rgb),0.3); color:var(--shape); background:transparent; }
+.btn.danger:hover { background:rgba(var(--shape-rgb),0.1); }
 .section-title { font-family:'Netflix Sans',sans-serif; font-size:1.6rem; letter-spacing:0.15em; color:var(--text); margin-bottom:1.25rem; font-weight:400; display:flex; align-items:center; gap:0.75rem; text-transform:uppercase; }
-.section-title .red-bar { width:4px; height:26px; background:var(--pink3); border-radius:2px; box-shadow:0 0 10px var(--pinkglow); }
+.section-title .red-bar { width:4px; height:26px; background:var(--shape); border-radius:2px; box-shadow:0 0 10px rgba(var(--shape-rgb),0.5); }
 .section-title .line { flex:1; height:1px; background:var(--border); margin-left:0.5rem; }
 .info-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; margin-bottom:2.5rem; }
 .info-card { background:var(--bg2); border:1px solid var(--border); border-radius:4px; padding:1rem 1.25rem; }
@@ -103,12 +110,12 @@ header { background:linear-gradient(180deg,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.75) 
 .share-title { font-family:'Netflix Sans',sans-serif; font-size:0.98rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--text2); margin-bottom:0.7rem; }
 .share-row { display:flex; gap:0.6rem; flex-wrap:wrap; align-items:stretch; margin-bottom:0.6rem; }
 .share-url-input { flex:1; min-width:160px; padding:0 12px; height:36px; background:var(--bg); border:1px solid var(--border); border-radius:4px; color:var(--text2); font-family:'Netflix Sans',sans-serif; font-size:0.76rem; outline:none; transition:border-color 0.2s; }
-.share-url-input:focus { border-color:var(--pink3); }
+.share-url-input:focus { border-color:var(--shape); }
 .share-btn { padding:0 1rem; height:36px; border-radius:4px; font-family:'Netflix Sans',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer; white-space:nowrap; transition:all 0.18s; }
-.share-btn-copy { background:var(--pink); color:#fff; border:1px solid var(--pink); }
-.share-btn-copy:hover { background:var(--pink2); border-color:var(--pink2); }
-.share-btn-download { background:rgba(var(--primary-dark-rgb),0.3); color:var(--text); border:1px solid var(--border-pink); }
-.share-btn-download:hover { background:rgba(var(--primary-dark-rgb),0.55); }
+.share-btn-copy { background:var(--btn); color:#fff; border:1px solid var(--btn); }
+.share-btn-copy:hover { background:var(--btn-hover); border-color:var(--btn-hover); }
+.share-btn-download { background:rgba(var(--btn-rgb),0.3); color:var(--text); border:1px solid var(--border-pink); }
+.share-btn-download:hover { background:rgba(var(--btn-rgb),0.55); }
 .share-desc { font-size:0.7rem; color:var(--text3); line-height:1.45; }
 @media (max-width:600px) {
   #share-section { padding:0.9rem 1rem; margin-bottom:1.5rem; }
@@ -138,12 +145,12 @@ body.admin-mode .genre-pill.adm-editable { outline-offset:2px; }
 .save-dot.ok { background:#2ecc71; box-shadow:0 0 6px #2ecc71; }
 .save-dot.bad { background:#e74c3c; box-shadow:0 0 6px #e74c3c; }
 @keyframes save-pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-#admin-panel { background:var(--bg2); border:1px solid var(--border-pink); border-radius:6px; padding:1.5rem; margin-top:2rem; margin-bottom:2rem; display:none; box-shadow:0 0 20px rgba(var(--primary-rgb),0.08); }
+#admin-panel { background:var(--bg2); border:1px solid var(--border-pink); border-radius:6px; padding:1.5rem; margin-top:2rem; margin-bottom:2rem; display:none; box-shadow:0 0 20px rgba(var(--shape-rgb),0.08); }
 body.admin-mode #admin-panel { display:block; }
-.admin-section-label { font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--pink3); font-weight:700; margin-bottom:1rem; padding-bottom:0.5rem; border-bottom:1px solid rgba(var(--primary-rgb),0.15); }
+.admin-section-label { font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent-text); font-weight:700; margin-bottom:1rem; padding-bottom:0.5rem; border-bottom:1px solid rgba(var(--shape-rgb),0.15); }
 .admin-row { display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center; margin-bottom:0.75rem; }
 .url-input { flex:1; padding:8px 12px; background:var(--bg3); border:1px solid var(--border); border-radius:3px; color:var(--text); font-family:'Netflix Sans',sans-serif; font-size:0.82rem; outline:none; transition:border-color 0.2s; min-width:200px; }
-.url-input:focus { border-color:var(--pink3); }
+.url-input:focus { border-color:var(--shape); }
 .admin-subtitle { font-size:0.72rem; color:var(--text2); margin-bottom:0.85rem; line-height:1.5; }
 .bg-preview { width:56px; height:56px; border-radius:4px; object-fit:cover; border:1px solid var(--border-pink); display:none; }
 .swatch-label { font-size:0.7rem; color:var(--text2); letter-spacing:0.05em; margin-bottom:0.6rem; }
@@ -152,15 +159,15 @@ body.admin-mode #admin-panel { display:block; }
 .swatch:hover { transform:scale(1.15); }
 .swatch.selected { border-color:#fff; transform:scale(1.12); }
 .swatch.selected::after { content:'✓'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#fff; font-size:0.8rem; font-weight:900; text-shadow:0 1px 3px rgba(0,0,0,0.85); }
-body.admin-mode .adm-editable { outline:1px dashed rgba(var(--primary-rgb),0.55); outline-offset:4px; cursor:text; border-radius:2px; transition:background 0.15s,outline-color 0.15s; }
-body.admin-mode .adm-editable:hover { background:rgba(var(--primary-rgb),0.1); }
-body.admin-mode .adm-editable:focus { outline:2px solid var(--pink3); background:rgba(var(--primary-rgb),0.14); }
+body.admin-mode .adm-editable { outline:1px dashed rgba(var(--shape-rgb),0.55); outline-offset:4px; cursor:text; border-radius:2px; transition:background 0.15s,outline-color 0.15s; }
+body.admin-mode .adm-editable:hover { background:rgba(var(--shape-rgb),0.1); }
+body.admin-mode .adm-editable:focus { outline:2px solid var(--shape); background:rgba(var(--shape-rgb),0.14); }
 body.admin-mode .hero-banner.adm-editable-zone { cursor:pointer; }
 .bg-upload-hint { position:absolute; z-index:3; top:1rem; right:1rem; background:rgba(0,0,0,0.85); border:1px solid var(--border-pink); color:var(--text2); font-size:0.68rem; letter-spacing:0.05em; padding:6px 12px; border-radius:4px; display:none; text-transform:uppercase; font-weight:700; }
 body.admin-mode .bg-upload-hint { display:block; }
-#toast { position:fixed; bottom:2rem; right:2rem; background:var(--bg3); border:1px solid var(--border); border-left:3px solid var(--pink3); border-radius:4px; padding:0.75rem 1.25rem; font-size:0.82rem; color:var(--text); transform:translateY(80px); opacity:0; transition:all 0.28s cubic-bezier(0.34,1.56,0.64,1); z-index:9998; max-width:300px; }
+#toast { position:fixed; bottom:2rem; right:2rem; background:var(--bg3); border:1px solid var(--border); border-left:3px solid var(--accent-text); border-radius:4px; padding:0.75rem 1.25rem; font-size:0.82rem; color:var(--text); transform:translateY(80px); opacity:0; transition:all 0.28s cubic-bezier(0.34,1.56,0.64,1); z-index:9998; max-width:300px; }
 #toast.show { transform:translateY(0); opacity:1; }
-#toast.success { border-left-color:var(--pink3); color:var(--pink3); }
+#toast.success { border-left-color:var(--accent-text); color:var(--accent-text); }
 #toast.error { border-left-color:#f87171; color:#f87171; }
 footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:center; font-size:0.7rem; color:var(--text3); letter-spacing:0.1em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:0.5rem; }
 @media (max-width:600px) { .container { padding:1rem; } header { padding:0 1rem; } .logo img { height:26px; } }
@@ -318,20 +325,28 @@ footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:cente
     <div class="swatch-row" id="bg-secondary-swatches"></div>
     <button class="btn" onclick="resetBgColors()" style="margin-top:0.25rem;">↺ Вернуть фон по умолчанию</button>
 
-    <div class="admin-section-label" style="margin-top:1.5rem;">🎨 Цвет кнопок и текста</div>
-    <div class="admin-subtitle">Выберите один основной цвет (кнопки, заголовок, акценты) и один дополнительный (жанровая метка, второй бейдж). Сочетаются только два цвета — это держит дизайн аккуратным.</div>
-    <div class="swatch-label">Основной цвет</div>
-    <div class="swatch-row" id="primary-swatches"></div>
-    <div class="swatch-label">Дополнительный цвет</div>
-    <div class="swatch-row" id="secondary-swatches"></div>
-    <button class="btn" onclick="resetColors()" style="margin-top:0.25rem;">↺ Вернуть цвета по умолчанию</button>
+    <div class="admin-section-label" style="margin-top:1.5rem;">🎨 Цвет текста</div>
+    <div class="admin-subtitle">Отдельная палитра для текста: цвет названия фильма и цвет акцентных надписей (метка жанра сверху, «Сейчас играет», подписи разделов).</div>
+    <div class="swatch-label">Заголовок (название фильма)</div>
+    <div class="swatch-row" id="title-swatches"></div>
+    <div class="swatch-label">Акцентный текст (надписи, подписи разделов)</div>
+    <div class="swatch-row" id="accent-text-swatches"></div>
+    <button class="btn" onclick="resetColors()" style="margin-top:0.25rem;">↺ Вернуть текст по умолчанию</button>
+
+    <div class="admin-section-label" style="margin-top:1.5rem;">🎨 Цвет кнопок и фигур</div>
+    <div class="admin-subtitle">Отдельная палитра для кнопок и декоративных фигур: цвет всех кнопок/плашек и цвет рамок, бейджей, обводок.</div>
+    <div class="swatch-label">Кнопки</div>
+    <div class="swatch-row" id="btn-swatches"></div>
+    <div class="swatch-label">Фигуры и рамки (бейджи, обводки)</div>
+    <div class="swatch-row" id="shape-swatches"></div>
+    <button class="btn" onclick="resetColors()" style="margin-top:0.25rem;">↺ Вернуть кнопки и фигуры по умолчанию</button>
   </div>
 
 </div>
 
 <footer>
   <div id="footer-text-line" class="adm-editable" data-singleline="1" data-site-field="footerText">© Видеоархив</div>
-  <button class="admin-pill admin-pill-footer" id="admin-btn" onclick="toggleAdmin()">Войти как админ</button>
+  <button class="admin-pill" id="admin-btn" type="button" title="Вход для администратора" onclick="toggleAdmin()">⚙</button>
 </footer>
 
 <div id="toast"></div>
@@ -342,8 +357,6 @@ const SESSION_KEY = 'admin_session';
 let isAdmin = sessionStorage.getItem(SESSION_KEY) === '1';
 const MOVIE_ID = window.__movieId || '';
 const MOVIE_PATH = window.__moviePath || '';
-const SITE_CONFIG_PATH = 'site-config.json';
-let siteConfig = { siteName: 'Видеоархив', footerText: '© Видеоархив', siteTagline: '—' };
 
 /* ===== Состояние фильма (всё, что сохраняется в movies/<id>.json) ===== */
 let movieData = {
@@ -351,9 +364,13 @@ let movieData = {
   poster: '',          // путь к постеру в репо (заполняется при создании на главной странице)
   fields: {},           // текстовые поля .adm-editable, ключ = data-field
   videoUrl: '',
+  // Текст шапки и подвала — свой для каждого фильма (не общий с библиотекой и другими фильмами)
+  siteName: 'Видеоархив',
+  siteTagline: '—',
+  footerText: '© Видеоархив',
   heroBg: { type: '', value: '' }, // type: 'upload' | 'url' ; value: путь в репо ИЛИ внешняя ссылка
   bgPosition: { x: 50, y: 0, scale: 1 },
-  colors: { primary: '', secondary: '', bgPrimary: '', bgSecondary: '' }
+  colors: { title: '', accentText: '', btn: '', shape: '', bgPrimary: '', bgSecondary: '' }
 };
 let movieSha = null;       // sha файла movies/<id>.json (для корректного обновления)
 let movieLoaded = false;
@@ -425,66 +442,29 @@ async function loadMovieData(){
   applyMovieDataToPage();
 }
 
-/* ===== GitHub: текст сайта (шапка/подвал) — общий для всех страниц ===== */
+/* ===== Текст шапки/подвала — свой для каждого фильма (хранится в movies/<id>.json) ===== */
 function applySiteConfigToDom(){
   const subEl = document.getElementById('logo-sub-text');
-  if (subEl) subEl.textContent = siteConfig.siteName || 'Видеоархив';
+  if (subEl) subEl.textContent = movieData.siteName || 'Видеоархив';
   const tagEl = document.getElementById('logo-sub-tagline');
-  if (tagEl) tagEl.textContent = siteConfig.siteTagline || '—';
+  if (tagEl) tagEl.textContent = movieData.siteTagline || '—';
   const footEl = document.getElementById('footer-text-line');
-  if (footEl) footEl.textContent = siteConfig.footerText || '© Видеоархив';
+  if (footEl) footEl.textContent = movieData.footerText || '© Видеоархив';
   const nameInput = document.getElementById('site-name-input');
   const footInput = document.getElementById('site-footer-input');
-  if (nameInput) nameInput.value = siteConfig.siteName || '';
-  if (footInput) footInput.value = siteConfig.footerText || '';
+  if (nameInput) nameInput.value = movieData.siteName || '';
+  if (footInput) footInput.value = movieData.footerText || '';
 }
 
-async function loadSiteConfig(){
-  try {
-    const raw = await ghGetTextFile(SITE_CONFIG_PATH);
-    if (raw) {
-      const loaded = JSON.parse(raw);
-      siteConfig = Object.assign({}, siteConfig, loaded);
-    }
-  } catch (e) { /* нет файла или ошибка чтения — остаёмся со значениями по умолчанию */ }
-  applySiteConfigToDom();
-}
-
-let siteConfigSaveTimer = null;
-let siteConfigSaving = false;
-
-async function persistSiteConfig(){
-  if (!isAdmin) return;
-  if (!ghGetConfig() || !ghGetToken()) {
-    toast('Сначала настройте GitHub (кнопка «⚙ GitHub» на главной странице)', 'error');
-    return;
-  }
-  if (siteConfigSaving) { clearTimeout(siteConfigSaveTimer); siteConfigSaveTimer = setTimeout(persistSiteConfig, 400); return; }
-  siteConfigSaving = true;
-  try {
-    await ghPutFile(SITE_CONFIG_PATH, JSON.stringify(siteConfig, null, 2), 'Update site config');
-    toast('✓ Текст сайта обновлён', 'success');
-  } catch (e) {
-    toast('Ошибка сохранения: ' + (e.message || e), 'error');
-  } finally {
-    siteConfigSaving = false;
-  }
-}
-
-function scheduleSaveSiteConfig(){
-  if (!isAdmin) return;
-  clearTimeout(siteConfigSaveTimer);
-  siteConfigSaveTimer = setTimeout(persistSiteConfig, 900);
-}
-
-/* Кнопка в админ-панели (та же форма с полями ввода) */
+/* Кнопка в админ-панели (та же форма с полями ввода) — текст сохраняется вместе с остальными данными фильма */
 function saveSiteConfig(){
   const nameInput = document.getElementById('site-name-input');
   const footInput = document.getElementById('site-footer-input');
-  siteConfig.siteName = (nameInput.value || '').trim() || 'Видеоархив';
-  siteConfig.footerText = (footInput.value || '').trim() || '© Видеоархив';
+  movieData.siteName = (nameInput.value || '').trim() || 'Видеоархив';
+  movieData.footerText = (footInput.value || '').trim() || '© Видеоархив';
   applySiteConfigToDom();
-  persistSiteConfig();
+  toast('✓ Текст фильма обновлён', 'success');
+  saveMovieData(true);
 }
 
 
@@ -501,7 +481,15 @@ async function saveMovieData(immediate){
     setSaveStatus('bad', 'GitHub не настроен — изменения не сохранятся для других людей.');
     return;
   }
-  if (savingNow) { clearTimeout(saveTimer); saveTimer = setTimeout(() => saveMovieData(immediate), 400); return; }
+  if (savingNow) {
+    // Уже идёт другое сохранение — ждём его окончания и запускаем своё заново,
+    // вместо того чтобы молча отложить и сразу "завершиться" (из-за этого вызовы
+    // вроде "await saveMovieData()" возвращались раньше, чем данные реально записаны,
+    // и казалось, что сохранение то срабатывает, то нет).
+    clearTimeout(saveTimer);
+    await new Promise(resolve => { saveTimer = setTimeout(resolve, 400); });
+    return saveMovieData(immediate);
+  }
   savingNow = true;
   setSaveStatus('saving', 'Сохранение…');
   try {
@@ -541,6 +529,7 @@ async function saveMovieData(immediate){
 
 /* ===== Применение данных к странице (после загрузки) ===== */
 function applyMovieDataToPage(){
+  applySiteConfigToDom();
   if (movieData.title) {
     document.title = movieData.title + ' | Видеоархив';
   }
@@ -568,11 +557,13 @@ function applyMovieDataToPage(){
   if (bg) {
     if (movieData.heroBg && movieData.heroBg.value) {
       const resolvedBg = resolveBgUrl(movieData.heroBg);
-      bg.style.backgroundImage = "url('" + resolvedBg.replace(/'/g, "\\'") + "')";
-      bg.style.display = 'block';
-      const prev = document.getElementById('bg-preview');
-      if (prev) { prev.src = resolvedBg; prev.style.display = 'inline-block'; }
-    } else if (movieData.poster) {
+      if (resolvedBg) {
+        bg.style.backgroundImage = "url('" + resolvedBg.replace(/'/g, "\\'") + "')";
+        bg.style.display = 'block';
+        const prev = document.getElementById('bg-preview');
+        if (prev) { prev.src = resolvedBg; prev.style.display = 'inline-block'; }
+      }
+    } else if (movieData.poster && typeof movieData.poster === 'string') {
       bg.style.backgroundImage = "url('" + movieData.poster.replace(/'/g, "\\'") + "')";
       bg.style.display = 'block';
     }
@@ -586,12 +577,25 @@ function applyMovieDataToPage(){
     applyBgPositionVars();
   }
 
-  // Цвета
-  const c = movieData.colors || {};
-  if (c.primary) applyPrimaryColor(c.primary, false);
-  if (c.secondary) applySecondaryColor(c.secondary, false);
-  if (c.bgPrimary) applyBgPrimaryColor(c.bgPrimary, false);
-  if (c.bgSecondary) applyBgSecondaryColor(c.bgSecondary, false);
+  // Цвета — оборачиваем в try/catch, чтобы ошибка в данных одного фильма
+  // никогда не мешала отрисовке палитр (раньше при сбое здесь палитры вообще не появлялись).
+  try {
+    const c = movieData.colors || {};
+    // На случай если у фильма ещё сохранены старые поля primary/secondary (до разделения палитр) —
+    // переносим их в новые поля один раз, чтобы старые настройки не потерялись.
+    if (c.primary && !c.title) c.title = c.primary;
+    if (c.secondary && !c.accentText) c.accentText = c.secondary;
+    if (c.primary && !c.btn) c.btn = c.primary;
+    if (c.secondary && !c.shape) c.shape = c.secondary;
+    if (c.title) applyTitleColor(c.title, false);
+    if (c.accentText) applyAccentTextColor(c.accentText, false);
+    if (c.btn) applyBtnColor(c.btn, false);
+    if (c.shape) applyShapeColor(c.shape, false);
+    if (c.bgPrimary) applyBgPrimaryColor(c.bgPrimary, false);
+    if (c.bgSecondary) applyBgSecondaryColor(c.bgSecondary, false);
+  } catch (e) {
+    console.error('Не удалось применить сохранённые цвета:', e);
+  }
   renderColorSwatches();
 }
 
@@ -615,7 +619,7 @@ function checkPwd(){
 function exitAdmin(){ isAdmin=false; sessionStorage.removeItem(SESSION_KEY); document.body.classList.remove('admin-mode'); updateAdminBtn(); setEditableMode(false); if (bgPositionMode) toggleBgPositionMode(); toast('Вы вышли из режима админа'); }
 function updateAdminBtn(){
   const btn=document.getElementById('admin-btn');
-  btn.textContent = isAdmin ? 'Выйти из режима админа' : 'Войти как админ';
+  btn.title = isAdmin ? 'Выйти из режима администратора' : 'Вход для администратора';
   btn.classList.toggle('active', isAdmin);
   document.getElementById('admin-status-label').style.display = isAdmin ? 'inline' : 'none';
 }
@@ -712,39 +716,64 @@ function scaleColor(hex, factor){
   const {r,g,b} = hexToRgb(hex);
   return rgbToHex(r*factor, g*factor, b*factor);
 }
-function applyPrimaryColor(hex, save){
-  const pink3 = hex, pink = scaleColor(hex,0.66), pink2 = scaleColor(hex,0.5);
+function applyTitleColor(hex, save){
   const root = document.documentElement.style;
-  root.setProperty('--pink3', pink3);
-  root.setProperty('--pink', pink);
-  root.setProperty('--pink2', pink2);
-  root.setProperty('--primary-rgb', rgbStr(pink3));
-  root.setProperty('--primary-dark-rgb', rgbStr(pink));
-  markSelectedSwatch('primary-swatches', hex);
+  root.setProperty('--title', hex);
+  root.setProperty('--title-rgb', rgbStr(hex));
+  root.setProperty('--titleglow', 'rgba(' + rgbStr(hex) + ',0.5)');
+  markSelectedSwatch('title-swatches', hex);
   if (save) {
-    movieData.colors.primary = hex;
-    toast('✓ Основной цвет обновлён','success');
+    movieData.colors.title = hex;
+    toast('✓ Цвет заголовка обновлён','success');
     scheduleSaveMovieData();
   }
 }
-function applySecondaryColor(hex, save){
-  const green3 = hex, green = scaleColor(hex,0.8);
+function applyAccentTextColor(hex, save){
   const root = document.documentElement.style;
-  root.setProperty('--green3', green3);
-  root.setProperty('--green', green);
-  root.setProperty('--secondary-rgb', rgbStr(green3));
-  markSelectedSwatch('secondary-swatches', hex);
+  root.setProperty('--accent-text', hex);
+  root.setProperty('--accent-text-rgb', rgbStr(hex));
+  root.setProperty('--accent-textglow', 'rgba(' + rgbStr(hex) + ',0.5)');
+  markSelectedSwatch('accent-text-swatches', hex);
   if (save) {
-    movieData.colors.secondary = hex;
-    toast('✓ Дополнительный цвет обновлён','success');
+    movieData.colors.accentText = hex;
+    toast('✓ Цвет акцентного текста обновлён','success');
+    scheduleSaveMovieData();
+  }
+}
+function applyBtnColor(hex, save){
+  const btnSolid = hex, btn = scaleColor(hex,0.66), btnHover = scaleColor(hex,0.5);
+  const root = document.documentElement.style;
+  root.setProperty('--btn', btn);
+  root.setProperty('--btn-hover', btnHover);
+  root.setProperty('--btn-solid', btnSolid);
+  root.setProperty('--btn-rgb', rgbStr(hex));
+  markSelectedSwatch('btn-swatches', hex);
+  if (save) {
+    movieData.colors.btn = hex;
+    toast('✓ Цвет кнопок обновлён','success');
+    scheduleSaveMovieData();
+  }
+}
+function applyShapeColor(hex, save){
+  const root = document.documentElement.style;
+  root.setProperty('--shape', hex);
+  root.setProperty('--shape-rgb', rgbStr(hex));
+  markSelectedSwatch('shape-swatches', hex);
+  if (save) {
+    movieData.colors.shape = hex;
+    toast('✓ Цвет фигур/рамок обновлён','success');
     scheduleSaveMovieData();
   }
 }
 function resetColors(){
-  movieData.colors.primary = '';
-  movieData.colors.secondary = '';
-  applyPrimaryColor('#cc0000', false);
-  applySecondaryColor('#ff3333', false);
+  movieData.colors.title = '';
+  movieData.colors.accentText = '';
+  movieData.colors.btn = '';
+  movieData.colors.shape = '';
+  applyTitleColor('#cc0000', false);
+  applyAccentTextColor('#ff3333', false);
+  applyBtnColor('#cc0000', false);
+  applyShapeColor('#cc0000', false);
   toast('✓ Цвета сброшены по умолчанию','success');
   scheduleSaveMovieData();
 }
@@ -796,31 +825,35 @@ function markSelectedSwatch(containerId, hex){
   });
 }
 function renderColorSwatches(){
-  const primaryRow = document.getElementById('primary-swatches');
-  const secondaryRow = document.getElementById('secondary-swatches');
+  const titleRow = document.getElementById('title-swatches');
+  const accentTextRow = document.getElementById('accent-text-swatches');
+  const btnRow = document.getElementById('btn-swatches');
+  const shapeRow = document.getElementById('shape-swatches');
   const bgPrimaryRow = document.getElementById('bg-primary-swatches');
   const bgSecondaryRow = document.getElementById('bg-secondary-swatches');
-  if (primaryRow && secondaryRow) {
-    primaryRow.innerHTML = '';
-    secondaryRow.innerHTML = '';
-    COLOR_PALETTE.forEach(c=>{
-      const b1 = document.createElement('button');
-      b1.type = 'button'; b1.className = 'swatch'; b1.style.background = c.hex;
-      b1.dataset.hex = c.hex; b1.title = c.name;
-      b1.addEventListener('click', () => applyPrimaryColor(c.hex, true));
-      primaryRow.appendChild(b1);
-
-      const b2 = document.createElement('button');
-      b2.type = 'button'; b2.className = 'swatch'; b2.style.background = c.hex;
-      b2.dataset.hex = c.hex; b2.title = c.name;
-      b2.addEventListener('click', () => applySecondaryColor(c.hex, true));
-      secondaryRow.appendChild(b2);
-    });
-    const currentPrimary = getComputedStyle(document.documentElement).getPropertyValue('--pink3').trim();
-    const currentSecondary = getComputedStyle(document.documentElement).getPropertyValue('--green3').trim();
-    markSelectedSwatch('primary-swatches', currentPrimary);
-    markSelectedSwatch('secondary-swatches', currentSecondary);
-  }
+  const textPalettes = [
+    { row: titleRow, containerId: 'title-swatches', apply: applyTitleColor, cssVar: '--title' },
+    { row: accentTextRow, containerId: 'accent-text-swatches', apply: applyAccentTextColor, cssVar: '--accent-text' },
+    { row: btnRow, containerId: 'btn-swatches', apply: applyBtnColor, cssVar: '--btn-solid' },
+    { row: shapeRow, containerId: 'shape-swatches', apply: applyShapeColor, cssVar: '--shape' }
+  ];
+  textPalettes.forEach(p => {
+    try {
+      if (!p.row) return;
+      p.row.innerHTML = '';
+      COLOR_PALETTE.forEach(c=>{
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'swatch'; b.style.background = c.hex;
+        b.dataset.hex = c.hex; b.title = c.name;
+        b.addEventListener('click', () => p.apply(c.hex, true));
+        p.row.appendChild(b);
+      });
+      const current = getComputedStyle(document.documentElement).getPropertyValue(p.cssVar).trim();
+      markSelectedSwatch(p.containerId, current);
+    } catch (e) {
+      console.error('Не удалось отрисовать палитру ' + p.containerId + ':', e);
+    }
+  });
   if (bgPrimaryRow && bgSecondaryRow) {
     bgPrimaryRow.innerHTML = '';
     bgSecondaryRow.innerHTML = '';
@@ -899,12 +932,12 @@ function initEditableHandlers(){
     });
     const key = el.getAttribute('data-site-field');
     const persist = function(){
-      siteConfig[key] = el.textContent;
+      movieData[key] = el.textContent;
       const nameInput = document.getElementById('site-name-input');
       const footInput = document.getElementById('site-footer-input');
-      if (nameInput && key === 'siteName') nameInput.value = siteConfig.siteName;
-      if (footInput && key === 'footerText') footInput.value = siteConfig.footerText;
-      scheduleSaveSiteConfig();
+      if (nameInput && key === 'siteName') nameInput.value = movieData.siteName;
+      if (footInput && key === 'footerText') footInput.value = movieData.footerText;
+      scheduleSaveMovieData();
     };
     el.addEventListener('input', persist);
     el.addEventListener('blur', persist);
@@ -953,7 +986,8 @@ function ghRawUrl(path){
 /* Возвращает реальный URL для отображения фона, в зависимости от того, загружен он файлом или вставлен ссылкой */
 function resolveBgUrl(heroBg){
   if (!heroBg || !heroBg.value) return '';
-  return heroBg.type === 'upload' ? ghRawUrl(heroBg.value) : heroBg.value;
+  const resolved = heroBg.type === 'upload' ? ghRawUrl(heroBg.value) : heroBg.value;
+  return (typeof resolved === 'string') ? resolved : '';
 }
 
 let bgPositionMode = false;
@@ -1046,6 +1080,8 @@ async function handleBgFile(e){
   const reader = new FileReader();
   reader.onload = async () => {
     const dataUrl = String(reader.result);
+    const prevHeroBg = movieData.heroBg; // на случай отката при ошибке
+    // Показываем выбранное фото сразу (локальный dataURL) — это надёжно и не зависит от GitHub/CDN.
     setHeroBgPreview(dataUrl);
     setSaveStatus('saving', 'Загрузка фото в GitHub…');
     try {
@@ -1056,16 +1092,26 @@ async function handleBgFile(e){
       const path = 'backgrounds/' + MOVIE_ID + '.' + ext;
       await ghPutFileFromDataUrl(path, dataUrl, 'Upload background for ' + MOVIE_ID);
       movieData.heroBg = { type: 'upload', value: path };
-      // ВАЖНО: не заменяем уже отображённую картинку (dataUrl) на путь в репозитории —
-      // сам по себе путь "backgrounds/xxx.jpg" не является рабочей ссылкой и фон пропадал бы.
-      // Текущее превью (dataUrl) остаётся видимым, а для миниатюры используем настоящую ссылку.
-      const prev = document.getElementById('bg-preview');
-      if (prev) prev.src = ghRawUrl(path);
-      toast('✓ Фон обновлён','success');
+      // ВАЖНО: не переключаем превью/миниатюру на raw.githubusercontent.com сразу после коммита —
+      // GitHub отдаёт новый файл по этой ссылке не мгновенно (кэш CDN), из-за чего картинка
+      // на секунду-другую "пропадала" или показывала старую версию. Поэтому и большой фон,
+      // и маленькая миниатюра остаются на локальном dataURL — он уже загружен и не моргает.
       await saveMovieData(true);
+      toast('✓ Фон обновлён','success');
     } catch (err) {
+      // Не удалось сохранить — откатываем состояние, чтобы оно не разъезжалось с тем, что реально в GitHub.
+      movieData.heroBg = prevHeroBg;
       toast('Ошибка загрузки фото: ' + (err.message || err), 'error');
       setSaveStatus('bad', 'Ошибка загрузки фото: ' + (err.message || err));
+      // Возвращаем на экране то, что реально сохранено (или пусто, если фона не было).
+      if (prevHeroBg && prevHeroBg.value) {
+        setHeroBgPreview(resolveBgUrl(prevHeroBg));
+      } else {
+        const bg = document.getElementById('hero-bg');
+        if (bg) { bg.style.backgroundImage = ''; bg.style.display = 'none'; }
+        const prev = document.getElementById('bg-preview');
+        if (prev) { prev.removeAttribute('src'); prev.style.display = 'none'; }
+      }
     }
   };
   reader.onerror = () => toast('Не удалось прочитать файл','error');
@@ -1117,8 +1163,6 @@ function copyShareUrl(){
 
   const shareUrlInput = document.getElementById('share-url');
   if (shareUrlInput) shareUrlInput.value = window.location.href;
-
-  loadSiteConfig();
 
   if (!MOVIE_ID) {
     setSaveStatus('bad', 'В адресе страницы не указан ID фильма (?id=...). Откройте фильм из библиотеки.');
