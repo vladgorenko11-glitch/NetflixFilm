@@ -1,7 +1,9 @@
 {
   "title": "Красное Увидомление",
   "poster": "posters/i57fo6wm.jpg",
-  "fields": {},
+  "fields": {
+    "hero-title": "<span>Красное Увидомление</span>"
+  },
   "videoUrl": "",
   "heroBg": {
     "type": "upload",
