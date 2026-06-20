@@ -7,8 +7,8 @@
   "siteTagline": "—",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/r5d8wgt3.jpg"
   },
   "bgPosition": {
     "x": 50,
