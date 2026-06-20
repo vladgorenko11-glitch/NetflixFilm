@@ -2,7 +2,8 @@
   "title": "Выпускной класс",
   "poster": "",
   "fields": {
-    "hero-title": "Выпускной класс"
+    "hero-title": "Выпускной класс",
+    "hero-eyebrow": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
