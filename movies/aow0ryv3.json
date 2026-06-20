@@ -17,6 +17,9 @@
     "imdb-rating": "5.6"
   },
   "videoUrl": "https://archive.org/download/lift..-2160p-sdr/Lift..2160pSDR.mp4",
+  "siteName": "Видеоархив 2024",
+  "siteTagline": "—",
+  "footerText": "© Видеоархив",
   "heroBg": {
     "type": "upload",
     "value": "backgrounds/aow0ryv3.jpg"
@@ -30,6 +33,10 @@
     "primary": "#ffffff",
     "secondary": "#ffffff",
     "bgPrimary": "#ffa600",
-    "bgSecondary": "#f5c518"
+    "bgSecondary": "#f5c518",
+    "title": "#ffffff",
+    "accentText": "#ffffff",
+    "btn": "#ffffff",
+    "shape": "#ffffff"
   }
 }
