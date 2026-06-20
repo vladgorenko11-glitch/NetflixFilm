@@ -4,8 +4,8 @@
   "fields": {},
   "videoUrl": "",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/88jcnysg.jpg"
   },
   "bgPosition": {
     "x": 50,
