@@ -6,7 +6,8 @@
     "hero-eyebrow": "| NETFLIX ORIGINAL",
     "badge-2": "Дубляж",
     "badge-3": "91 минута",
-    "badge-4": "1080p"
+    "badge-4": "1080p",
+    "hero-desc": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
