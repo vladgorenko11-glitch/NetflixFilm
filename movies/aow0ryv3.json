@@ -21,7 +21,7 @@
     "scale": 1
   },
   "colors": {
-    "primary": "",
+    "primary": "#ffffff",
     "secondary": "",
     "bgPrimary": "#ffa600",
     "bgSecondary": "#f5c518"
