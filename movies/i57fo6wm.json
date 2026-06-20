@@ -4,7 +4,8 @@
   "fields": {
     "hero-title": "КРАСНОЕ                                    УВЕДОМЛЕНИЕ",
     "now-playing": "— Красное увидомение —",
-    "badge-1": "2021"
+    "badge-1": "2021",
+    "badge-2": "<br>"
   },
   "videoUrl": "",
   "heroBg": {
