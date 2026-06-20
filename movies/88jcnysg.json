@@ -27,7 +27,7 @@
   "colors": {
     "primary": "#ffffff",
     "secondary": "#cc0000",
-    "bgPrimary": "",
+    "bgPrimary": "#ff6b35",
     "bgSecondary": ""
   }
 }
