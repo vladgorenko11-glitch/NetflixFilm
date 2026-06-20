@@ -1,0 +1,21 @@
+{
+  "title": "Красное Увидомление",
+  "poster": "posters/i57fo6wm.jpg",
+  "fields": {},
+  "videoUrl": "",
+  "heroBg": {
+    "type": "upload",
+    "value": "backgrounds/i57fo6wm.jpg"
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "primary": "",
+    "secondary": "",
+    "bgPrimary": "",
+    "bgSecondary": ""
+  }
+}
