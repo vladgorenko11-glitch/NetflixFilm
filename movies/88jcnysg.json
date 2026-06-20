@@ -10,7 +10,8 @@
     "hero-eyebrow": "| NETFLIX ORIGINAL",
     "imdb-rating": "6.7",
     "genre-1": "Фантастика",
-    "genre-2": "Боевик"
+    "genre-2": "Боевик",
+    "genre-3": "<br>"
   },
   "videoUrl": "",
   "heroBg": {
