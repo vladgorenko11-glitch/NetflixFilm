@@ -14,7 +14,8 @@
     "imdb-rating": "6.3",
     "genre-1": "КОМЕДИЯ",
     "genre-2": "БОЕВИК",
-    "genre-3": "ПРИКЛЮЧЕНИЯ"
+    "genre-3": "ПРИКЛЮЧЕНИЯ",
+    "genre-4": "<br>"
   },
   "videoUrl": "",
   "heroBg": {
