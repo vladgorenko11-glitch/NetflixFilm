@@ -12,7 +12,8 @@
     "hero-eyebrow": "|NETFLIX ORIGINAL&nbsp;",
     "imdb-label": "IMDb",
     "imdb-rating": "6.3",
-    "genre-1": "КОМЕДИЯ"
+    "genre-1": "КОМЕДИЯ",
+    "genre-2": "<br>"
   },
   "videoUrl": "",
   "heroBg": {
