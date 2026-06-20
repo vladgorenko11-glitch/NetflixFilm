@@ -175,7 +175,7 @@ footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:cente
     <a class="logo" href="index.html" style="cursor:pointer; text-decoration:none; color:inherit;">
       <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix">
       <div class="logo-sep"></div>
-      <div class="logo-sub">Видеоархив<br>—</div>
+      <div class="logo-sub" id="logo-sub-text">Видеоархив<br>—</div>
     </a>
     <div class="header-right">
       <span id="admin-status-label" style="font-size:0.7rem;color:var(--text2);letter-spacing:0.05em;display:none;">✎ Режим редактирования: кликните на текст или фон</span>
@@ -238,6 +238,17 @@ footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:cente
       <button class="btn" onclick="goToLibrary()">← Настроить GitHub на главной странице</button>
       <button class="btn" id="force-save-btn" onclick="saveMovieData(true)">💾 Сохранить сейчас</button>
     </div>
+
+    <div class="admin-section-label" style="margin-top:1.5rem;">📝 Текст сайта (шапка и подвал)</div>
+    <div class="admin-subtitle">Этот текст общий для всего сайта — он отобразится и в каталоге, и на всех страницах фильмов.</div>
+    <div class="admin-row">
+      <input type="text" class="url-input" id="site-name-input" placeholder="Видеоархив (текст в шапке)">
+    </div>
+    <div class="admin-row">
+      <input type="text" class="url-input" id="site-footer-input" placeholder="© Видеоархив (текст в подвале)">
+    </div>
+    <button class="btn primary" onclick="saveSiteConfig()" style="margin-top:0.25rem;">💾 Сохранить текст сайта</button>
+
     <div class="admin-section-label" style="margin-top:1.5rem;">▶ Видео</div>
     <div class="admin-subtitle">Сайт не хранит сами видеофайлы — вставьте прямую ссылку на видео (с Google Drive, другого хостинга и т.п.). Ссылка сохраняется в GitHub вместе с остальными данными фильма.</div>
     <div class="admin-row">
@@ -286,7 +297,7 @@ footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:cente
 </div>
 
 <footer>
-  <div>© Видеоархив</div>
+  <div id="footer-text-line">© Видеоархив</div>
   <button class="admin-pill admin-pill-footer" id="admin-btn" onclick="toggleAdmin()">Войти как админ</button>
 </footer>
 
@@ -298,6 +309,8 @@ const SESSION_KEY = 'admin_session';
 let isAdmin = sessionStorage.getItem(SESSION_KEY) === '1';
 const MOVIE_ID = window.__movieId || '';
 const MOVIE_PATH = window.__moviePath || '';
+const SITE_CONFIG_PATH = 'site-config.json';
+let siteConfig = { siteName: 'Видеоархив', footerText: '© Видеоархив' };
 
 /* ===== Состояние фильма (всё, что сохраняется в movies/<id>.json) ===== */
 let movieData = {
@@ -379,7 +392,49 @@ async function loadMovieData(){
   applyMovieDataToPage();
 }
 
-/* ===== GitHub: сохранение данных фильма (с debounce) ===== */
+/* ===== GitHub: текст сайта (шапка/подвал) — общий для всех страниц ===== */
+function applySiteConfigToDom(){
+  const subEl = document.getElementById('logo-sub-text');
+  if (subEl) subEl.innerHTML = (siteConfig.siteName || 'Видеоархив') + '<br>—';
+  const footEl = document.getElementById('footer-text-line');
+  if (footEl) footEl.textContent = siteConfig.footerText || '© Видеоархив';
+  const nameInput = document.getElementById('site-name-input');
+  const footInput = document.getElementById('site-footer-input');
+  if (nameInput) nameInput.value = siteConfig.siteName || '';
+  if (footInput) footInput.value = siteConfig.footerText || '';
+}
+
+async function loadSiteConfig(){
+  try {
+    const raw = await ghGetTextFile(SITE_CONFIG_PATH);
+    if (raw) {
+      const loaded = JSON.parse(raw);
+      siteConfig = Object.assign({}, siteConfig, loaded);
+    }
+  } catch (e) { /* нет файла или ошибка чтения — остаёмся со значениями по умолчанию */ }
+  applySiteConfigToDom();
+}
+
+async function saveSiteConfig(){
+  if (!isAdmin) return;
+  if (!ghGetConfig() || !ghGetToken()) {
+    toast('Сначала настройте GitHub (кнопка «⚙ GitHub» на главной странице)', 'error');
+    return;
+  }
+  const nameInput = document.getElementById('site-name-input');
+  const footInput = document.getElementById('site-footer-input');
+  siteConfig.siteName = (nameInput.value || '').trim() || 'Видеоархив';
+  siteConfig.footerText = (footInput.value || '').trim() || '© Видеоархив';
+  try {
+    await ghPutFile(SITE_CONFIG_PATH, JSON.stringify(siteConfig, null, 2), 'Update site config');
+    applySiteConfigToDom();
+    toast('✓ Текст сайта обновлён', 'success');
+  } catch (e) {
+    toast('Ошибка сохранения: ' + (e.message || e), 'error');
+  }
+}
+
+
 function scheduleSaveMovieData(){
   if (!isAdmin) return;
   clearTimeout(saveTimer);
@@ -540,6 +595,8 @@ function clearUrl(){
 
 /* ===== Цвета ===== */
 const COLOR_PALETTE = [
+  { hex:'#ffffff', name:'Белый'     },
+  { hex:'#000000', name:'Чёрный'    },
   { hex:'#cc0000', name:'Красный'   },
   { hex:'#ff3333', name:'Алый'      },
   { hex:'#e50914', name:'Нетфликс'  },
@@ -956,6 +1013,8 @@ function copyShareUrl(){
 
   const shareUrlInput = document.getElementById('share-url');
   if (shareUrlInput) shareUrlInput.value = window.location.href;
+
+  loadSiteConfig();
 
   if (!MOVIE_ID) {
     setSaveStatus('bad', 'В адресе страницы не указан ID фильма (?id=...). Откройте фильм из библиотеки.');
