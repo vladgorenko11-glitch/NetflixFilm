@@ -34,7 +34,7 @@
     "bgSecondary": "#3b82f6",
     "title": "#ffffff",
     "accentText": "#ff6b35",
-    "btn": "#ffffff",
+    "btn": "#000000",
     "shape": "#ff6b35"
   }
 }
