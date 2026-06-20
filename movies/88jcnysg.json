@@ -1,0 +1,21 @@
+{
+  "title": "Проект «Адам»",
+  "poster": "posters/88jcnysg.jpg",
+  "fields": {},
+  "videoUrl": "",
+  "heroBg": {
+    "type": "",
+    "value": ""
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "primary": "#ffffff",
+    "secondary": "",
+    "bgPrimary": "",
+    "bgSecondary": ""
+  }
+}
