@@ -3,7 +3,8 @@
   "poster": "posters/i57fo6wm.jpg",
   "fields": {
     "hero-title": "КРАСНОЕ                                    УВЕДОМЛЕНИЕ",
-    "now-playing": "— Красное увидомение —"
+    "now-playing": "— Красное увидомение —",
+    "badge-1": "<br>"
   },
   "videoUrl": "",
   "heroBg": {
