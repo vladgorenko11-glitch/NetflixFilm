@@ -23,7 +23,7 @@
   },
   "colors": {
     "primary": "#000000",
-    "secondary": "",
+    "secondary": "#ffffff",
     "bgPrimary": "#ffa600",
     "bgSecondary": "#f5c518"
   }
