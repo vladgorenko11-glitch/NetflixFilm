@@ -23,7 +23,7 @@
   "colors": {
     "primary": "",
     "secondary": "",
-    "bgPrimary": "",
+    "bgPrimary": "#ffffff",
     "bgSecondary": ""
   }
 }
