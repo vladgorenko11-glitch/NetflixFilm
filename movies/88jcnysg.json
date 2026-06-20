@@ -14,7 +14,7 @@
   },
   "colors": {
     "primary": "#ffffff",
-    "secondary": "",
+    "secondary": "#cc0000",
     "bgPrimary": "",
     "bgSecondary": ""
   }
