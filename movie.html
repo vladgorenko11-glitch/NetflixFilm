@@ -567,10 +567,11 @@ function applyMovieDataToPage(){
   const bg = document.getElementById('hero-bg');
   if (bg) {
     if (movieData.heroBg && movieData.heroBg.value) {
-      bg.style.backgroundImage = "url('" + movieData.heroBg.value.replace(/'/g, "\\'") + "')";
+      const resolvedBg = resolveBgUrl(movieData.heroBg);
+      bg.style.backgroundImage = "url('" + resolvedBg.replace(/'/g, "\\'") + "')";
       bg.style.display = 'block';
       const prev = document.getElementById('bg-preview');
-      if (prev) { prev.src = movieData.heroBg.value; prev.style.display = 'inline-block'; }
+      if (prev) { prev.src = resolvedBg; prev.style.display = 'inline-block'; }
     } else if (movieData.poster) {
       bg.style.backgroundImage = "url('" + movieData.poster.replace(/'/g, "\\'") + "')";
       bg.style.display = 'block';
@@ -940,6 +941,20 @@ function setHeroBgPreview(src){
   const prev = document.getElementById('bg-preview');
   if (prev) { prev.src = src; prev.style.display = 'inline-block'; }
 }
+/* Превращает путь файла в репозитории (например "backgrounds/abc.jpg") в реальную ссылку,
+   по которой картинку можно загрузить в браузере (raw.githubusercontent.com). */
+function ghRawUrl(path){
+  const cfg = ghGetConfig();
+  if (!cfg || !path) return path;
+  if (/^https?:\/\//i.test(path)) return path; // уже полная ссылка — ничего не трогаем
+  const branch = cfg.branch || 'main';
+  return 'https://raw.githubusercontent.com/' + cfg.owner + '/' + cfg.repo + '/' + branch + '/' + path;
+}
+/* Возвращает реальный URL для отображения фона, в зависимости от того, загружен он файлом или вставлен ссылкой */
+function resolveBgUrl(heroBg){
+  if (!heroBg || !heroBg.value) return '';
+  return heroBg.type === 'upload' ? ghRawUrl(heroBg.value) : heroBg.value;
+}
 
 let bgPositionMode = false;
 let bgPosX = 50, bgPosY = 0, bgScale = 1;
@@ -1041,7 +1056,11 @@ async function handleBgFile(e){
       const path = 'backgrounds/' + MOVIE_ID + '.' + ext;
       await ghPutFileFromDataUrl(path, dataUrl, 'Upload background for ' + MOVIE_ID);
       movieData.heroBg = { type: 'upload', value: path };
-      setHeroBgPreview(path);
+      // ВАЖНО: не заменяем уже отображённую картинку (dataUrl) на путь в репозитории —
+      // сам по себе путь "backgrounds/xxx.jpg" не является рабочей ссылкой и фон пропадал бы.
+      // Текущее превью (dataUrl) остаётся видимым, а для миниатюры используем настоящую ссылку.
+      const prev = document.getElementById('bg-preview');
+      if (prev) prev.src = ghRawUrl(path);
       toast('✓ Фон обновлён','success');
       await saveMovieData(true);
     } catch (err) {
