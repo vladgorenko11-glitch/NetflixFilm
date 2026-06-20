@@ -13,7 +13,8 @@
     "imdb-label": "IMDb",
     "imdb-rating": "6.3",
     "genre-1": "КОМЕДИЯ",
-    "genre-2": "БОЕВИК"
+    "genre-2": "БОЕВИК",
+    "genre-3": "<br>"
   },
   "videoUrl": "",
   "heroBg": {
