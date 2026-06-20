@@ -1,7 +1,9 @@
 {
   "title": "Это всё он",
   "poster": "posters/r5d8wgt3.jpg",
-  "fields": {},
+  "fields": {
+    "badge-1": "<br>"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив",
   "siteTagline": "—",
