@@ -28,6 +28,6 @@
     "primary": "#ffffff",
     "secondary": "#cc0000",
     "bgPrimary": "#ff6b35",
-    "bgSecondary": ""
+    "bgSecondary": "#000000"
   }
 }
