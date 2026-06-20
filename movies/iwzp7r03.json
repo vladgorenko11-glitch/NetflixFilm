@@ -13,8 +13,8 @@
   "siteTagline": "—",
   "footerText": "© «СЕРДЦЕ ИЗ КАМНЯ» • 2023 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/iwzp7r03.jpg"
   },
   "bgPosition": {
     "x": 50,
