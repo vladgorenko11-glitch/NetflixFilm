@@ -1,0 +1,23 @@
+{
+  "title": "Воздушное ограбление",
+  "poster": "posters/aow0ryv3.jpg",
+  "fields": {
+    "badge-1": "<br>"
+  },
+  "videoUrl": "",
+  "heroBg": {
+    "type": "",
+    "value": ""
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "primary": "",
+    "secondary": "",
+    "bgPrimary": "",
+    "bgSecondary": ""
+  }
+}
