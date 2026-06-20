@@ -20,8 +20,8 @@
   "siteTagline": "ВЫПУСКНОЙ КЛАСС",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/iw2ulmcb.jpg"
   },
   "bgPosition": {
     "x": 50,
