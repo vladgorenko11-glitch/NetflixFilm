@@ -13,7 +13,8 @@
     "genre-1": "БОЕВИК",
     "genre-2": "ТРИЛЛЕР",
     "genre-4": "ДРАМА",
-    "genre-3": "КРИМИНАЛ"
+    "genre-3": "КРИМИНАЛ",
+    "now-playing": "— Фильм —"
   },
   "videoUrl": "",
   "siteName": "Видеоархив 2023",
@@ -24,8 +25,8 @@
     "value": "backgrounds/uxj4ps0z.jpg"
   },
   "bgPosition": {
-    "x": 50,
-    "y": 0,
+    "x": 44.44048467569494,
+    "y": 25,
     "scale": 1
   },
   "colors": {
