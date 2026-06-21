@@ -20,8 +20,8 @@
   "siteTagline": "ЗАГАДОЧНОЕ УБИЙСТВО",
   "footerText": "© ЗАГАДОЧНОЕ УБИЙСТВО • 2019 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/9gwj4lth.jpg"
   },
   "bgPosition": {
     "x": 50,
