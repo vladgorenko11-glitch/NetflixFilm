@@ -1,7 +1,9 @@
 {
   "title": "Мальчик по имени Рождество",
   "poster": "posters/rea5i558.jpg",
-  "fields": {},
+  "fields": {
+    "hero-eyebrow": "<br>"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив 2021",
   "siteTagline": "Мальчик по имени Рождество",
