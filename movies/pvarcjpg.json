@@ -1,0 +1,26 @@
+{
+  "title": "Тайлер Рейк: Операция по спасению",
+  "poster": "posters/pvarcjpg.jpg",
+  "fields": {},
+  "videoUrl": "",
+  "siteName": "Видеоархив",
+  "siteTagline": "—",
+  "footerText": "© Видеоархив",
+  "heroBg": {
+    "type": "upload",
+    "value": "backgrounds/pvarcjpg.jpg"
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "title": "",
+    "accentText": "",
+    "btn": "",
+    "shape": "",
+    "bgPrimary": "",
+    "bgSecondary": ""
+  }
+}
