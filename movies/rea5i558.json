@@ -19,8 +19,8 @@
   "siteTagline": "Мальчик по имени Рождество",
   "footerText": "© МАЛЬЧИК ПО ИМЕНИ РОЖДЕСТВО • 2021 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/rea5i558.jpg"
   },
   "bgPosition": {
     "x": 50,
