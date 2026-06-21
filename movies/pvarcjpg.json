@@ -1,7 +1,9 @@
 {
   "title": "Тайлер Рейк: Операция по спасению",
   "poster": "posters/pvarcjpg.jpg",
-  "fields": {},
+  "fields": {
+    "badge-3": "X"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив",
   "siteTagline": "—",
@@ -19,7 +21,7 @@
     "title": "#ffffff",
     "accentText": "#ffffff",
     "btn": "#ffffff",
-    "shape": "#000000",
+    "shape": "#ffffff",
     "bgPrimary": "#ffffff",
     "bgSecondary": "#000000"
   }
