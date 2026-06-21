@@ -1,7 +1,9 @@
 {
   "title": "Атлас",
   "poster": "posters/iop740lf.jpg",
-  "fields": {},
+  "fields": {
+    "hero-eyebrow": "| NETFLIX ORIGINAL"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив",
   "siteTagline": "—",
