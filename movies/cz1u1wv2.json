@@ -15,8 +15,8 @@
   "siteTagline": "ЗАГАДОЧНОЕ УБИЙСТВО 2",
   "footerText": "© ЗАГАДОЧНОЕ УБИЙСТВО 2 • 2023 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/cz1u1wv2.jpg"
   },
   "bgPosition": {
     "x": 50,
