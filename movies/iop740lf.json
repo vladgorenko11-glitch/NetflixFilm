@@ -19,8 +19,8 @@
   "siteTagline": "атлас",
   "footerText": "© АТЛАС • 2024 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/iop740lf.jpg"
   },
   "bgPosition": {
     "x": 50,
