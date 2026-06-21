@@ -20,7 +20,7 @@
     "accentText": "#ffffff",
     "btn": "",
     "shape": "",
-    "bgPrimary": "",
+    "bgPrimary": "#ffffff",
     "bgSecondary": ""
   }
 }
