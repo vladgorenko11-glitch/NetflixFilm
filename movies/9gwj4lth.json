@@ -31,7 +31,7 @@
   "colors": {
     "title": "#ffffff",
     "accentText": "#3b82f6",
-    "btn": "",
+    "btn": "#f43f5e",
     "shape": "",
     "bgPrimary": "#38bdf8",
     "bgSecondary": "#14b8a6"
