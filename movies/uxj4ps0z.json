@@ -7,7 +7,8 @@
     "badge-1": "2023",
     "badge-2": "дубляж",
     "badge-3": "122 минути",
-    "badge-4": "1080p"
+    "badge-4": "1080p",
+    "hero-desc": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
