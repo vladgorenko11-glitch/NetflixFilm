@@ -3,7 +3,8 @@
   "poster": "",
   "fields": {
     "hero-title": "Незабываемое Рождество",
-    "hero-eyebrow": "| NETFLIX ORIGINAL"
+    "hero-eyebrow": "| NETFLIX ORIGINAL",
+    "hero-desc": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив 2022",
