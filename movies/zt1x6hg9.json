@@ -20,8 +20,8 @@
   "siteTagline": "НЕЗАБЫВАЕМОЕ РОЖДЕСТВО",
   "footerText": "© НЕЗАБЫВАЕМОЕ РОЖДЕСТВО • 2022 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/zt1x6hg9.jpg"
   },
   "bgPosition": {
     "x": 50,
