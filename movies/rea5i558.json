@@ -2,7 +2,8 @@
   "title": "Мальчик по имени Рождество",
   "poster": "posters/rea5i558.jpg",
   "fields": {
-    "hero-eyebrow": "| NETFLIX ORIGINAL"
+    "hero-eyebrow": "| NETFLIX ORIGINAL",
+    "hero-desc": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив 2021",
