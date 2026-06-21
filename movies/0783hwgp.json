@@ -15,8 +15,8 @@
   "siteTagline": "ПАРА НА ПРАЗДНИКИ",
   "footerText": "© ПАРА НА ПРАЗДНИКИ • 2020 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/0783hwgp.jpg"
   },
   "bgPosition": {
     "x": 50,
