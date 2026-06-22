@@ -20,8 +20,8 @@
   "siteTagline": "Призрачная шестёрка",
   "footerText": "© ПРИЗРАЧНАЯ ШЕСТЁРКА • 2019 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/lfzepz9l.jpg"
   },
   "bgPosition": {
     "x": 50,
