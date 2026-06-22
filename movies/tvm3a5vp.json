@@ -3,7 +3,8 @@
   "poster": "",
   "fields": {
     "hero-title": "Оставь мир позади",
-    "hero-eyebrow": "| NETFLIX ORIGINAL"
+    "hero-eyebrow": "| NETFLIX ORIGINAL",
+    "hero-desc": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
