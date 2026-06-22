@@ -1,7 +1,9 @@
 {
   "title": "",
   "poster": "",
-  "fields": {},
+  "fields": {
+    "hero-title": "<br>"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив",
   "siteTagline": "Оставь мир позади",
