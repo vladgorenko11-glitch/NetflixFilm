@@ -2,7 +2,8 @@
   "title": "Оставь мир позади",
   "poster": "",
   "fields": {
-    "hero-title": "Оставь мир позади"
+    "hero-title": "Оставь мир позади",
+    "hero-eyebrow": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
