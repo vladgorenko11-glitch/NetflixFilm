@@ -10,7 +10,8 @@
     "badge-3": "141 мин",
     "badge-4": "1080p",
     "imdb-rating": "6.4",
-    "genre-1": "ТРИЛЛЕР"
+    "genre-1": "ТРИЛЛЕР",
+    "genre-2": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
