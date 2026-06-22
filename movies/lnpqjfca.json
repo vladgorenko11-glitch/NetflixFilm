@@ -19,8 +19,8 @@
   "siteTagline": "мать",
   "footerText": "© МАТЬ • 2023 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/lnpqjfca.jpg"
   },
   "bgPosition": {
     "x": 50,
