@@ -20,8 +20,8 @@
   "siteTagline": "Оставь мир позади",
   "footerText": "© ОСТАВЬ МИР ПОЗАДИ • 2023 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/tvm3a5vp.jpg"
   },
   "bgPosition": {
     "x": 50,
