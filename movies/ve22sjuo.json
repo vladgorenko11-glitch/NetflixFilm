@@ -20,8 +20,8 @@
   "siteTagline": "Серый человек",
   "footerText": "© СЕРЫЙ ЧЕЛОВЕК • 2022 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/ve22sjuo.jpg"
   },
   "bgPosition": {
     "x": 50,
