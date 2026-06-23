@@ -1,7 +1,9 @@
 {
   "title": "Школа добра и зла",
   "poster": "posters/ebql12vf.jpg",
-  "fields": {},
+  "fields": {
+    "hero-eyebrow": "<br>"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив",
   "siteTagline": "Школа добра и зла",
