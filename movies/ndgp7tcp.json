@@ -3,11 +3,12 @@
   "poster": "posters/ndgp7tcp.jpg",
   "fields": {
     "hero-eyebrow": "| NETFLIX ORIGINAL",
-    "badge-1": "2023"
+    "badge-1": "2023",
+    "hero-title": "<span>Мятежная Луна: Дитя огня</span>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив 2023",
-  "siteTagline": "—",
+  "siteTagline": "МЯТЕЖНАЯ ЛУНА: ДИТЯ ОГНЯ",
   "footerText": "© МЯТЕЖНАЯ ЛУНА • 2023 • NETFLIX",
   "heroBg": {
     "type": "",
