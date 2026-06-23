@@ -19,8 +19,8 @@
   "siteTagline": "Уродина",
   "footerText": "© УРОДИНА • 2024 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/9utt5el6.jpg"
   },
   "bgPosition": {
     "x": 50,
