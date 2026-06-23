@@ -9,7 +9,8 @@
     "badge-4": "1080p",
     "badge-3": "110 мин",
     "imdb-rating": "6.1",
-    "genre-1": "ФЭНТЕЗИ"
+    "genre-1": "ФЭНТЕЗИ",
+    "genre-3": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
