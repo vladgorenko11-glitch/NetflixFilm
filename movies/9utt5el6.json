@@ -1,7 +1,9 @@
 {
   "title": "Уродина",
   "poster": "posters/9utt5el6.jpg",
-  "fields": {},
+  "fields": {
+    "hero-eyebrow": "| NETFLIX ORIGINAL"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив 2024",
   "siteTagline": "Уродина",
