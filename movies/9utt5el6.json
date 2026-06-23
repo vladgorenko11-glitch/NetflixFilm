@@ -28,8 +28,8 @@
     "scale": 1
   },
   "colors": {
-    "title": "#000000",
-    "accentText": "#000000",
+    "title": "#ffffff",
+    "accentText": "#ffffff",
     "btn": "#cc0000",
     "shape": "#ffffff",
     "bgPrimary": "#ffffff",
