@@ -27,7 +27,7 @@
     "title": "#ffffff",
     "accentText": "#cc0000",
     "btn": "#000000",
-    "shape": "",
+    "shape": "#000000",
     "bgPrimary": "",
     "bgSecondary": "#ff6b35"
   }
