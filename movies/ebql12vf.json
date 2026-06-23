@@ -19,8 +19,8 @@
   "siteTagline": "Школа добра и зла",
   "footerText": "© ШКОЛА ДОБРА И ЗЛА • 2022 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/ebql12vf.jpg"
   },
   "bgPosition": {
     "x": 50,
