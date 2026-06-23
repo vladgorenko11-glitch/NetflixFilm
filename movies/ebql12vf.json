@@ -2,7 +2,8 @@
   "title": "Школа добра и зла",
   "poster": "posters/ebql12vf.jpg",
   "fields": {
-    "hero-eyebrow": "| NETFLIX ORIGINAL"
+    "hero-eyebrow": "| NETFLIX ORIGINAL",
+    "imdb-rating": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
