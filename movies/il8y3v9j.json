@@ -1,7 +1,9 @@
 {
   "title": "Дева и дракон",
   "poster": "posters/il8y3v9j.jpg",
-  "fields": {},
+  "fields": {
+    "hero-eyebrow": "<br>"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив",
   "siteTagline": "—",
