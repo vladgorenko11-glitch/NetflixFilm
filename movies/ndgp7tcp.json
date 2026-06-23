@@ -15,8 +15,8 @@
   "siteTagline": "МЯТЕЖНАЯ ЛУНА",
   "footerText": "© МЯТЕЖНАЯ ЛУНА • 2023 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/ndgp7tcp.jpg"
   },
   "bgPosition": {
     "x": 50,
