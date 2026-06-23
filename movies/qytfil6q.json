@@ -19,8 +19,8 @@
   "siteTagline": "Электрический штат",
   "footerText": "© ЭЛЕКТРИЧЕСКИЙ ШТАТ • 2025 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/qytfil6q.jpg"
   },
   "bgPosition": {
     "x": 50,
