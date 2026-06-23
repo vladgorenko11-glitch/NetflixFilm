@@ -28,7 +28,7 @@
     "scale": 1
   },
   "colors": {
-    "title": "#ffffff",
+    "title": "#000000",
     "accentText": "#cc0000",
     "btn": "#cc0000",
     "shape": "#ffffff",
