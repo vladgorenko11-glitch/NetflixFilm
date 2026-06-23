@@ -1,0 +1,28 @@
+{
+  "title": "Мятежная Луна: Дитя огня",
+  "poster": "posters/ndgp7tcp.jpg",
+  "fields": {
+    "hero-eyebrow": "| NETFLIX ORIGINAL"
+  },
+  "videoUrl": "",
+  "siteName": "Видеоархив",
+  "siteTagline": "—",
+  "footerText": "© Видеоархив",
+  "heroBg": {
+    "type": "",
+    "value": ""
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "title": "",
+    "accentText": "",
+    "btn": "",
+    "shape": "",
+    "bgPrimary": "",
+    "bgSecondary": ""
+  }
+}
