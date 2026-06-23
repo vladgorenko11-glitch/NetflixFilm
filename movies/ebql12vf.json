@@ -4,7 +4,8 @@
   "fields": {
     "hero-eyebrow": "| NETFLIX ORIGINAL",
     "imdb-rating": "5.9",
-    "genre-2": "ПРИКЛЮЧЕНИЯ"
+    "genre-2": "ПРИКЛЮЧЕНИЯ",
+    "genre-3": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
