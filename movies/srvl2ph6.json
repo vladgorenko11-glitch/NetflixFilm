@@ -1,0 +1,26 @@
+{
+  "title": "Мятежная Луна: Оставляющая шрамы",
+  "poster": "posters/srvl2ph6.jpg",
+  "fields": {},
+  "videoUrl": "",
+  "siteName": "Видеоархив",
+  "siteTagline": "—",
+  "footerText": "© Видеоархив",
+  "heroBg": {
+    "type": "",
+    "value": ""
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "title": "#ffffff",
+    "accentText": "",
+    "btn": "",
+    "shape": "",
+    "bgPrimary": "",
+    "bgSecondary": ""
+  }
+}
