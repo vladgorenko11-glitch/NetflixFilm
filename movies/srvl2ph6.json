@@ -1,7 +1,9 @@
 {
   "title": "Мятежная Луна: Оставляющая шрамы",
   "poster": "posters/srvl2ph6.jpg",
-  "fields": {},
+  "fields": {
+    "hero-eyebrow": "<br>"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив",
   "siteTagline": "Мятежная Луна",
