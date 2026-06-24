@@ -10,7 +10,9 @@
     "badge-2": "дубляж",
     "hero-title": "<span>Франкенштейн</span>",
     "imdb-rating": "7.2",
-    "genre-1": "УЖАСЫ"
+    "genre-1": "УЖАСЫ",
+    "genre-2": "ДРАМА",
+    "genre-3": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив 2025",
