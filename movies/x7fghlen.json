@@ -20,8 +20,8 @@
   "siteTagline": "ФРАНКЕНШТЕЙН",
   "footerText": "© ФРАНКЕНШТЕЙН • 2025 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/x7fghlen.jpg"
   },
   "bgPosition": {
     "x": 50,
