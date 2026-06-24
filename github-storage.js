@@ -38,6 +38,15 @@ function ghIsConfigured() {
   const cfg = ghGetConfig();
   return !!(cfg && cfg.owner && cfg.repo && ghGetToken());
 }
+/* На відміну від ghIsConfigured(), ця перевірка НЕ вимагає токена —
+   її потрібно використовувати там, де ми лише ЧИТАЄМО дані (наприклад
+   при першому відкритті сайту), бо читання публічне і працює без токена.
+   GH_DEFAULT_CFG гарантує, що ця перевірка завжди true навіть на новому
+   пристрої/браузері, де адмін ще ніколи не заходив. */
+function ghHasRepoConfig() {
+  const cfg = ghGetConfig();
+  return !!(cfg && cfg.owner && cfg.repo);
+}
 
 function ghApiBase(cfg) {
   return `https://api.github.com/repos/${cfg.owner}/${cfg.repo}`;

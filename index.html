@@ -655,7 +655,7 @@ if (libTextSaveBtn) libTextSaveBtn.addEventListener('click', saveLibrarySiteConf
 (async function init(){
   updateGhStatusDot();
   loadSiteConfig();
-  if (!ghIsConfigured()) {
+  if (!ghHasRepoConfig()) {
     loadingNote.style.display = 'none';
     grid.style.display = 'grid';
     libLoadError = null;
@@ -664,8 +664,6 @@ if (libTextSaveBtn) libTextSaveBtn.addEventListener('click', saveLibrarySiteConf
     return;
   }
   await loadMoviesFromGitHub();
-  loadingNote.style.display = 'none';
-  grid.style.display = 'grid';
   render();
 })();
 </script>
