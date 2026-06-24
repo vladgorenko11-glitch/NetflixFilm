@@ -19,8 +19,8 @@
   "siteTagline": "Бессмертный человек",
   "footerText": "© ОСТРЫЕ КОЗЫРЬКИ • 2026 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/1xu1jl03.jpg"
   },
   "bgPosition": {
     "x": 50,
