@@ -15,8 +15,8 @@
   "siteTagline": "ОТПУСК НА ДВОИХ",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/9ej8hg07.jpg"
   },
   "bgPosition": {
     "x": 50,
