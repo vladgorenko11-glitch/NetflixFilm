@@ -1,7 +1,9 @@
 {
   "title": "Мой год в оксфорде",
   "poster": "posters/91tp7xlj.jpg",
-  "fields": {},
+  "fields": {
+    "hero-eyebrow": "| NETFLIX ORIGINAL"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив 2025",
   "siteTagline": "мой год в оксфорде",
