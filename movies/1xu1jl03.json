@@ -1,0 +1,26 @@
+{
+  "title": "Острые козырьки: Бессмертный человек",
+  "poster": "posters/1xu1jl03.jpg",
+  "fields": {},
+  "videoUrl": "",
+  "siteName": "Видеоархив",
+  "siteTagline": "Острые козырьки: Бессмертный человек",
+  "footerText": "© Видеоархив",
+  "heroBg": {
+    "type": "",
+    "value": ""
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "title": "",
+    "accentText": "",
+    "btn": "",
+    "shape": "",
+    "bgPrimary": "",
+    "bgSecondary": ""
+  }
+}
