@@ -2,7 +2,8 @@
   "title": "Не смотрите наверх",
   "poster": "posters/netflix/t20x8zrg.jpg",
   "fields": {
-    "hero-eyebrow": "| NETFLIX ORIGINAL"
+    "hero-eyebrow": "| NETFLIX ORIGINAL",
+    "hero-desc": "Два астронома обнаруживают комету, которая угрожает уничтожить Землю. Пытаясь предупредить человечество о надвигающейся катастрофе, они сталкиваются с безразличием властей, СМИ и общества."
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
