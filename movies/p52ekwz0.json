@@ -20,8 +20,8 @@
   "siteTagline": "Я ИДУ ИСКАТЬ 2",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/p52ekwz0.jpg"
   },
   "bgPosition": {
     "x": 50,
