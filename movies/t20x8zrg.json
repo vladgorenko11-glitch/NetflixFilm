@@ -1,7 +1,9 @@
 {
   "title": "Не смотрите наверх",
   "poster": "posters/netflix/t20x8zrg.jpg",
-  "fields": {},
+  "fields": {
+    "hero-eyebrow": "| NETFLIX ORIGINAL"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив",
   "siteTagline": "Не смотрите наверх",
