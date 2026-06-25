@@ -19,8 +19,8 @@
   "siteTagline": "Не смотрите наверх",
   "footerText": "© НЕ СМОТРИТЕ НАВЕРХ • 2021 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/t20x8zrg.jpg"
   },
   "bgPosition": {
     "x": 50,
