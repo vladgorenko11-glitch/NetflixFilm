@@ -7,8 +7,8 @@
   "siteTagline": "Голосовые для Изабель",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/a83czfqb.jpg"
   },
   "bgPosition": {
     "x": 50,
