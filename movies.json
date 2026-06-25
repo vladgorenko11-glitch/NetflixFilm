@@ -138,5 +138,11 @@
     "id": "x7fghlen",
     "title": "Франкенштейн",
     "poster": "posters/x7fghlen.jpg"
+  },
+  {
+    "id": "t20x8zrg",
+    "title": "Не смотрите наверх",
+    "poster": "posters/netflix/t20x8zrg.jpg",
+    "studio": "netflix"
   }
 ]
