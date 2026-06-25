@@ -9,8 +9,8 @@
   "siteTagline": "—",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/20ywo5zl.webp"
   },
   "bgPosition": {
     "x": 50,
