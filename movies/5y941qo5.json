@@ -15,8 +15,8 @@
   "siteTagline": "АВАТАР 3",
   "footerText": "© АВАТАР: пламя И ПЕПЕЛ • 2025 • DISNEY",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/5y941qo5.webp"
   },
   "bgPosition": {
     "x": 50,
