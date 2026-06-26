@@ -20,8 +20,8 @@
   "siteTagline": "ВОТ ЭТО ДРАМА!",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/i1u60v0y.png"
   },
   "bgPosition": {
     "x": 50,
