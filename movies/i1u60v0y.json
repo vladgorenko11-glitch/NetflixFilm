@@ -2,7 +2,8 @@
   "title": "Вот это драма!",
   "poster": "",
   "fields": {
-    "hero-title": "Вот это драма!"
+    "hero-title": "Вот это драма!",
+    "hero-desc": "| A24"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
