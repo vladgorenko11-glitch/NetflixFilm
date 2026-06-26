@@ -20,8 +20,8 @@
   "siteTagline": "Аватар: Пламя и пепел",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/9hxbkaph.webp"
   },
   "bgPosition": {
     "x": 50,
