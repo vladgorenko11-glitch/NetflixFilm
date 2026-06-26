@@ -20,8 +20,8 @@
   "siteTagline": "Дьявол носит Prada 2",
   "footerText": "© ДЬЯВОЛ НОСИТ PRADA 2 • 2026 • DISNEY",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/o4u31fu6.png"
   },
   "bgPosition": {
     "x": 50,
