@@ -33,7 +33,7 @@
     "accentText": "#cc0000",
     "btn": "#cc0000",
     "shape": "#000000",
-    "bgPrimary": "#ffffff",
-    "bgSecondary": "#cc0000"
+    "bgPrimary": "#cc0000",
+    "bgSecondary": "#ffffff"
   }
 }
