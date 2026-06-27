@@ -20,8 +20,8 @@
   "siteTagline": "вечность",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/wmjqk2rs.jpg"
   },
   "bgPosition": {
     "x": 50,
