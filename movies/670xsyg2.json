@@ -1,0 +1,26 @@
+{
+  "title": "",
+  "poster": "",
+  "fields": {},
+  "videoUrl": "",
+  "siteName": "Видеоархив",
+  "siteTagline": "—",
+  "footerText": "© Видеоархив",
+  "heroBg": {
+    "type": "upload",
+    "value": "backgrounds/670xsyg2.jpg"
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "title": "",
+    "accentText": "",
+    "btn": "",
+    "shape": "",
+    "bgPrimary": "",
+    "bgSecondary": ""
+  }
+}
