@@ -1,7 +1,9 @@
 {
   "title": "",
   "poster": "",
-  "fields": {},
+  "fields": {
+    "hero-desc": "<br>"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив",
   "siteTagline": "—",
