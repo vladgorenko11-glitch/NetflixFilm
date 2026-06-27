@@ -20,8 +20,8 @@
   "siteTagline": "НАПОЛЕОН",
   "footerText": "© НАПОЛЕОН • 2023 • APPLE TV+",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/ezra9xx9.jpg"
   },
   "bgPosition": {
     "x": 50,
