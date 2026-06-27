@@ -24,8 +24,8 @@
     "scale": 1
   },
   "colors": {
-    "title": "",
-    "accentText": "",
+    "title": "#ffffff",
+    "accentText": "#ffffff",
     "btn": "",
     "shape": "",
     "bgPrimary": "#ffffff",
