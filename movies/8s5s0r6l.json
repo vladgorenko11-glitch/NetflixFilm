@@ -20,8 +20,8 @@
   "siteTagline": "Аргайл: Супершпион",
   "footerText": "© АРГАЙЛ • 2024 • APPLE TV+",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/8s5s0r6l.jpg"
   },
   "bgPosition": {
     "x": 50,
