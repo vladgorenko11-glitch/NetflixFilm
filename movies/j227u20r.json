@@ -16,8 +16,8 @@
     "scale": 1
   },
   "colors": {
-    "title": "",
-    "accentText": "",
+    "title": "#22c55e",
+    "accentText": "#22c55e",
     "btn": "",
     "shape": "",
     "bgPrimary": "#22c55e",
