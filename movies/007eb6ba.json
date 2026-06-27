@@ -15,8 +15,8 @@
   "siteTagline": "f1",
   "footerText": "© F1 • 2025 • apple original",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/007eb6ba.jpg"
   },
   "bgPosition": {
     "x": 50,
