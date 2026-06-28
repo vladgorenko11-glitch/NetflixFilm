@@ -20,8 +20,8 @@
   "siteTagline": "МОЯ ВИНА",
   "footerText": "© МОЯ ВИНА • 2023 • PRIME VIDEO",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/zcctfiev.webp"
   },
   "bgPosition": {
     "x": 50,
