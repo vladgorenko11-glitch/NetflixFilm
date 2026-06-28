@@ -3,7 +3,8 @@
   "poster": "",
   "fields": {
     "hero-title": "<span style=\"color: rgb(255, 255, 255); font-size: clamp(2rem, 4.5vw, 3.5rem); letter-spacing: 0.06em;\">Мандалорец и Грогу</span><br>",
-    "hero-eyebrow": "| LUCASFILM"
+    "hero-eyebrow": "| LUCASFILM",
+    "hero-desc": "Мандалорец и Грогу отправляются в новое путешествие по галактике, где их ждут опасные враги, неожиданные союзники и испытания, способные изменить их судьбу."
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
