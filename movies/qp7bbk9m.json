@@ -8,7 +8,8 @@
     "genre-1": "КОМЕДИЯ",
     "genre-2": "МЮЗИКЛ",
     "genre-3": "ФЭНТЕЗИ",
-    "genre-4": "СЕМЕЙНЫЙ"
+    "genre-4": "СЕМЕЙНЫЙ",
+    "imdb-rating": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
