@@ -15,8 +15,8 @@
   "siteTagline": "Война будущего",
   "footerText": "© ВОЙНА БУДУЩЕГО • 2021 • AMAZON",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/1jrjbr66.jpg"
   },
   "bgPosition": {
     "x": 50,
