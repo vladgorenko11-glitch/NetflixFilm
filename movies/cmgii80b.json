@@ -1,0 +1,28 @@
+{
+  "title": "Мандалорец и Грогу",
+  "poster": "",
+  "fields": {
+    "hero-title": "<br><div>Мандалорец и Грогу</div>"
+  },
+  "videoUrl": "",
+  "siteName": "Видеоархив",
+  "siteTagline": "—",
+  "footerText": "© Видеоархив",
+  "heroBg": {
+    "type": "",
+    "value": ""
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "title": "",
+    "accentText": "",
+    "btn": "",
+    "shape": "",
+    "bgPrimary": "",
+    "bgSecondary": ""
+  }
+}
