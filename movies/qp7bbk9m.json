@@ -20,8 +20,8 @@
   "siteTagline": "В ДУХЕ РОЖДЕСТВА",
   "footerText": "© В ДУХЕ РОЖДЕСТВА • 2022 • APPLE TV+",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/qp7bbk9m.png"
   },
   "bgPosition": {
     "x": 50,
