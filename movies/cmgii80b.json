@@ -20,8 +20,8 @@
   "siteTagline": "МАНДАЛОРЕЦ И ГРОГУ",
   "footerText": "© МАНДАЛОРЕЦ И ГРОГУ • 2026 • DISNEY",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/cmgii80b.webp"
   },
   "bgPosition": {
     "x": 50,
