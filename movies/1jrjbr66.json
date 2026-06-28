@@ -4,7 +4,8 @@
   "fields": {
     "hero-title": "Война будущего",
     "badge-3": "138 мин",
-    "badge-1": "2021"
+    "badge-1": "2021",
+    "hero-eyebrow": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив 2021",
