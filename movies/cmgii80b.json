@@ -2,7 +2,7 @@
   "title": "Мандалорец и Грогу",
   "poster": "",
   "fields": {
-    "hero-title": "<br><div>Мандалорец и Грогу</div>"
+    "hero-title": "<span style=\"color: rgb(255, 255, 255); font-size: clamp(2rem, 4.5vw, 3.5rem); letter-spacing: 0.06em;\">Мандалорец и Грогу</span><br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
