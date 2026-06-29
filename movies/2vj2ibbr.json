@@ -2,7 +2,8 @@
   "title": "наша вина",
   "poster": "",
   "fields": {
-    "hero-title": "наша вина"
+    "hero-title": "наша вина",
+    "hero-eyebrow": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
