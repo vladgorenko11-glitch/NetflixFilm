@@ -16,8 +16,8 @@
   "siteTagline": "НАША ВИНА",
   "footerText": "© НАША ВИНА • 2025 • PRIME VIDEO",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/2vj2ibbr.webp"
   },
   "bgPosition": {
     "x": 50,
