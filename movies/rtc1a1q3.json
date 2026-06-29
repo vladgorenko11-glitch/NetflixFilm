@@ -1,7 +1,9 @@
 {
-  "title": "",
+  "title": "Мортал Комбат 2",
   "poster": "",
-  "fields": {},
+  "fields": {
+    "hero-title": "Мортал Комбат 2"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив",
   "siteTagline": "—",
