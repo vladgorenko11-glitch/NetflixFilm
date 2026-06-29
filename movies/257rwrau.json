@@ -18,8 +18,8 @@
   "siteTagline": "Майкл",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/257rwrau.jpg"
   },
   "bgPosition": {
     "x": 50,
