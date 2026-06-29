@@ -11,8 +11,8 @@
   "siteTagline": "Твоя вина",
   "footerText": "© ТВОЯ ВИНА • 2024 • PRIME VIDEO",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/q1py7fdq.webp"
   },
   "bgPosition": {
     "x": 50,
