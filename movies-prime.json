@@ -10,5 +10,11 @@
     "title": "Моя вина",
     "poster": "posters/prime/zcctfiev.jpg",
     "studio": "prime"
+  },
+  {
+    "id": "q1py7fdq",
+    "title": "Твоя вина",
+    "poster": "posters/prime/q1py7fdq.jpg",
+    "studio": "prime"
   }
 ]
