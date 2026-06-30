@@ -1,7 +1,9 @@
 {
   "title": "Клаус",
   "poster": "posters/netflix/auvhkk6i.jpg",
-  "fields": {},
+  "fields": {
+    "hero-eyebrow": "| NETFLIX ORIGINAL"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив",
   "siteTagline": "Клаус",
