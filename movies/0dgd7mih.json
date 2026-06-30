@@ -20,8 +20,8 @@
   "siteTagline": "Морской монстр",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/0dgd7mih.jpg"
   },
   "bgPosition": {
     "x": 50,
