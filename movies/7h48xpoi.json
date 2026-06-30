@@ -14,8 +14,8 @@
   "siteTagline": "Митчеллы против машин",
   "footerText": "© МИТЧЕЛЛЫ ПРОТИВ МАШИН • 2021 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/7h48xpoi.jpg"
   },
   "bgPosition": {
     "x": 50,
