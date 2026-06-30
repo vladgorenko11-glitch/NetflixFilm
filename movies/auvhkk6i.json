@@ -2,7 +2,8 @@
   "title": "Клаус",
   "poster": "posters/netflix/auvhkk6i.jpg",
   "fields": {
-    "hero-eyebrow": "| NETFLIX ORIGINAL"
+    "hero-eyebrow": "| NETFLIX ORIGINAL",
+    "hero-desc": "v"
   },
   "videoUrl": "",
   "siteName": "Видеоархив",
