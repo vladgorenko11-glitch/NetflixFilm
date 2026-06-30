@@ -1,0 +1,26 @@
+{
+  "title": "Ручная кладь",
+  "poster": "posters/netflix/63s9vptq.jpg",
+  "fields": {},
+  "videoUrl": "",
+  "siteName": "Видеоархив",
+  "siteTagline": "РУЧНАЯ КЛАДЬ",
+  "footerText": "© Видеоархив",
+  "heroBg": {
+    "type": "",
+    "value": ""
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "title": "",
+    "accentText": "",
+    "btn": "",
+    "shape": "",
+    "bgPrimary": "",
+    "bgSecondary": ""
+  }
+}
