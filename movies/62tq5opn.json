@@ -14,8 +14,8 @@
   "siteTagline": "Лео",
   "footerText": "© ЛЕО • 2023 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/62tq5opn.jpg"
   },
   "bgPosition": {
     "x": 50,
