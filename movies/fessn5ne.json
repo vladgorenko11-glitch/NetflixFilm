@@ -7,8 +7,8 @@
   "siteTagline": "Клуб убийств по четвергам",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/fessn5ne.jpg"
   },
   "bgPosition": {
     "x": 50,
