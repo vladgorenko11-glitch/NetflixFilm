@@ -7,8 +7,8 @@
   "siteTagline": "Скрудж: Рождественская песнь",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/yi2x97h8.jpg"
   },
   "bgPosition": {
     "x": 50,
