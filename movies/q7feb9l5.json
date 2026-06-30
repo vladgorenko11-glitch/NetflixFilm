@@ -14,8 +14,8 @@
   "siteTagline": "Дорога домой",
   "footerText": "© ДОРОГА ДОМОЙ • 2021 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/q7feb9l5.jpg"
   },
   "bgPosition": {
     "x": 50,
