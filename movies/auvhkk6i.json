@@ -24,7 +24,7 @@
   },
   "colors": {
     "title": "#ffffff",
-    "accentText": "",
+    "accentText": "#e50914",
     "btn": "#22c55e",
     "shape": "#cc0000",
     "bgPrimary": "#cc0000",
