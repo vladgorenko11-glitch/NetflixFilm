@@ -14,8 +14,8 @@
   "siteTagline": "Клаус",
   "footerText": "© КЛАУС • 2019 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/auvhkk6i.jpg"
   },
   "bgPosition": {
     "x": 50,
