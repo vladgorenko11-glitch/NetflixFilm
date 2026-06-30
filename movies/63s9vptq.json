@@ -14,8 +14,8 @@
   "siteTagline": "РУЧНАЯ КЛАДЬ",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/63s9vptq.jpg"
   },
   "bgPosition": {
     "x": 50,
