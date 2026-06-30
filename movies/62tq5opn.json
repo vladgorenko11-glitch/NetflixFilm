@@ -1,7 +1,9 @@
 {
   "title": "Лео",
   "poster": "posters/netflix/62tq5opn.jpg",
-  "fields": {},
+  "fields": {
+    "hero-eyebrow": "│ NETFLIX ORIGINAL"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив",
   "siteTagline": "Лео",
