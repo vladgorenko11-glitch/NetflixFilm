@@ -3,7 +3,8 @@
   "poster": "posters/netflix/keazwbev.jpg",
   "fields": {
     "badge-1": "2025",
-    "badge-2": "дубляж"
+    "badge-2": "дубляж",
+    "badge-3": "<br>"
   },
   "videoUrl": "",
   "siteName": "Видеоархив 2025",
