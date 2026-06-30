@@ -1,7 +1,9 @@
 {
   "title": "Дорога домой",
   "poster": "posters/netflix/q7feb9l5.jpg",
-  "fields": {},
+  "fields": {
+    "hero-eyebrow": "| NETFLIX ORIGINAL"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив",
   "siteTagline": "Дорога домой",
