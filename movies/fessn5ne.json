@@ -1,7 +1,9 @@
 {
   "title": "Клуб убийств по четвергам",
   "poster": "posters/netflix/fessn5ne.jpg",
-  "fields": {},
+  "fields": {
+    "hero-desc": "<br>"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив 2025",
   "siteTagline": "Клуб убийств по четвергам",
