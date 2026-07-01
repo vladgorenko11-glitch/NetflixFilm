@@ -1,7 +1,9 @@
 {
   "title": "Энола Холмс",
   "poster": "posters/netflix/irf1a9o2.jpg",
-  "fields": {},
+  "fields": {
+    "hero-eyebrow": "X"
+  },
   "videoUrl": "",
   "siteName": "Видеоархив 2020",
   "siteTagline": "Энола Холмс",
