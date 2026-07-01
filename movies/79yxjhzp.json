@@ -19,8 +19,8 @@
   "siteTagline": "Энола Холмс 2",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/79yxjhzp.jpg"
   },
   "bgPosition": {
     "x": 50,
