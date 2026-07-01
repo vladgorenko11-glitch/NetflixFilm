@@ -1,0 +1,28 @@
+{
+  "title": "Энола Холмс 3",
+  "poster": "posters/netflix/cuha7a6y.jpg",
+  "fields": {
+    "hero-desc": "Новое дело приводит Энолу Холмс на Мальту, где загадочное преступление втягивает ее в опасный заговор. На этот раз ставки оказываются выше, чем когда-либо прежде."
+  },
+  "videoUrl": "",
+  "siteName": "Видеоархив",
+  "siteTagline": "—",
+  "footerText": "© Видеоархив",
+  "heroBg": {
+    "type": "",
+    "value": ""
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "title": "",
+    "accentText": "",
+    "btn": "",
+    "shape": "",
+    "bgPrimary": "",
+    "bgSecondary": ""
+  }
+}
