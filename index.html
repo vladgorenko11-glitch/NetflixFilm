@@ -53,8 +53,26 @@ header { background:linear-gradient(180deg,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.75) 
 .lib-sub { font-size:0.95rem; color:var(--text2); max-width:560px; line-height:1.6; }
 
 /* ===== ВКЛАДКИ СТУДИЙ ===== */
-.studio-tabs-wrap { padding:1.5rem 0 0; border-bottom:1px solid rgba(255,255,255,0.07); }
+.studio-tabs-wrap { display:flex; align-items:flex-end; justify-content:space-between; gap:1rem; flex-wrap:wrap; padding:1.5rem 0 0; border-bottom:1px solid rgba(255,255,255,0.07); }
 .studio-tabs { display:flex; gap:0.6rem; align-items:flex-end; flex-wrap:wrap; }
+
+/* ===== ФИЛЬТР ТИПА (Фильмы / Сериалы) ===== */
+.type-filter { position:relative; margin-bottom:0.85rem; }
+.type-filter-btn { display:flex; align-items:center; gap:0.55rem; background:transparent; border:2px solid var(--pink3); color:var(--pink3); padding:0.6rem 1.3rem; border-radius:6px; font-size:0.76rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; font-family:inherit; transition:background 0.2s,color 0.2s; white-space:nowrap; }
+.type-filter-btn:hover { background:rgba(var(--primary-rgb),0.12); }
+.type-filter.open .type-filter-btn { background:rgba(var(--primary-rgb),0.18); }
+.type-filter-arrow { font-size:0.65rem; transition:transform 0.2s; }
+.type-filter.open .type-filter-arrow { transform:rotate(180deg); }
+.type-filter-menu { position:absolute; top:calc(100% + 8px); right:0; background:var(--bg2); border:1px solid var(--border-pink); border-radius:6px; min-width:190px; box-shadow:0 12px 34px rgba(0,0,0,0.6); display:none; overflow:hidden; z-index:60; }
+.type-filter.open .type-filter-menu { display:block; }
+.type-filter-option { display:block; width:100%; text-align:left; background:transparent; border:none; border-bottom:1px solid rgba(255,255,255,0.06); color:var(--text2); padding:0.7rem 1.1rem; font-size:0.78rem; letter-spacing:0.03em; cursor:pointer; font-family:inherit; }
+.type-filter-option:last-child { border-bottom:none; }
+.type-filter-option:hover { background:rgba(255,255,255,0.06); color:#fff; }
+.type-filter-option.active { color:var(--pink3); font-weight:800; }
+@media (max-width:600px) {
+  .type-filter-btn { padding:0.5rem 1rem; font-size:0.66rem; gap:0.4rem; }
+  .type-filter-menu { min-width:160px; }
+}
 .studio-tab {
   display:flex; align-items:center; justify-content:center; gap:0.55rem;
   padding:0.7rem 1.4rem 0.8rem;
@@ -202,6 +220,18 @@ footer { text-align:center; padding:2.5rem 1rem; color:var(--text3); font-size:0
       <button class="studio-tab" data-studio="other" type="button">
         <span style="font-size:2rem; line-height:1;">🎥</span>
       </button>
+    </div>
+
+    <div class="type-filter" id="type-filter">
+      <button class="type-filter-btn" id="type-filter-btn" type="button">
+        <span>Выбрать</span>
+        <span class="type-filter-arrow">▾</span>
+      </button>
+      <div class="type-filter-menu" id="type-filter-menu">
+        <button type="button" class="type-filter-option active" data-filter="all">Все</button>
+        <button type="button" class="type-filter-option" data-filter="movie">Только фильмы</button>
+        <button type="button" class="type-filter-option" data-filter="series">Только сериалы</button>
+      </div>
     </div>
   </div>
 
@@ -432,6 +462,14 @@ function updateGhStatusDot(){
   ghConfigBtn.prepend(span);
 }
 
+/* ===== ФИЛЬТР ТИПА (Фильмы / Сериалы) ===== */
+let currentTypeFilter = 'all'; // 'all' | 'movie' | 'series'
+function applyTypeFilter(list){
+  if (currentTypeFilter === 'movie')  return list.filter(m => m.type !== 'series');
+  if (currentTypeFilter === 'series') return list.filter(m => m.type === 'series');
+  return list;
+}
+
 function render(){
   grid.innerHTML = "";
 
@@ -451,7 +489,9 @@ function render(){
     grid.appendChild(addCard);
   }
 
-  movies.forEach(m => {
+  const visibleMovies = applyTypeFilter(movies);
+
+  visibleMovies.forEach(m => {
     const a = document.createElement('a');
     a.className = 'lib-card has-poster';
     const moviePage = pagePathForItem(m);
@@ -474,7 +514,7 @@ function render(){
     grid.appendChild(a);
   });
 
-  if (movies.length === 0 && !libLoadError) {
+  if (visibleMovies.length === 0 && !libLoadError) {
     const emptySlots = isAdmin ? 3 : 4;
     for (let i = 0; i < emptySlots; i++) {
       const d = document.createElement('div');
@@ -691,6 +731,27 @@ document.getElementById('studio-tabs').addEventListener('click', e => {
   if (!tab) return;
   const sid = tab.dataset.studio;
   if (sid && sid !== currentStudio) switchStudio(sid);
+});
+
+/* ===== ФИЛЬТР ТИПА: обработчики кликов ===== */
+const typeFilterEl   = document.getElementById('type-filter');
+const typeFilterBtn  = document.getElementById('type-filter-btn');
+const typeFilterMenu = document.getElementById('type-filter-menu');
+
+typeFilterBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  typeFilterEl.classList.toggle('open');
+});
+typeFilterMenu.addEventListener('click', e => {
+  const opt = e.target.closest('.type-filter-option');
+  if (!opt) return;
+  currentTypeFilter = opt.dataset.filter;
+  typeFilterMenu.querySelectorAll('.type-filter-option').forEach(o => o.classList.toggle('active', o === opt));
+  typeFilterEl.classList.remove('open');
+  render();
+});
+document.addEventListener('click', e => {
+  if (!typeFilterEl.contains(e.target)) typeFilterEl.classList.remove('open');
 });
 
 /* ===== ТЕКСТ БИБЛИОТЕКИ ===== */
