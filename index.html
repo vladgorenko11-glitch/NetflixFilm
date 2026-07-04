@@ -308,6 +308,13 @@ footer { text-align:center; padding:2.5rem 1rem; color:var(--text3); font-size:0
   <div class="lib-modal-box">
     <div class="lib-modal-title">Новый фильм</div>
     <div class="lib-modal-sub">Укажите название и загрузите постер. После создания откроется страница фильма — все изменения там сохраняются прямо в GitHub.</div>
+    <div id="import-file-block" style="display:none; border:1px dashed var(--border-pink); border-radius:6px; padding:0.85rem 1rem; margin-bottom:1.1rem; background:var(--bg2);">
+      <label style="margin-top:0;">Уже есть готовый сайт?</label>
+      <div style="font-size:0.72rem; color:var(--text2); line-height:1.5; margin-bottom:0.7rem;">Загрузите .html файл готового сайта сериала — название, постер, жанры и серии (с ссылками на видео) заполнятся автоматически.</div>
+      <button class="lib-btn primary" id="import-file-btn" type="button" style="width:100%;">📄 Создать через существующий файл</button>
+      <input type="file" id="import-file-input" accept=".html,.htm" style="display:none;">
+      <div id="import-file-status" style="font-size:0.72rem; margin-top:0.6rem;"></div>
+    </div>
     <label>Название</label>
     <input type="text" id="title-input" placeholder="Например: Интерстеллар" maxlength="120">
     <label>Постер</label>
@@ -359,6 +366,7 @@ let movies = [];
 let isAdmin = false;
 try { isAdmin = sessionStorage.getItem(ADMIN_SESSION_KEY) === "1"; } catch(e){}
 let newPosterDataUrl = "";
+let importedSeriesData = null; // { genres, episodes, season } — заполняется после разбора загруженного готового HTML-файла
 let libLoadError = null;
 let currentStudio = "netflix"; // активная вкладка
 
@@ -576,6 +584,36 @@ async function createMovie(){
     const movie = { id: id, title: title, poster: posterPath, studio: currentStudio, type: newItemType };
     movies = movies.concat([movie]);
     await saveMoviesToGitHub();
+
+    /* Если сериал был создан через загрузку готового файла — сразу сохраняем
+       распознанные жанры и серии (с ссылками на видео) в series/<id>.json,
+       чтобы на странице сериала всё уже было заполнено. */
+    if (newItemType === 'series' && importedSeriesData &&
+        ((importedSeriesData.episodes && importedSeriesData.episodes.length) ||
+         (importedSeriesData.genres && importedSeriesData.genres.length))) {
+      try {
+        const fields = {};
+        (importedSeriesData.genres || []).forEach((g, i) => { fields['genre-' + (i + 1)] = g; });
+        const seriesData = {
+          title: title,
+          poster: posterPath,
+          fields: fields,
+          videoUrl: '',
+          season: importedSeriesData.season || 1,
+          episodes: importedSeriesData.episodes || [],
+          siteName: (siteConfig && siteConfig.siteName) || 'Видеоархив',
+          siteTagline: '—',
+          footerText: (siteConfig && siteConfig.footerText) || '© Видеоархив',
+          heroBg: { type: '', value: '' },
+          bgPosition: { x: 50, y: 0, scale: 1 },
+          colors: { title: '', accentText: '', btn: '', shape: '', bgPrimary: '', bgSecondary: '' }
+        };
+        await ghPutFile('series/' + id + '.json', JSON.stringify(seriesData, null, 2), 'Import series data for ' + title);
+      } catch(e) {
+        console.error('Не удалось сохранить импортированные данные сериала', e);
+      }
+    }
+
     const moviePage = pagePathForItem(movie);
     window.location.href = moviePage + '?id=' + encodeURIComponent(id) + '&studio=' + encodeURIComponent(currentStudio);
   } catch(e){
@@ -699,7 +737,14 @@ function openAddModal(){
   posterPlaceholder.style.display = '';
   addSubmit.disabled = true; addSubmit.textContent = "Создать";
   document.getElementById('add-error').textContent = "";
+  importedSeriesData = null;
+  const importStatusEl = document.getElementById('import-file-status');
+  if (importStatusEl) importStatusEl.textContent = "";
+  const importFileInputEl = document.getElementById('import-file-input');
+  if (importFileInputEl) importFileInputEl.value = "";
   const isSeries = newItemType === 'series';
+  const importBlock = document.getElementById('import-file-block');
+  if (importBlock) importBlock.style.display = isSeries ? '' : 'none';
   document.querySelector('#add-modal .lib-modal-title').textContent = isSeries ? 'Новый сериал' : 'Новый фильм';
   document.querySelector('#add-modal .lib-modal-sub').textContent =
     (isSeries ? 'Сериал' : 'Фильм') + ' будет добавлен в коллекцию «' + STUDIOS[currentStudio].label + '». Откройте страницу ' +
@@ -724,6 +769,138 @@ posterFile.addEventListener('change', e => {
 document.getElementById('add-cancel').addEventListener('click', () => addModal.classList.remove('open'));
 addModal.addEventListener('click', e => { if (e.target === addModal) addModal.classList.remove('open'); });
 addSubmit.addEventListener('click', createMovie);
+
+/* ===== СОЗДАНИЕ ЧЕРЕЗ СУЩЕСТВУЮЩИЙ ФАЙЛ (импорт готового сайта сериала) =====
+   Пользователь загружает .html файл уже готового (ранее сделанного) сайта сериала.
+   Мы разбираем его в браузере (DOMParser + регулярки по исходному коду страницы)
+   и вытаскиваем: название, постер/фон, жанры и список серий со ссылками на видео —
+   насколько это возможно для конкретного файла. Всё, что не удалось найти,
+   останется пустым — админ сможет дозаполнить это вручную на странице сериала. */
+function parseLegacySeriesHtml(htmlText){
+  const result = { title: '', posterDataUrl: '', genres: [], episodes: [], season: 1 };
+  try {
+    const doc = new DOMParser().parseFromString(htmlText, 'text/html');
+
+    /* --- Название: берём текст до первого "|" в <title> --- */
+    const rawTitle = (doc.title || '').trim();
+    if (rawTitle) result.title = rawTitle.split('|')[0].trim();
+
+    /* --- Сезон, если в названии есть "Сезон N" --- */
+    const seasonMatch = rawTitle.match(/[Сс]езон\s*(\d+)/);
+    if (seasonMatch) result.season = parseInt(seasonMatch[1], 10) || 1;
+
+    /* --- Постер / фоновое изображение --- */
+    let heroImg = doc.getElementById('hero-bg-1') || doc.querySelector('img[id*="hero-bg" i], img[class*="hero-bg" i]');
+    if (heroImg && /^data:image\//.test(heroImg.getAttribute('src') || '')) {
+      result.posterDataUrl = heroImg.getAttribute('src');
+    }
+    if (!result.posterDataUrl) {
+      const ogImg = doc.querySelector('meta[property="og:image"]');
+      if (ogImg && /^data:image\//.test(ogImg.getAttribute('content') || '')) result.posterDataUrl = ogImg.getAttribute('content');
+    }
+    if (!result.posterDataUrl) {
+      const bgMatch = htmlText.match(/background-image\s*:\s*url\(\s*['"]?(data:image\/[a-zA-Z0-9;,+/=]+)['"]?\s*\)/);
+      if (bgMatch) result.posterDataUrl = bgMatch[1];
+    }
+    if (!result.posterDataUrl) {
+      const anyImg = doc.querySelector('img[src^="data:image/"]');
+      if (anyImg) result.posterDataUrl = anyImg.getAttribute('src');
+    }
+
+    /* --- Жанры (плашки .genre-pill, если есть) --- */
+    doc.querySelectorAll('.genre-pill').forEach(el => {
+      const t = (el.textContent || '').trim();
+      if (t && t !== 'X' && result.genres.length < 4 && result.genres.indexOf(t) === -1) result.genres.push(t);
+    });
+
+    /* --- Серии: пробуем несколько известных форматов исходников --- */
+    let episodes = null;
+
+    /* Формат 1: наш новый генератор — movieData.episodes: [{ episode, title, videoUrl }, ...] */
+    let m = htmlText.match(/episodes\s*:\s*(\[[\s\S]*?\])\s*,\s*\n?\s*(?:siteName|footerText|heroBg|colors)/);
+    if (m) {
+      try {
+        const arr = new Function('return ' + m[1])();
+        if (Array.isArray(arr) && arr.length) {
+          episodes = arr.map((e, i) => ({ episode: e.episode || (i + 1), title: e.title || '', videoUrl: e.videoUrl || '' }));
+        }
+      } catch(e){}
+    }
+
+    /* Формат 2: старые самодельные сайты — const EPISODES = [{num, title}, ...]; + карта ссылок {num: url} */
+    if (!episodes) {
+      let epList = null, urlMap = null;
+      const m2 = htmlText.match(/(?:const|let|var)\s+EPISODES\s*=\s*(\[[\s\S]*?\]);/);
+      if (m2) { try { epList = new Function('return ' + m2[1])(); } catch(e){} }
+      const urlMapRegexes = [
+        /(?:const|let|var)\s+SHARED_URLS\s*=\s*(\{[\s\S]*?\});/,
+        /(?:const|let|var)\s+\w*[Vv]ideo[Uu]rls?\w*\s*=\s*(\{[\s\S]*?\});/,
+        /(?:const|let|var)\s+\w*[Uu]rls?\w*\s*=\s*(\{[\s\S]*?\});/
+      ];
+      for (let i = 0; i < urlMapRegexes.length && !urlMap; i++) {
+        const mm = htmlText.match(urlMapRegexes[i]);
+        if (mm) { try { urlMap = new Function('return ' + mm[1])(); } catch(e){} }
+      }
+      if (Array.isArray(epList) && epList.length) {
+        episodes = epList.map((e, i) => {
+          const num = e.num || e.episode || (i + 1);
+          const url = urlMap ? (urlMap[num] || urlMap[String(num)] || '') : '';
+          return { episode: num, title: e.title || '', videoUrl: url };
+        });
+      }
+    }
+
+    if (episodes) result.episodes = episodes;
+  } catch(e) {
+    console.error('Не удалось разобрать загруженный файл', e);
+  }
+  return result;
+}
+
+const importFileBtn   = document.getElementById('import-file-btn');
+const importFileInput = document.getElementById('import-file-input');
+const importFileStatus= document.getElementById('import-file-status');
+if (importFileBtn && importFileInput) {
+  importFileBtn.addEventListener('click', () => importFileInput.click());
+  importFileInput.addEventListener('change', e => {
+    const f = e.target.files && e.target.files[0];
+    if (!f) return;
+    importFileStatus.style.color = 'var(--text2)';
+    importFileStatus.textContent = 'Читаем файл…';
+    const reader = new FileReader();
+    reader.onload = () => {
+      const parsed = parseLegacySeriesHtml(String(reader.result));
+      if (parsed.title) {
+        titleInput.value = parsed.title;
+        addSubmit.disabled = !titleInput.value.trim();
+      }
+      if (parsed.posterDataUrl) {
+        newPosterDataUrl = parsed.posterDataUrl;
+        posterPreview.src = newPosterDataUrl;
+        posterPreview.style.display = 'block';
+        posterPlaceholder.style.display = 'none';
+      }
+      importedSeriesData = { genres: parsed.genres, episodes: parsed.episodes, season: parsed.season };
+      const parts = [];
+      if (parsed.title) parts.push('название');
+      if (parsed.posterDataUrl) parts.push('постер');
+      if (parsed.genres.length) parts.push(parsed.genres.length + ' жанр(а/ов)');
+      if (parsed.episodes.length) parts.push(parsed.episodes.length + ' серий');
+      if (parts.length) {
+        importFileStatus.style.color = '#2ecc71';
+        importFileStatus.textContent = '✓ Распознано: ' + parts.join(', ') + '. Проверьте название и создайте сериал.';
+      } else {
+        importFileStatus.style.color = '#e74c3c';
+        importFileStatus.textContent = 'Не удалось распознать данные в этом файле. Заполните поля вручную.';
+      }
+    };
+    reader.onerror = () => {
+      importFileStatus.style.color = '#e74c3c';
+      importFileStatus.textContent = 'Ошибка чтения файла.';
+    };
+    reader.readAsText(f, 'utf-8');
+  });
+}
 
 /* ===== ВКЛАДКИ: обработчики кликов ===== */
 document.getElementById('studio-tabs').addEventListener('click', e => {
