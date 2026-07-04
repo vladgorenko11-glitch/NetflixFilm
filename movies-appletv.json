@@ -46,5 +46,12 @@
     "title": "В духе Рождества",
     "poster": "posters/appletv/qp7bbk9m.jpg",
     "studio": "appletv"
+  },
+  {
+    "id": "86006l4a",
+    "title": "Основание (сезон 1)",
+    "poster": "posters/appletv/86006l4a.jpg",
+    "studio": "appletv",
+    "type": "series"
   }
 ]
