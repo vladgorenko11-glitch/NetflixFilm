@@ -228,5 +228,12 @@
     "title": "Энола Холмс 3",
     "poster": "posters/netflix/cuha7a6y.jpg",
     "studio": "netflix"
+  },
+  {
+    "id": "sgvz0ifx",
+    "title": "Аватар: Легенда об Аанге · сезон 2",
+    "poster": "posters/netflix/sgvz0ifx.jpg",
+    "studio": "netflix",
+    "type": "series"
   }
 ]
