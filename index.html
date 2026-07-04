@@ -590,10 +590,33 @@ async function createMovie(){
        чтобы на странице сериала всё уже было заполнено. */
     if (newItemType === 'series' && importedSeriesData &&
         ((importedSeriesData.episodes && importedSeriesData.episodes.length) ||
-         (importedSeriesData.genres && importedSeriesData.genres.length))) {
+         (importedSeriesData.genres && importedSeriesData.genres.length) ||
+         (importedSeriesData.fields && Object.keys(importedSeriesData.fields).length) ||
+         (importedSeriesData.colors && Object.keys(importedSeriesData.colors).some(k => importedSeriesData.colors[k])))) {
       try {
-        const fields = {};
-        (importedSeriesData.genres || []).forEach((g, i) => { fields['genre-' + (i + 1)] = g; });
+        const fields = Object.assign({}, importedSeriesData.fields || {});
+        (importedSeriesData.genres || []).forEach((g, i) => {
+          if (!fields['genre-' + (i + 1)]) fields['genre-' + (i + 1)] = g;
+        });
+
+        /* Фоновое изображение: если из старого файла нашлась картинка (data:) —
+           заливаем её в репозиторий как отдельный файл фона. Ссылку на файл
+           в СТАРОМ репозитории переносить нельзя — её там больше нет. */
+        let heroBg = { type: '', value: '' };
+        if (importedSeriesData.heroBg && importedSeriesData.heroBg.value) {
+          if (importedSeriesData.heroBg.type === 'url') {
+            heroBg = { type: 'url', value: importedSeriesData.heroBg.value };
+          } else if (/^data:image\//.test(importedSeriesData.heroBg.value)) {
+            const hbExt = importedSeriesData.heroBg.value.startsWith('data:image/png') ? 'png'
+                        : importedSeriesData.heroBg.value.startsWith('data:image/webp') ? 'webp'
+                        : importedSeriesData.heroBg.value.startsWith('data:image/gif') ? 'gif'
+                        : 'jpg';
+            const hbPath = 'posters/' + currentStudio + '/' + id + '-bg.' + hbExt;
+            await ghPutFileFromDataUrl(hbPath, importedSeriesData.heroBg.value, 'Upload hero background for ' + title);
+            heroBg = { type: 'upload', value: hbPath };
+          }
+        }
+
         const seriesData = {
           title: title,
           poster: posterPath,
@@ -601,12 +624,15 @@ async function createMovie(){
           videoUrl: '',
           season: importedSeriesData.season || 1,
           episodes: importedSeriesData.episodes || [],
-          siteName: (siteConfig && siteConfig.siteName) || 'Видеоархив',
-          siteTagline: '—',
-          footerText: (siteConfig && siteConfig.footerText) || '© Видеоархив',
-          heroBg: { type: '', value: '' },
+          siteName: importedSeriesData.siteName || (siteConfig && siteConfig.siteName) || 'Видеоархив',
+          siteTagline: importedSeriesData.siteTagline || '—',
+          footerText: importedSeriesData.footerText || (siteConfig && siteConfig.footerText) || '© Видеоархив',
+          heroBg: heroBg,
           bgPosition: { x: 50, y: 0, scale: 1 },
-          colors: { title: '', accentText: '', btn: '', shape: '', bgPrimary: '', bgSecondary: '' }
+          colors: Object.assign(
+            { title: '', accentText: '', btn: '', shape: '', bgPrimary: '', bgSecondary: '' },
+            importedSeriesData.colors || {}
+          )
         };
         await ghPutFile('series/' + id + '.json', JSON.stringify(seriesData, null, 2), 'Import series data for ' + title);
       } catch(e) {
@@ -772,27 +798,119 @@ addSubmit.addEventListener('click', createMovie);
 
 /* ===== СОЗДАНИЕ ЧЕРЕЗ СУЩЕСТВУЮЩИЙ ФАЙЛ (импорт готового сайта сериала) =====
    Пользователь загружает .html файл уже готового (ранее сделанного) сайта сериала.
-   Мы разбираем его в браузере (DOMParser + регулярки по исходному коду страницы)
-   и вытаскиваем: название, постер/фон, жанры и список серий со ссылками на видео —
-   насколько это возможно для конкретного файла. Всё, что не удалось найти,
-   останется пустым — админ сможет дозаполнить это вручную на странице сериала. */
+   Мы разбираем его в браузере и вытаскиваем ВСЁ, что возможно: название, постер/фон,
+   жанры, текстовые поля (описание, бейджи, "сейчас играет" и т.д.), цвета оформления
+   и список серий со ссылками на видео.
+
+   Главный путь: старые самостоятельные (не подключённые к общей библиотеке) сайты,
+   которые генерировал этот же инструмент раньше, хранят ВСЕ данные целиком в одном
+   JS-объекте "let movieData = {...}" прямо в исходнике страницы — title, fields,
+   colors, heroBg, siteName и т.д. Поэтому вместо того чтобы вытаскивать по кусочкам
+   (как раньше — только title/poster/episodes), мы сначала пытаемся найти и разобрать
+   этот объект целиком через balanced-brace парсинг — это даёт точную копию сайта,
+   включая цвета и весь текст. Если объекта нет (совсем другой/самодельный файл) —
+   используем резервные способы (DOM, :root CSS-переменные, старые форматы EPISODES). */
+
+/* Находит "varName = {" в тексте и возвращает исходный код объекта-литерала
+   с учётом вложенных { } и строк (чтобы скобки внутри строк не путали подсчёт). */
+function extractJsObjectLiteral(text, varName){
+  const startRe = new RegExp('\\b' + varName + '\\s*=\\s*\\{');
+  const sm = startRe.exec(text);
+  if (!sm) return null;
+  let i = text.indexOf('{', sm.index);
+  if (i === -1) return null;
+  let depth = 0, inStr = null, escape = false;
+  const start = i;
+  for (; i < text.length; i++){
+    const ch = text[i];
+    if (inStr){
+      if (escape) escape = false;
+      else if (ch === '\\') escape = true;
+      else if (ch === inStr) inStr = null;
+      continue;
+    }
+    if (ch === '"' || ch === "'" || ch === '`') { inStr = ch; continue; }
+    if (ch === '{') depth++;
+    else if (ch === '}') { depth--; if (depth === 0) return text.slice(start, i + 1); }
+  }
+  return null;
+}
+
 function parseLegacySeriesHtml(htmlText){
-  const result = { title: '', posterDataUrl: '', genres: [], episodes: [], season: 1 };
+  const result = {
+    title: '', posterDataUrl: '', genres: [], episodes: [], season: 1,
+    fields: {}, colors: {}, heroBg: null, siteName: '', siteTagline: '', footerText: ''
+  };
   try {
     const doc = new DOMParser().parseFromString(htmlText, 'text/html');
 
-    /* --- Название: берём текст до первого "|" в <title> --- */
-    const rawTitle = (doc.title || '').trim();
-    if (rawTitle) result.title = rawTitle.split('|')[0].trim();
+    /* --- ГЛАВНЫЙ ПУТЬ: полный объект movieData --- */
+    const literal = extractJsObjectLiteral(htmlText, 'movieData');
+    if (literal) {
+      try {
+        const obj = new Function('return ' + literal)();
+        if (obj && typeof obj === 'object') {
+          if (obj.title) result.title = String(obj.title);
+          if (obj.fields && typeof obj.fields === 'object') result.fields = Object.assign({}, obj.fields);
+          if (Array.isArray(obj.episodes) && obj.episodes.length) {
+            result.episodes = obj.episodes.map((e, i) => ({
+              episode: e.episode || (i + 1), title: e.title || '', videoUrl: e.videoUrl || ''
+            }));
+          }
+          if (typeof obj.season === 'number' && obj.season > 0) result.season = obj.season;
+          if (obj.siteName) result.siteName = String(obj.siteName);
+          if (obj.siteTagline) result.siteTagline = String(obj.siteTagline);
+          if (obj.footerText) result.footerText = String(obj.footerText);
+          if (obj.colors && typeof obj.colors === 'object') result.colors = Object.assign({}, obj.colors);
+          if (obj.heroBg && obj.heroBg.value) {
+            /* Путь на файл в СТАРОМ репозитории переносить нельзя — его там больше нет.
+               Берём фон только если это внешняя ссылка либо готовая картинка (data:). */
+            if (obj.heroBg.type === 'url' || /^data:image\//.test(obj.heroBg.value)) {
+              result.heroBg = { type: obj.heroBg.type, value: obj.heroBg.value };
+            }
+          }
+          if (obj.poster && /^data:image\//.test(obj.poster)) result.posterDataUrl = obj.poster;
+          /* Жанры лежат в fields.genre-1..4 внутри этого же объекта */
+          for (let gi = 1; gi <= 4; gi++) {
+            const g = result.fields['genre-' + gi];
+            if (g && g !== 'X' && result.genres.indexOf(g) === -1) result.genres.push(g);
+          }
+        }
+      } catch (e) { console.error('Не удалось разобрать movieData из файла', e); }
+    }
 
-    /* --- Сезон, если в названии есть "Сезон N" --- */
-    const seasonMatch = rawTitle.match(/[Сс]езон\s*(\d+)/);
-    if (seasonMatch) result.season = parseInt(seasonMatch[1], 10) || 1;
+    /* --- Название (резерв, если объект не дал) --- */
+    if (!result.title) {
+      const rawTitle = (doc.title || '').trim();
+      if (rawTitle) result.title = rawTitle.split('|')[0].trim();
+    }
+    const seasonMatch = (doc.title || '').match(/[Сс]езон\s*(\d+)/);
+    if (seasonMatch && result.season === 1) result.season = parseInt(seasonMatch[1], 10) || 1;
 
-    /* --- Постер / фоновое изображение --- */
-    let heroImg = doc.getElementById('hero-bg-1') || doc.querySelector('img[id*="hero-bg" i], img[class*="hero-bg" i]');
-    if (heroImg && /^data:image\//.test(heroImg.getAttribute('src') || '')) {
-      result.posterDataUrl = heroImg.getAttribute('src');
+    /* --- Текстовые поля из DOM (data-field) — резерв/дозаполнение недостающего --- */
+    doc.querySelectorAll('[data-field]').forEach(el => {
+      const key = el.getAttribute('data-field');
+      if (!key || result.fields[key]) return;
+      const html = el.innerHTML.trim();
+      if (html && html !== 'X') result.fields[key] = html;
+    });
+
+    /* --- Жанры из плашек .genre-pill (резерв) --- */
+    if (!result.genres.length) {
+      doc.querySelectorAll('.genre-pill').forEach(el => {
+        const t = (el.textContent || '').trim();
+        if (t && t !== 'X' && result.genres.length < 4 && result.genres.indexOf(t) === -1) result.genres.push(t);
+      });
+    }
+
+    /* --- Постер / фоновое изображение (резерв) --- */
+    if (!result.posterDataUrl) {
+      const heroEl = doc.getElementById('hero-bg');
+      if (heroEl) {
+        const styleAttr = heroEl.getAttribute('style') || '';
+        const bm = styleAttr.match(/background-image\s*:\s*url\(\s*['"]?(data:image\/[a-zA-Z0-9;,+/=]+)['"]?\s*\)/);
+        if (bm) result.posterDataUrl = bm[1];
+      }
     }
     if (!result.posterDataUrl) {
       const ogImg = doc.querySelector('meta[property="og:image"]');
@@ -807,28 +925,31 @@ function parseLegacySeriesHtml(htmlText){
       if (anyImg) result.posterDataUrl = anyImg.getAttribute('src');
     }
 
-    /* --- Жанры (плашки .genre-pill, если есть) --- */
-    doc.querySelectorAll('.genre-pill').forEach(el => {
-      const t = (el.textContent || '').trim();
-      if (t && t !== 'X' && result.genres.length < 4 && result.genres.indexOf(t) === -1) result.genres.push(t);
-    });
-
-    /* --- Серии: пробуем несколько известных форматов исходников --- */
-    let episodes = null;
-
-    /* Формат 1: наш новый генератор — movieData.episodes: [{ episode, title, videoUrl }, ...] */
-    let m = htmlText.match(/episodes\s*:\s*(\[[\s\S]*?\])\s*,\s*\n?\s*(?:siteName|footerText|heroBg|colors)/);
-    if (m) {
-      try {
-        const arr = new Function('return ' + m[1])();
-        if (Array.isArray(arr) && arr.length) {
-          episodes = arr.map((e, i) => ({ episode: e.episode || (i + 1), title: e.title || '', videoUrl: e.videoUrl || '' }));
-        }
-      } catch(e){}
+    /* --- Цвета из :root CSS-переменных (резерв, если объект их не дал) --- */
+    if (!Object.keys(result.colors).some(k => result.colors[k])) {
+      const rootMatch = htmlText.match(/:root\s*\{([\s\S]*?)\}/);
+      const rootBlock = rootMatch ? rootMatch[1] : htmlText;
+      const cssVar = name => {
+        const m = rootBlock.match(new RegExp('--' + name + '\\s*:\\s*([^;]+);'));
+        return m ? m[1].trim() : '';
+      };
+      const rgbToHex = rgbStr => {
+        const parts = (rgbStr || '').split(',').map(s => parseInt(s.trim(), 10));
+        if (parts.length !== 3 || parts.some(isNaN)) return '';
+        return '#' + parts.map(n => Math.max(0, Math.min(255, n)).toString(16).padStart(2, '0')).join('');
+      };
+      const colors = {};
+      const title = cssVar('title'); if (/^#/.test(title)) colors.title = title;
+      const accentText = cssVar('accent-text'); if (/^#/.test(accentText)) colors.accentText = accentText;
+      const btnSolid = cssVar('btn-solid'); if (/^#/.test(btnSolid)) colors.btn = btnSolid;
+      const shape = cssVar('shape'); if (/^#/.test(shape)) colors.shape = shape;
+      const bgPrimaryHex = rgbToHex(cssVar('bg-accent1-rgb')); if (bgPrimaryHex) colors.bgPrimary = bgPrimaryHex;
+      const bgSecondaryHex = rgbToHex(cssVar('bg-accent2-rgb')); if (bgSecondaryHex) colors.bgSecondary = bgSecondaryHex;
+      if (Object.keys(colors).length) result.colors = Object.assign({}, result.colors, colors);
     }
 
-    /* Формат 2: старые самодельные сайты — const EPISODES = [{num, title}, ...]; + карта ссылок {num: url} */
-    if (!episodes) {
+    /* --- Серии: старые форматы EPISODES/SHARED_URLS (если ещё не нашли) --- */
+    if (!result.episodes.length) {
       let epList = null, urlMap = null;
       const m2 = htmlText.match(/(?:const|let|var)\s+EPISODES\s*=\s*(\[[\s\S]*?\]);/);
       if (m2) { try { epList = new Function('return ' + m2[1])(); } catch(e){} }
@@ -842,15 +963,13 @@ function parseLegacySeriesHtml(htmlText){
         if (mm) { try { urlMap = new Function('return ' + mm[1])(); } catch(e){} }
       }
       if (Array.isArray(epList) && epList.length) {
-        episodes = epList.map((e, i) => {
+        result.episodes = epList.map((e, i) => {
           const num = e.num || e.episode || (i + 1);
           const url = urlMap ? (urlMap[num] || urlMap[String(num)] || '') : '';
           return { episode: num, title: e.title || '', videoUrl: url };
         });
       }
     }
-
-    if (episodes) result.episodes = episodes;
   } catch(e) {
     console.error('Не удалось разобрать загруженный файл', e);
   }
@@ -880,12 +999,19 @@ if (importFileBtn && importFileInput) {
         posterPreview.style.display = 'block';
         posterPlaceholder.style.display = 'none';
       }
-      importedSeriesData = { genres: parsed.genres, episodes: parsed.episodes, season: parsed.season };
+      importedSeriesData = {
+        genres: parsed.genres, episodes: parsed.episodes, season: parsed.season,
+        fields: parsed.fields, colors: parsed.colors, heroBg: parsed.heroBg,
+        siteName: parsed.siteName, siteTagline: parsed.siteTagline, footerText: parsed.footerText
+      };
       const parts = [];
       if (parsed.title) parts.push('название');
       if (parsed.posterDataUrl) parts.push('постер');
       if (parsed.genres.length) parts.push(parsed.genres.length + ' жанр(а/ов)');
       if (parsed.episodes.length) parts.push(parsed.episodes.length + ' серий');
+      if (parsed.fields && Object.keys(parsed.fields).length) parts.push(Object.keys(parsed.fields).length + ' текстовых полей (описание, бейджи и т.п.)');
+      if (parsed.colors && Object.keys(parsed.colors).some(k => parsed.colors[k])) parts.push('цвета оформления');
+      if (parsed.heroBg && parsed.heroBg.value) parts.push('фоновое изображение');
       if (parts.length) {
         importFileStatus.style.color = '#2ecc71';
         importFileStatus.textContent = '✓ Распознано: ' + parts.join(', ') + '. Проверьте название и создайте сериал.';
