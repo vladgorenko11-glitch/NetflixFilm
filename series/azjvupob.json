@@ -11,8 +11,8 @@
   "siteTagline": "—",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/azjvupob.jpg"
   },
   "bgPosition": {
     "x": 50,
