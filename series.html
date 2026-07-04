@@ -177,6 +177,36 @@ body.admin-mode .bg-upload-hint { display:block; }
 #toast.error { border-left-color:#f87171; color:#f87171; }
 footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:center; font-size:0.7rem; color:var(--text3); letter-spacing:0.1em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:0.5rem; }
 @media (max-width:600px) { .container { padding:1rem; } header { padding:0 1rem; } .logo img { height:26px; } }
+
+/* ===== СЕРИИ (эпизоды) ===== */
+.episodes-section { margin: 0 0 2.5rem; }
+.episodes-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:0.9rem; }
+.episode-card { background:var(--bg2); border:1px solid var(--border); border-radius:6px; overflow:hidden; position:relative; transition:transform 0.2s,border-color 0.2s,box-shadow 0.2s; }
+.episode-card:hover { transform:translateY(-3px); border-color:var(--border-pink); box-shadow:0 10px 30px rgba(0,0,0,0.55); }
+.episode-card.active { border-color:var(--shape); box-shadow:0 0 0 2px rgba(var(--shape-rgb),0.35); }
+.episode-card.active .ep-thumb::after { content:'▶ ИГРАЕТ'; position:absolute; top:8px; right:8px; background:var(--shape); color:#fff; font-size:0.58rem; font-weight:700; letter-spacing:0.08em; padding:3px 7px; border-radius:3px; z-index:1; }
+.ep-thumb { aspect-ratio:16/9; background:#000; position:relative; display:flex; align-items:center; justify-content:center; cursor:pointer; overflow:hidden; }
+.ep-thumb-badge { position:absolute; top:8px; left:8px; background:rgba(0,0,0,0.75); border:1px solid var(--border-pink); color:#fff; font-size:0.62rem; letter-spacing:0.08em; font-weight:700; padding:3px 7px; border-radius:3px; z-index:1; }
+.ep-num-bg { font-size:2.2rem; font-weight:800; color:rgba(255,255,255,0.08); letter-spacing:-0.02em; user-select:none; }
+.ep-play-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.4); opacity:0; transition:opacity 0.2s; }
+.episode-card:hover .ep-play-overlay { opacity:1; }
+.ep-play-icon { width:40px; height:40px; background:var(--shape); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1rem; padding-left:3px; box-shadow:0 0 20px rgba(var(--shape-rgb),0.5); }
+.ep-info { padding:0.7rem 0.8rem; }
+.ep-title-edit { font-size:0.84rem; color:var(--text); font-weight:700; line-height:1.3; display:block; outline:none; }
+body.admin-mode .ep-title-edit { outline:1px dashed rgba(var(--shape-rgb),0.55); outline-offset:3px; cursor:text; border-radius:2px; }
+body.admin-mode .ep-title-edit:hover { background:rgba(var(--shape-rgb),0.1); }
+body.admin-mode .ep-title-edit:focus { outline:2px solid var(--shape); background:rgba(var(--shape-rgb),0.14); }
+.ep-status { margin-top:4px; font-size:0.66rem; color:var(--text3); }
+.ep-status.has-video { color:var(--shape); }
+.admin-only { display:none; }
+body.admin-mode .admin-only { display:flex; }
+.ep-admin-row { gap:0.4rem; margin-top:0.6rem; }
+.ep-admin-btn { flex:1; padding:4px 6px; font-size:0.62rem; letter-spacing:0.05em; border-radius:3px; border:1px solid var(--border); background:var(--bg3); color:var(--text2); cursor:pointer; font-family:inherit; text-transform:uppercase; font-weight:700; }
+.ep-admin-btn:hover { border-color:var(--shape); color:var(--text); }
+.ep-admin-btn.danger { color:var(--shape); border-color:rgba(var(--shape-rgb),0.3); }
+.add-episode-card { border:1px dashed var(--border-pink); background:var(--bg2); border-radius:6px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:0.4rem; cursor:pointer; min-height:120px; color:var(--shape); font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; }
+.add-episode-card:hover { background:rgba(var(--shape-rgb),0.08); }
+.add-episode-card .plus-icon { font-size:1.8rem; opacity:0.8; }
 </style>
 <script src="github-storage.js"></script>
 <script>
@@ -252,6 +282,11 @@ footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:cente
     </div>
   </div>
 
+  <section class="episodes-section">
+    <div class="section-title"><span class="red-bar"></span>Серии<span class="line"></span></div>
+    <div class="episodes-grid" id="episodes-grid"></div>
+  </section>
+
   <div class="meta-pills-row">
     <div class="imdb-pill">
       <span class="imdb-label">IMDb</span>
@@ -295,14 +330,15 @@ footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:cente
     </div>
     <button class="btn primary" onclick="saveSiteConfig()" style="margin-top:0.25rem;">💾 Сохранить текст сайта</button>
 
-    <div class="admin-section-label" style="margin-top:1.5rem;">▶ Видео</div>
-    <div class="admin-subtitle">Сайт не хранит сами видеофайлы — вставьте прямую ссылку на видео (с Google Drive, другого хостинга и т.п.). Ссылка сохраняется в GitHub вместе с остальными данными фильма.</div>
+    <div class="admin-section-label" style="margin-top:1.5rem;">🎬 Серии</div>
+    <div class="admin-subtitle">Сайт не хранит сами видеофайлы. Каждая серия — отдельная карточка в разделе «Серии» на странице. Нажмите «+ Добавить серию», чтобы создать новую — нумерация (S1E1, S1E2…) проставляется автоматически. Название серии меняется прямо в карточке (кликните на текст), а ссылка на видео задаётся кнопкой «🔗 URL» на карточке.</div>
     <div class="admin-row">
-      <input type="text" class="url-input" id="url-input" placeholder="Прямая ссылка на видео (mp4, m3u8...)">
-      <button class="btn primary" onclick="saveUrl()">Сохранить URL</button>
+      <label style="font-size:0.72rem;color:var(--text2);letter-spacing:0.05em;">Номер сезона:</label>
+      <input type="text" class="url-input" id="season-input" placeholder="1" style="max-width:80px;flex:0 0 80px;">
+      <button class="btn primary" onclick="saveSeasonNumber()">Сохранить сезон</button>
     </div>
     <div class="admin-row">
-      <button class="btn danger" onclick="clearUrl()">✕ Очистить</button>
+      <button class="btn primary" onclick="addEpisode()">+ Добавить серию</button>
       <button class="btn danger" onclick="changePassword()">🔑 Изменить пароль</button>
     </div>
 
@@ -370,6 +406,8 @@ let movieData = {
   poster: '',          // путь к постеру в репо (заполняется при создании на главной странице)
   fields: {},           // текстовые поля .adm-editable, ключ = data-field
   videoUrl: '',
+  season: 1,            // номер сезона (для авто-нумерации S{season}E{episode})
+  episodes: [],         // [{ episode: 1, title: '', videoUrl: '' }, ...]
   // Текст шапки и подвала — свой для каждого фильма (не общий с библиотекой и другими фильмами)
   siteName: 'Видеоархив',
   siteTagline: '—',
@@ -425,6 +463,8 @@ async function loadMovieData(){
       movieData.heroBg = loaded.heroBg || { type:'', value:'' };
       movieData.bgPosition = loaded.bgPosition || { x:50, y:0, scale:1 };
       movieData.colors = loaded.colors || {};
+      movieData.season = (typeof loaded.season === 'number' && loaded.season > 0) ? loaded.season : 1;
+      movieData.episodes = Array.isArray(loaded.episodes) ? loaded.episodes : [];
       movieSha = file.sha;
       setSaveStatus('ok', '✓ Данные загружены из GitHub.');
     } else {
@@ -603,6 +643,175 @@ function applyMovieDataToPage(){
     console.error('Не удалось применить сохранённые цвета:', e);
   }
   renderColorSwatches();
+
+  // Серии
+  const seasonInput = document.getElementById('season-input');
+  if (seasonInput) seasonInput.value = movieData.season || 1;
+  renderEpisodes();
+  const episodesForAutoplay = getEpisodesList();
+  const firstWithVideo = episodesForAutoplay.findIndex(e => e && e.videoUrl);
+  playEpisode(firstWithVideo !== -1 ? firstWithVideo : 0);
+}
+
+/* ===== Серии (эпизоды) ===== */
+let currentEpisodeIndex = 0;
+
+function episodeLabel(ep){
+  const season = movieData.season || 1;
+  const num = (ep && ep.episode) ? ep.episode : 1;
+  return 'S' + season + 'E' + num;
+}
+
+/* Возвращает список серий для отображения. Если ещё ни одной серии не сохранено
+   (новый сериал), показываем одну виртуальную «Серию 1» — она станет настоящей
+   и сохранится в GitHub, как только админ что-то в ней изменит (название/URL/добавит ещё). */
+function getEpisodesList(){
+  if (Array.isArray(movieData.episodes) && movieData.episodes.length) return movieData.episodes;
+  return [{ episode: 1, title: '', videoUrl: '' }];
+}
+
+function ensureRealEpisodesArray(){
+  if (!Array.isArray(movieData.episodes) || !movieData.episodes.length) {
+    movieData.episodes = getEpisodesList().map(e => Object.assign({}, e));
+  }
+}
+
+function saveSeasonNumber(){
+  const input = document.getElementById('season-input');
+  let val = parseInt(input ? input.value : '1', 10);
+  if (!val || val < 1) val = 1;
+  movieData.season = val;
+  if (input) input.value = val;
+  renderEpisodes();
+  toast('✓ Номер сезона сохранён', 'success');
+  scheduleSaveMovieData();
+}
+
+function renderEpisodes(){
+  const grid = document.getElementById('episodes-grid');
+  if (!grid) return;
+  const episodes = getEpisodesList();
+  grid.innerHTML = '';
+  episodes.forEach((ep, idx) => {
+    const card = document.createElement('div');
+    card.className = 'episode-card' + (idx === currentEpisodeIndex ? ' active' : '');
+    const hasVideo = !!(ep && ep.videoUrl);
+    const label = episodeLabel(ep);
+    const titleText = (ep && ep.title && ep.title.trim()) ? ep.title : ('Серия ' + (ep.episode || (idx+1)));
+    card.innerHTML =
+      '<div class="ep-thumb" data-idx="' + idx + '">' +
+        '<span class="ep-thumb-badge">' + label + '</span>' +
+        '<span class="ep-num-bg">' + label + '</span>' +
+        '<div class="ep-play-overlay"><div class="ep-play-icon">▶</div></div>' +
+      '</div>' +
+      '<div class="ep-info">' +
+        '<span class="ep-title-edit" data-idx="' + idx + '"></span>' +
+        '<div class="ep-status ' + (hasVideo ? 'has-video' : '') + '">' + (hasVideo ? '✓ видео добавлено' : 'нет видео') + '</div>' +
+        '<div class="ep-admin-row admin-only">' +
+          '<button type="button" class="ep-admin-btn" data-act="url" data-idx="' + idx + '">🔗 URL</button>' +
+          '<button type="button" class="ep-admin-btn danger" data-act="del" data-idx="' + idx + '">✕</button>' +
+        '</div>' +
+      '</div>';
+    const titleEl = card.querySelector('.ep-title-edit');
+    titleEl.textContent = titleText;
+    grid.appendChild(card);
+  });
+
+  const addCard = document.createElement('div');
+  addCard.className = 'add-episode-card admin-only';
+  addCard.innerHTML = '<div class="plus-icon">+</div><div>Добавить серию</div>';
+  addCard.addEventListener('click', addEpisode);
+  grid.appendChild(addCard);
+
+  grid.querySelectorAll('.ep-thumb').forEach(el => {
+    el.addEventListener('click', () => playEpisode(parseInt(el.getAttribute('data-idx'), 10)));
+  });
+  grid.querySelectorAll('.ep-title-edit').forEach(el => {
+    el.contentEditable = isAdmin ? 'true' : 'false';
+    el.spellcheck = false;
+    el.addEventListener('paste', function(e){
+      e.preventDefault();
+      const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+      document.execCommand('insertText', false, text);
+    });
+    el.addEventListener('keydown', function(e){ if (e.key === 'Enter') { e.preventDefault(); el.blur(); } });
+    el.addEventListener('blur', function(){
+      if (!isAdmin) return;
+      const idx = parseInt(el.getAttribute('data-idx'), 10);
+      ensureRealEpisodesArray();
+      const val = el.textContent.trim();
+      movieData.episodes[idx].title = val;
+      if (!val) el.textContent = 'Серия ' + movieData.episodes[idx].episode;
+      scheduleSaveMovieData();
+    });
+  });
+  grid.querySelectorAll('.ep-admin-btn').forEach(btn => {
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      const idx = parseInt(btn.getAttribute('data-idx'), 10);
+      const act = btn.getAttribute('data-act');
+      if (act === 'url') setEpisodeUrl(idx);
+      else if (act === 'del') deleteEpisode(idx);
+    });
+  });
+}
+
+function playEpisode(idx){
+  const episodes = getEpisodesList();
+  const ep = episodes[idx];
+  const video = document.getElementById('main-video');
+  const placeholder = document.getElementById('player-placeholder');
+  const nowPlaying = document.getElementById('now-playing');
+  if (!ep) return;
+  currentEpisodeIndex = idx;
+  if (ep.videoUrl) {
+    video.src = ep.videoUrl;
+    video.style.display = 'block';
+    placeholder.style.display = 'none';
+  } else {
+    video.pause(); video.removeAttribute('src'); video.load();
+    video.style.display = 'none';
+    placeholder.style.display = '';
+  }
+  if (nowPlaying && !nowPlaying.isContentEditable) {
+    nowPlaying.textContent = episodeLabel(ep) + (ep.title ? ' — ' + ep.title : '');
+  }
+  renderEpisodes();
+}
+
+function addEpisode(){
+  if (!isAdmin) return;
+  ensureRealEpisodesArray();
+  const nextNum = movieData.episodes.reduce((m, e) => Math.max(m, e.episode || 0), 0) + 1;
+  movieData.episodes.push({ episode: nextNum, title: '', videoUrl: '' });
+  renderEpisodes();
+  toast('✓ ' + episodeLabel({ episode: nextNum }) + ' добавлена', 'success');
+  scheduleSaveMovieData();
+}
+
+function deleteEpisode(idx){
+  if (!isAdmin) return;
+  ensureRealEpisodesArray();
+  if (movieData.episodes.length <= 1) { toast('Должна остаться хотя бы одна серия', 'error'); return; }
+  if (!confirm('Удалить ' + episodeLabel(movieData.episodes[idx]) + '?')) return;
+  movieData.episodes.splice(idx, 1);
+  movieData.episodes.forEach((e, i) => { e.episode = i + 1; });
+  if (currentEpisodeIndex >= movieData.episodes.length) currentEpisodeIndex = movieData.episodes.length - 1;
+  playEpisode(currentEpisodeIndex);
+  toast('Серия удалена');
+  scheduleSaveMovieData();
+}
+
+function setEpisodeUrl(idx){
+  if (!isAdmin) return;
+  ensureRealEpisodesArray();
+  const current = movieData.episodes[idx].videoUrl || '';
+  const url = prompt('Прямая ссылка на видео для ' + episodeLabel(movieData.episodes[idx]) + ':', current);
+  if (url === null) return;
+  movieData.episodes[idx].videoUrl = url.trim();
+  toast('✓ Ссылка на видео сохранена', 'success');
+  if (idx === currentEpisodeIndex) playEpisode(idx); else renderEpisodes();
+  scheduleSaveMovieData();
 }
 
 /* ===== Админ-вход ===== */
@@ -891,6 +1100,7 @@ function setEditableMode(on){
     el.contentEditable = on ? 'true' : 'false';
     el.spellcheck = false;
   });
+  if (typeof renderEpisodes === 'function') renderEpisodes();
 }
 function initEditableHandlers(){
   document.querySelectorAll('.adm-editable[data-field]').forEach(el=>{
