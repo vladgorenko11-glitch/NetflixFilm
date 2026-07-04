@@ -107,6 +107,7 @@ header { background:linear-gradient(180deg,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.75) 
 .lib-card-add .lib-card-label { color: var(--pink3); }
 .lib-card .lib-card-icon { font-size:1.8rem; opacity:0.45; }
 .lib-card .lib-card-label { font-size:0.66rem; letter-spacing:0.1em; text-transform:uppercase; opacity:0.75; }
+.lib-card-type-badge { position:absolute; top:0.5rem; left:0.5rem; background:rgba(0,0,0,0.75); border:1px solid var(--border-pink); color:#fff; font-size:0.6rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; padding:0.25rem 0.5rem; border-radius:4px; z-index:1; }
 .lib-card-delete { position:absolute; top:0.5rem; right:0.5rem; width:28px; height:28px; border-radius:50%; background: rgba(0,0,0,0.75); color:#fff; border:1px solid var(--border-pink); cursor:pointer; font-size:0.9rem; z-index:2; display:none; align-items:center; justify-content:center; }
 .lib-card:hover .lib-card-delete { display:flex; }
 .lib-empty-note { margin-top:2.5rem; padding:1.25rem 1.5rem; border:1px solid var(--border); border-radius:6px; background:var(--bg2); color:var(--text2); font-size:0.85rem; line-height:1.6; max-width:680px; }
@@ -261,6 +262,18 @@ footer { text-align:center; padding:2.5rem 1rem; color:var(--text3); font-size:0
   </div>
 </div>
 
+<div class="lib-modal" id="type-modal">
+  <div class="lib-modal-box">
+    <div class="lib-modal-title">Что добавить?</div>
+    <div class="lib-modal-sub">Выберите тип — от этого зависит структура страницы редактирования.</div>
+    <div class="lib-modal-actions" style="margin-bottom:0.75rem;">
+      <button class="lib-btn primary" id="type-movie-btn" type="button" style="padding:1.3rem 1rem; font-size:0.85rem;">🎬<br>Фильм</button>
+      <button class="lib-btn primary" id="type-series-btn" type="button" style="padding:1.3rem 1rem; font-size:0.85rem;">📺<br>Сериал</button>
+    </div>
+    <button class="lib-btn" id="type-cancel" type="button" style="width:100%;">Отмена</button>
+  </div>
+</div>
+
 <div class="lib-modal" id="add-modal">
   <div class="lib-modal-box">
     <div class="lib-modal-title">Новый фильм</div>
@@ -298,6 +311,13 @@ const STUDIOS = {
   hbomax:  { label: 'HBO Max',   moviesPath: 'movies-hbomax.json',   moviePagePath: 'movie.html' },
   other:   { label: 'Інше',      moviesPath: 'movies-other.json',    moviePagePath: 'movie.html' },
 };
+
+/* Страница редактирования зависит от типа карточки (фильм/сериал), а не от студии.
+   Для сериалов используется отдельный файл series.html и отдельная папка данных series/. */
+const TYPE_PAGE = { movie: 'movie.html', series: 'series.html' };
+function pagePathForItem(item){
+  return TYPE_PAGE[item && item.type] || TYPE_PAGE.movie;
+}
 
 const ADMIN_PWD_KEY = "library_admin_pwd";
 const ADMIN_SESSION_KEY = "library_admin_active";
@@ -426,18 +446,19 @@ function render(){
     const addCard = document.createElement('button');
     addCard.type = 'button';
     addCard.className = 'lib-card lib-card-add';
-    addCard.innerHTML = '<span class="lib-card-icon">+</span><span class="lib-card-label">Добавить фильм</span>';
-    addCard.addEventListener('click', openAddModal);
+    addCard.innerHTML = '<span class="lib-card-icon">+</span><span class="lib-card-label">Добавить</span>';
+    addCard.addEventListener('click', openTypeModal);
     grid.appendChild(addCard);
   }
 
   movies.forEach(m => {
     const a = document.createElement('a');
     a.className = 'lib-card has-poster';
-    const moviePage = STUDIOS[currentStudio].moviePagePath;
+    const moviePage = pagePathForItem(m);
     a.href = moviePage + '?id=' + encodeURIComponent(m.id) + '&studio=' + encodeURIComponent(currentStudio);
     let posterHtml = m.poster ? ('<img class="lib-card-poster" src="' + escapeHtml(m.poster) + '" alt="' + escapeHtml(m.title) + '" loading="lazy">') : '';
-    a.innerHTML = posterHtml + '<div class="lib-card-overlay"><div class="lib-card-name"></div></div>';
+    const typeBadge = m.type === 'series' ? '<div class="lib-card-type-badge">Сериал</div>' : '';
+    a.innerHTML = posterHtml + typeBadge + '<div class="lib-card-overlay"><div class="lib-card-name"></div></div>';
     a.querySelector('.lib-card-name').textContent = m.title;
     if (isAdmin) {
       const del = document.createElement('button');
@@ -479,11 +500,13 @@ async function deleteMovie(id){
   if (!confirm('Удалить фильм из библиотеки? Это нельзя отменить.')) return;
   if (!ghIsConfigured()) { alert('Сначала настройте GitHub.'); return; }
   const prev = movies;
+  const removed = movies.find(m => m.id === id);
   movies = movies.filter(m => m.id !== id);
   render();
   try {
     await saveMoviesToGitHub();
-    await ghDeleteFile('movies/' + id + '.json', 'Delete movie ' + id).catch(function(){});
+    const dataFolder = (removed && removed.type === 'series') ? 'series/' : 'movies/';
+    await ghDeleteFile(dataFolder + id + '.json', 'Delete ' + id).catch(function(){});
   } catch(e){
     alert('Не удалось удалить: ' + (e.message || e));
     movies = prev; render();
@@ -510,10 +533,10 @@ async function createMovie(){
       posterPath = 'posters/' + currentStudio + '/' + id + '.' + ext;
       await ghPutFileFromDataUrl(posterPath, newPosterDataUrl, 'Upload poster for ' + title);
     }
-    const movie = { id: id, title: title, poster: posterPath, studio: currentStudio };
+    const movie = { id: id, title: title, poster: posterPath, studio: currentStudio, type: newItemType };
     movies = movies.concat([movie]);
     await saveMoviesToGitHub();
-    const moviePage = STUDIOS[currentStudio].moviePagePath;
+    const moviePage = pagePathForItem(movie);
     window.location.href = moviePage + '?id=' + encodeURIComponent(id) + '&studio=' + encodeURIComponent(currentStudio);
   } catch(e){
     addError.textContent = "Ошибка: " + (e.message || e);
@@ -599,7 +622,28 @@ document.getElementById('gh-save').addEventListener('click', async () => {
   }
 });
 
-/* ===== ADD MOVIE MODAL ===== */
+/* ===== ВЫБОР ТИПА (ФИЛЬМ / СЕРИАЛ) ===== */
+const typeModal = document.getElementById('type-modal');
+let newItemType = 'movie'; // 'movie' | 'series' — что сейчас создаём
+
+function openTypeModal(){
+  if (!ghIsConfigured()) { openGhModal(); return; }
+  typeModal.classList.add('open');
+}
+document.getElementById('type-movie-btn').addEventListener('click', () => {
+  newItemType = 'movie';
+  typeModal.classList.remove('open');
+  openAddModal();
+});
+document.getElementById('type-series-btn').addEventListener('click', () => {
+  newItemType = 'series';
+  typeModal.classList.remove('open');
+  openAddModal();
+});
+document.getElementById('type-cancel').addEventListener('click', () => typeModal.classList.remove('open'));
+typeModal.addEventListener('click', e => { if (e.target === typeModal) typeModal.classList.remove('open'); });
+
+/* ===== ADD MOVIE/SERIES MODAL (название + постер) ===== */
 const addModal         = document.getElementById('add-modal');
 const titleInput       = document.getElementById('title-input');
 const posterDrop       = document.getElementById('poster-drop');
@@ -615,9 +659,11 @@ function openAddModal(){
   posterPlaceholder.style.display = '';
   addSubmit.disabled = true; addSubmit.textContent = "Создать";
   document.getElementById('add-error').textContent = "";
-  // Показываем для какой студии добавляем
+  const isSeries = newItemType === 'series';
+  document.querySelector('#add-modal .lib-modal-title').textContent = isSeries ? 'Новый сериал' : 'Новый фильм';
   document.querySelector('#add-modal .lib-modal-sub').textContent =
-    'Фильм будет добавлен в коллекцию «' + STUDIOS[currentStudio].label + '». Откройте страницу фильма после создания, чтобы заполнить все поля.';
+    (isSeries ? 'Сериал' : 'Фильм') + ' будет добавлен в коллекцию «' + STUDIOS[currentStudio].label + '». Откройте страницу ' +
+    (isSeries ? 'сериала' : 'фильма') + ' после создания, чтобы заполнить все поля.';
   addModal.classList.add('open');
   setTimeout(() => titleInput.focus(), 0);
 }
