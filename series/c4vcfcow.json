@@ -82,6 +82,6 @@
     "btn": "#cc0000",
     "shape": "#cc0000",
     "bgPrimary": "#cc0000",
-    "bgSecondary": "#ffffff"
+    "bgSecondary": "#000000"
   }
 }
