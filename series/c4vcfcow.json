@@ -81,7 +81,7 @@
     "accentText": "",
     "btn": "#cc0000",
     "shape": "#cc0000",
-    "bgPrimary": "#cc0000",
-    "bgSecondary": "#000000"
+    "bgPrimary": "#000000",
+    "bgSecondary": "#cc0000"
   }
 }
