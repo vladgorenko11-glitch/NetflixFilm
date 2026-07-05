@@ -295,10 +295,10 @@ body.admin-mode .admin-only { display:flex; }
       <div id="now-playing" class="adm-editable" data-singleline="1" data-field="now-playing">— Фильм —</div>
     </div>
     <div id="player-container">
-      <video id="main-video" controls preload="metadata" src=""></video>
+      <video id="main-video" controls preload="auto" src=""></video>
       <div id="player-placeholder">
         <div class="big-icon">▶</div>
-        <p>Видео ещё не загружено</p>
+        <p id="player-placeholder-text">Выберите серию</p>
       </div>
     </div>
   </div>
@@ -669,13 +669,12 @@ function applyMovieDataToPage(){
   const seasonInput = document.getElementById('season-input');
   if (seasonInput) seasonInput.value = movieData.season || 1;
   renderEpisodes();
-  const episodesForAutoplay = getEpisodesList();
-  const firstWithVideo = episodesForAutoplay.findIndex(e => e && e.videoUrl);
-  playEpisode(firstWithVideo !== -1 ? firstWithVideo : 0);
+  // Ничего не выбираем и не проигрываем автоматически — ждём, пока
+  // пользователь сам выберет серию из списка ниже.
 }
 
 /* ===== Серии (эпизоды) ===== */
-let currentEpisodeIndex = 0;
+let currentEpisodeIndex = -1;
 
 function episodeLabel(ep){
   const season = movieData.season || 1;
@@ -717,11 +716,12 @@ function renderEpisodes(){
     const card = document.createElement('div');
     card.className = 'episode-card' + (idx === currentEpisodeIndex ? ' active' : '');
     const hasVideo = !!(ep && ep.videoUrl);
-    const label = episodeLabel(ep);
+    const autoLabel = episodeLabel(ep);
+    const label = (ep && ep.label && ep.label.trim()) ? ep.label : autoLabel;
     const titleText = (ep && ep.title && ep.title.trim()) ? ep.title : ('Серия ' + (ep.episode || (idx+1)));
     card.innerHTML =
       '<div class="ep-thumb" data-idx="' + idx + '">' +
-        '<span class="ep-thumb-badge">' + label + '</span>' +
+        '<span class="ep-thumb-badge ep-badge-edit" data-idx="' + idx + '" data-auto="' + autoLabel + '">' + label + '</span>' +
         '<span class="ep-num-bg">' + label + '</span>' +
         '<div class="ep-play-overlay"><div class="ep-play-icon">▶</div></div>' +
       '</div>' +
@@ -745,7 +745,34 @@ function renderEpisodes(){
   grid.appendChild(addCard);
 
   grid.querySelectorAll('.ep-thumb').forEach(el => {
-    el.addEventListener('click', () => playEpisode(parseInt(el.getAttribute('data-idx'), 10)));
+    el.addEventListener('click', (e) => {
+      if (e.target.closest('.ep-badge-edit')) return;
+      playEpisode(parseInt(el.getAttribute('data-idx'), 10), true);
+    });
+  });
+  grid.querySelectorAll('.ep-badge-edit').forEach(el => {
+    el.contentEditable = isAdmin ? 'true' : 'false';
+    el.spellcheck = false;
+    if (isAdmin) {
+      el.addEventListener('click', function(e){ e.stopPropagation(); });
+      el.addEventListener('mousedown', function(e){ e.stopPropagation(); });
+    }
+    el.addEventListener('paste', function(e){
+      e.preventDefault();
+      const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+      document.execCommand('insertText', false, text);
+    });
+    el.addEventListener('keydown', function(e){ if (e.key === 'Enter') { e.preventDefault(); el.blur(); } });
+    el.addEventListener('blur', function(){
+      if (!isAdmin) return;
+      const idx = parseInt(el.getAttribute('data-idx'), 10);
+      ensureRealEpisodesArray();
+      const val = el.textContent.trim();
+      const auto = el.getAttribute('data-auto') || '';
+      movieData.episodes[idx].label = (val && val !== auto) ? val : '';
+      if (!val) el.textContent = auto;
+      scheduleSaveMovieData();
+    });
   });
   grid.querySelectorAll('.ep-title-edit').forEach(el => {
     el.contentEditable = isAdmin ? 'true' : 'false';
@@ -777,11 +804,12 @@ function renderEpisodes(){
   });
 }
 
-function playEpisode(idx){
+function playEpisode(idx, userInitiated){
   const episodes = getEpisodesList();
   const ep = episodes[idx];
   const video = document.getElementById('main-video');
   const placeholder = document.getElementById('player-placeholder');
+  const placeholderText = document.getElementById('player-placeholder-text');
   const nowPlaying = document.getElementById('now-playing');
   if (!ep) return;
   currentEpisodeIndex = idx;
@@ -789,15 +817,24 @@ function playEpisode(idx){
     video.src = ep.videoUrl;
     video.style.display = 'block';
     placeholder.style.display = 'none';
+    video.load();
+    const p = video.play();
+    if (p && p.catch) p.catch(() => {});
   } else {
     video.pause(); video.removeAttribute('src'); video.load();
     video.style.display = 'none';
     placeholder.style.display = '';
+    if (placeholderText) placeholderText.textContent = 'Видео ещё не загружено';
   }
   if (nowPlaying && !nowPlaying.isContentEditable) {
-    nowPlaying.textContent = episodeLabel(ep) + (ep.title ? ' — ' + ep.title : '');
+    const lbl = (ep.label && ep.label.trim()) ? ep.label : episodeLabel(ep);
+    nowPlaying.textContent = lbl + (ep.title ? ' — ' + ep.title : '');
   }
   renderEpisodes();
+  if (userInitiated) {
+    const section = document.getElementById('player-section');
+    if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 function addEpisode(){
@@ -818,7 +855,7 @@ function deleteEpisode(idx){
   movieData.episodes.splice(idx, 1);
   movieData.episodes.forEach((e, i) => { e.episode = i + 1; });
   if (currentEpisodeIndex >= movieData.episodes.length) currentEpisodeIndex = movieData.episodes.length - 1;
-  playEpisode(currentEpisodeIndex);
+  if (currentEpisodeIndex >= 0) playEpisode(currentEpisodeIndex); else renderEpisodes();
   toast('Серия удалена');
   scheduleSaveMovieData();
 }
