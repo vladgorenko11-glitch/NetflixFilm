@@ -12,7 +12,8 @@
     "imdb-rating": "7.6",
     "genre-1": "ФАНТАСТИКА",
     "genre-4": "ПРИКЛЮЧЕНИЯ",
-    "genre-2": "ДРАМА"
+    "genre-2": "ДРАМА",
+    "genre-3": "<br>"
   },
   "videoUrl": "",
   "season": 1,
