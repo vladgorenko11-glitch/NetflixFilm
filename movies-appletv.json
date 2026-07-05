@@ -53,5 +53,12 @@
     "poster": "posters/appletv/azjvupob.webp",
     "studio": "appletv",
     "type": "series"
+  },
+  {
+    "id": "c4vcfcow",
+    "title": "Основание · сезон 2",
+    "poster": "posters/appletv/c4vcfcow.png",
+    "studio": "appletv",
+    "type": "series"
   }
 ]
