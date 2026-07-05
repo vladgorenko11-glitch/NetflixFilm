@@ -52,5 +52,12 @@
     "title": "Майкл",
     "poster": "posters/other/257rwrau.jpg",
     "studio": "other"
+  },
+  {
+    "id": "f6p0rlb6",
+    "title": "История игрушек 5",
+    "poster": "posters/other/f6p0rlb6.jpg",
+    "studio": "other",
+    "type": "movie"
   }
 ]
