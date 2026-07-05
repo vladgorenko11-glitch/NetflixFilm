@@ -186,9 +186,11 @@ footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:cente
 .episode-card.active { border-color:var(--shape); box-shadow:0 0 0 2px rgba(var(--shape-rgb),0.35); }
 .episode-card.active .ep-thumb::after { content:'▶ ИГРАЕТ'; position:absolute; top:8px; right:8px; background:var(--shape); color:#fff; font-size:0.58rem; font-weight:700; letter-spacing:0.08em; padding:3px 7px; border-radius:3px; z-index:1; }
 .ep-thumb { aspect-ratio:16/9; background:#000; position:relative; display:flex; align-items:center; justify-content:center; cursor:pointer; overflow:hidden; }
-.ep-thumb-badge { position:absolute; top:8px; left:8px; background:rgba(0,0,0,0.75); border:1px solid var(--border-pink); color:#fff; font-size:0.62rem; letter-spacing:0.08em; font-weight:700; padding:3px 7px; border-radius:3px; z-index:1; }
+.ep-thumb-badge { position:absolute; top:8px; left:8px; background:rgba(0,0,0,0.75); border:1px solid var(--border-pink); color:#fff; font-size:0.62rem; letter-spacing:0.08em; font-weight:700; padding:3px 7px; border-radius:3px; z-index:2; }
+body.admin-mode .ep-badge-edit { cursor:text; outline:1px dashed rgba(255,255,255,0.35); outline-offset:2px; }
+body.admin-mode .ep-badge-edit:focus { outline:1px solid var(--accent-text); background:rgba(0,0,0,0.9); }
 .ep-num-bg { font-size:2.2rem; font-weight:800; color:rgba(255,255,255,0.08); letter-spacing:-0.02em; user-select:none; }
-.ep-play-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.4); opacity:0; transition:opacity 0.2s; }
+.ep-play-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.4); opacity:0; transition:opacity 0.2s; pointer-events:none; }
 .episode-card:hover .ep-play-overlay { opacity:1; }
 .ep-play-icon { width:40px; height:40px; background:var(--shape); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1rem; padding-left:3px; box-shadow:0 0 20px rgba(var(--shape-rgb),0.5); }
 .ep-info { padding:0.7rem 0.8rem; }
