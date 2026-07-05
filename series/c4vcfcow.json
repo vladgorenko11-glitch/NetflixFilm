@@ -28,7 +28,7 @@
   "colors": {
     "title": "",
     "accentText": "",
-    "btn": "#ffffff",
+    "btn": "#000000",
     "shape": "",
     "bgPrimary": "#cc0000",
     "bgSecondary": "#ffffff"
