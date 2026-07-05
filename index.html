@@ -903,6 +903,52 @@ function parseLegacySeriesHtml(htmlText){
       });
     }
 
+    /* --- Резерв по КЛАССАМ: старые самодельные шаблоны не используют data-field,
+       но часто называют элементы теми же классами, что и наш текущий шаблон
+       (.hero-eyebrow, .hero-title, .hero-desc, .badge-pink/green/outline/gray и т.д.) --- */
+    const textByClass = sel => {
+      const el = doc.querySelector(sel);
+      if (!el) return '';
+      const t = (el.textContent || '').trim();
+      return (t && t !== 'X') ? t : '';
+    };
+    if (!result.fields['hero-eyebrow']) {
+      const v = textByClass('.hero-eyebrow');
+      if (v) result.fields['hero-eyebrow'] = v;
+    }
+    if (!result.fields['hero-title']) {
+      const mainTitle = textByClass('.hero-title');
+      const subTitle = textByClass('.hero-subtitle');
+      const combined = subTitle ? (mainTitle ? mainTitle + ': ' + subTitle : subTitle) : mainTitle;
+      if (combined) result.fields['hero-title'] = combined;
+    }
+    if (!result.fields['hero-desc']) {
+      const v = textByClass('.hero-desc');
+      if (v) result.fields['hero-desc'] = v;
+    }
+    if (!result.fields['now-playing']) {
+      const v = textByClass('#now-playing') || textByClass('.now-playing');
+      if (v) result.fields['now-playing'] = v;
+    }
+    if (!result.fields['imdb-rating']) {
+      const v = textByClass('.imdb-rating');
+      if (v) result.fields['imdb-rating'] = v;
+    }
+    const badgeClassMap = [['badge-1','.badge-pink'],['badge-2','.badge-green'],['badge-3','.badge-outline'],['badge-4','.badge-gray']];
+    badgeClassMap.forEach(([key, sel]) => {
+      if (result.fields[key]) return;
+      const v = textByClass(sel);
+      if (v) result.fields[key] = v;
+    });
+    if (!result.siteName || !result.siteTagline) {
+      const logoSub = doc.querySelector('.logo-sub');
+      if (logoSub) {
+        const parts = logoSub.innerHTML.split(/<br\s*\/?>/i).map(s => (s || '').replace(/<[^>]+>/g,'').trim()).filter(Boolean);
+        if (!result.siteName && parts[0]) result.siteName = parts[0];
+        if (!result.siteTagline && parts[1]) result.siteTagline = parts[1];
+      }
+    }
+
     /* --- Постер / фоновое изображение (резерв) --- */
     if (!result.posterDataUrl) {
       const heroEl = doc.getElementById('hero-bg');
@@ -946,6 +992,33 @@ function parseLegacySeriesHtml(htmlText){
       const bgPrimaryHex = rgbToHex(cssVar('bg-accent1-rgb')); if (bgPrimaryHex) colors.bgPrimary = bgPrimaryHex;
       const bgSecondaryHex = rgbToHex(cssVar('bg-accent2-rgb')); if (bgSecondaryHex) colors.bgSecondary = bgSecondaryHex;
       if (Object.keys(colors).length) result.colors = Object.assign({}, result.colors, colors);
+    }
+
+    /* --- Резерв №2: если файл использует свою собственную схему CSS-переменных
+       (например --pink/--bg вместо --title/--accent-text), пробуем угадать по
+       распространённым названиям. Это приближённое соответствие, не точная копия. */
+    if (!Object.keys(result.colors).some(k => result.colors[k])) {
+      const rootMatch2 = htmlText.match(/:root\s*\{([\s\S]*?)\}/);
+      const rootBlock2 = rootMatch2 ? rootMatch2[1] : htmlText;
+      const cssVarAny = names => {
+        for (const name of names) {
+          const m = rootBlock2.match(new RegExp('--' + name + '\\s*:\\s*(#[0-9a-fA-F]{3,8})\\s*;'));
+          if (m) return m[1];
+        }
+        return '';
+      };
+      const guessed = {};
+      const accent = cssVarAny(['pink','accent','primary','brand','main','red','blue']);
+      const accentLight = cssVarAny(['pink3','accent2','primary2','light','accent-light']);
+      const textColor = cssVarAny(['text','fg','title']);
+      const bgColor = cssVarAny(['bg','bg1','background']);
+      const bg2Color = cssVarAny(['bg3','bg2','background2']);
+      if (accent) { guessed.accentText = accent; guessed.btn = accent; }
+      if (accentLight) guessed.shape = accentLight;
+      if (textColor) guessed.title = textColor;
+      if (bgColor) guessed.bgPrimary = bgColor;
+      if (bg2Color) guessed.bgSecondary = bg2Color;
+      if (Object.keys(guessed).length) result.colors = Object.assign({}, result.colors, guessed);
     }
 
     /* --- Серии: старые форматы EPISODES/SHARED_URLS (если ещё не нашли) --- */
