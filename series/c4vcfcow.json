@@ -17,8 +17,8 @@
   "siteTagline": "ОСНОВАНИЕ · СЕЗОН 1",
   "footerText": "© ОСНОВАНИЕ • 2 СЕЗОН • 2023 • APPLE TV+",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/c4vcfcow.webp"
   },
   "bgPosition": {
     "x": 50,
