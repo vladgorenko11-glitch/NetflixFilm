@@ -180,7 +180,7 @@ footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:cente
 
 /* ===== СЕРИИ (эпизоды) ===== */
 .episodes-section { margin: 0 0 2.5rem; }
-.episodes-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:0.9rem; }
+.episodes-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:0.9rem; }
 .episode-card { background:var(--bg2); border:1px solid var(--border); border-radius:6px; overflow:hidden; position:relative; transition:transform 0.2s,border-color 0.2s,box-shadow 0.2s; }
 .episode-card:hover { transform:translateY(-3px); border-color:var(--border-pink); box-shadow:0 10px 30px rgba(0,0,0,0.55); }
 .episode-card.active { border-color:var(--shape); box-shadow:0 0 0 2px rgba(var(--shape-rgb),0.35); }
@@ -211,8 +211,11 @@ body.admin-mode .admin-only { display:flex; }
 .add-episode-card:hover { background:rgba(var(--shape-rgb),0.08); }
 .add-episode-card .plus-icon { font-size:1.8rem; opacity:0.8; }
 
+@media (max-width:900px) and (min-width:601px) {
+  .episodes-grid { grid-template-columns:repeat(3,1fr); }
+}
 @media (max-width:600px) {
-  .episodes-grid { grid-template-columns:repeat(auto-fill,minmax(108px,1fr)); gap:0.5rem; }
+  .episodes-grid { grid-template-columns:repeat(2,1fr); gap:0.5rem; }
   .ep-info { padding:0.45rem 0.5rem; }
   .ep-title-edit { font-size:0.7rem; line-height:1.2; }
   .ep-status { margin-top:2px; font-size:0.58rem; }
