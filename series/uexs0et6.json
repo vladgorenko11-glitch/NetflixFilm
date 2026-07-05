@@ -1,0 +1,68 @@
+{
+  "title": "Его и её",
+  "poster": "posters/netflix/uexs0et6.jpg",
+  "fields": {
+    "hero-eyebrow": "▮ 2026 · Драма-триллер",
+    "hero-title": "Его и её: His & Hers",
+    "hero-desc": "Он и она — двое, чьи судьбы сплетаются в тени старого леса. История о любви, недоверии и цене молчания.",
+    "now-playing": "— Выберите серию —",
+    "badge-1": "1080p",
+    "badge-2": "RedHead Sound",
+    "badge-3": "2026",
+    "badge-4": "6 / 6 серий"
+  },
+  "videoUrl": "",
+  "season": 1,
+  "episodes": [
+    {
+      "episode": 1,
+      "title": "Встреча",
+      "videoUrl": "https://archive.org/download/his.and.-hers.-s-01-e-01.1080p.-nf.-web-dl.-h.-264-enia-hd/HIS.and.HERS.S01E01.1080p.NF.WEB-DL.H.264-EniaHD.mp4"
+    },
+    {
+      "episode": 2,
+      "title": "Тайна",
+      "videoUrl": "https://archive.org/download/his.and.-hers.-s-01-e-02.1080p.-nf.-web-dl.-h.-264-enia-hd/HIS.and.HERS.S01E02.1080p.NF.WEB-DL.H.264-EniaHD.mp4"
+    },
+    {
+      "episode": 3,
+      "title": "Ревность",
+      "videoUrl": "https://archive.org/download/his.and.-hers.-s-01-e-03.1080p.-nf.-web-dl.-h.-264-enia-hd/HIS.and.HERS.S01E03.1080p.NF.WEB-DL.H.264-EniaHD.mp4"
+    },
+    {
+      "episode": 4,
+      "title": "Признание",
+      "videoUrl": "https://archive.org/download/his.and.-hers.-s-01-e-04.1080p.-nf.-web-dl.-h.-264-enia-hd/HIS.and.HERS.S01E04.1080p.NF.WEB-DL.H.264-EniaHD.mp4"
+    },
+    {
+      "episode": 5,
+      "title": "Разлука",
+      "videoUrl": "https://archive.org/download/his.and.-hers.-s-01-e-05.1080p.-nf.-web-dl.-h.-264-enia-hd/HIS.and.HERS.S01E05.1080p.NF.WEB-DL.H.264-EniaHD.mp4"
+    },
+    {
+      "episode": 6,
+      "title": "Возвращение",
+      "videoUrl": "https://archive.org/download/his.and.-hers.-s-01-e-06.1080p.-nf.-web-dl.-h.-264-enia-hd/HIS.and.HERS.S01E06.1080p.NF.WEB-DL.H.264-EniaHD.mp4"
+    }
+  ],
+  "siteName": "Видеоархив",
+  "siteTagline": "2026",
+  "footerText": "© MOVIES • 2026 • NETFLIX",
+  "heroBg": {
+    "type": "",
+    "value": ""
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "title": "#ece8dc",
+    "accentText": "#7a9464",
+    "btn": "#7a9464",
+    "shape": "#b8cf9a",
+    "bgPrimary": "#0d1410",
+    "bgSecondary": "#1e2a22"
+  }
+}
