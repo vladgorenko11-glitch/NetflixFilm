@@ -12,7 +12,33 @@
   },
   "videoUrl": "",
   "season": 1,
-  "episodes": [],
+  "episodes": [
+    {
+      "episode": 1,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 2,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 3,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 4,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 5,
+      "title": "",
+      "videoUrl": ""
+    }
+  ],
   "siteName": "Видеоархив 2023 ",
   "siteTagline": "ОСНОВАНИЕ · СЕЗОН 1",
   "footerText": "© ОСНОВАНИЕ • 2 СЕЗОН • 2023 • APPLE TV+",
