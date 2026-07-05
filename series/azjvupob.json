@@ -2,7 +2,8 @@
   "title": "Основание",
   "poster": "",
   "fields": {
-    "hero-title": "Основание"
+    "hero-title": "Основание",
+    "hero-eyebrow": "<br>"
   },
   "videoUrl": "",
   "season": 1,
