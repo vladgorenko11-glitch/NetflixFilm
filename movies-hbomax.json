@@ -19,5 +19,12 @@
     "poster": "posters/hbomax/izhtu275.jpg",
     "studio": "hbomax",
     "type": "series"
+  },
+  {
+    "id": "tsbed15p",
+    "title": "Оно: Добро пожаловать в Дерри",
+    "poster": "posters/hbomax/tsbed15p.jpg",
+    "studio": "hbomax",
+    "type": "series"
   }
 ]
