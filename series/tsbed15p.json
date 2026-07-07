@@ -59,8 +59,8 @@
   "siteTagline": "Сезон 1 · 2025",
   "footerText": "© MOVIES • 2026 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/tsbed15p.jpg"
   },
   "bgPosition": {
     "x": 50,
