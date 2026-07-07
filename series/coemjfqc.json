@@ -1,7 +1,9 @@
 {
-  "title": "",
+  "title": "Основание",
   "poster": "",
-  "fields": {},
+  "fields": {
+    "hero-title": "Основание"
+  },
   "videoUrl": "",
   "season": 1,
   "episodes": [
