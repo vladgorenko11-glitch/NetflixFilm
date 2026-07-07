@@ -67,8 +67,8 @@
   "siteTagline": "Основание · сезон 3",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/coemjfqc.webp"
   },
   "bgPosition": {
     "x": 50,
