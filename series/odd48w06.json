@@ -54,8 +54,8 @@
   "siteTagline": "Сезон 2 · 2025",
   "footerText": "© MOVIES • 2026 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/odd48w06.jpg"
   },
   "bgPosition": {
     "x": 50,
