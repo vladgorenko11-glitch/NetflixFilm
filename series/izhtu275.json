@@ -49,8 +49,8 @@
   "siteTagline": "Сезон 1 · 2024",
   "footerText": "© MOVIES • 2026 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/izhtu275.jpg"
   },
   "bgPosition": {
     "x": 50,
