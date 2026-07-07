@@ -1,0 +1,78 @@
+{
+  "title": "Оно: Добро пожаловать в Дерри",
+  "poster": "posters/hbomax/tsbed15p.jpg",
+  "fields": {
+    "hero-eyebrow": "▮ Сезон 1 · Полный · 2025",
+    "hero-title": "Добро пожаловать в Дерри: IT: Welcome to Derry",
+    "hero-desc": "Приквел к культовому «Оно» по роману Стивена Кинга. Действие разворачивается в 1962 году в маленьком городке Дерри, штат Мэн, где древнее зло пробуждается каждые двадцать семь лет. Группа детей сталкивается с необъяснимыми исчезновениями и кошмарным существом, которое питается их страхами. Восемь эпизодов леденящего душу ужаса — в качестве 1080p с профессиональным дубляжом от RedHead Sound.",
+    "now-playing": "— Выберите серию —",
+    "badge-1": "1080p",
+    "badge-2": "RedHead Sound",
+    "badge-3": "1 Сезон",
+    "badge-4": "2025"
+  },
+  "videoUrl": "",
+  "season": 1,
+  "episodes": [
+    {
+      "episode": 1,
+      "title": "Пилот",
+      "videoUrl": "https://archive.org/download/it-welcome-to-derry-s-01-e-01-1080p-rhs/IT-%20Welcome%20to%20Derry%20S01E01_1080p_RHS.mp4"
+    },
+    {
+      "episode": 2,
+      "title": "Существо в темноте",
+      "videoUrl": "https://archive.org/download/it-welcome-to-derry-s-01-e-02-1080p-rhs/IT-%20Welcome%20to%20Derry%20S01E02_1080p_RHS.mp4"
+    },
+    {
+      "episode": 3,
+      "title": "Теперь ты видишь",
+      "videoUrl": "https://archive.org/download/it-welcome-to-derry-s-01-e-03-1080p-rhs/IT-%20Welcome%20to%20Derry%20S01E03_1080p_RHS.mp4"
+    },
+    {
+      "episode": 4,
+      "title": "Великий вихревой механизм функционирования нашей планеты",
+      "videoUrl": "https://archive.org/download/it-welcome-to-derry-s-01-e-04-1080p-rhs/IT-%20Welcome%20to%20Derry%20S01E04_1080p_RHS.mp4"
+    },
+    {
+      "episode": 5,
+      "title": "Нейболт-стрит, 29",
+      "videoUrl": "https://archive.org/download/it-welcome-to-derry-s-01-e-05-1080p-rhs/IT-%20Welcome%20to%20Derry%20S01E05_1080p_RHS.mp4"
+    },
+    {
+      "episode": 6,
+      "title": "Во имя отца",
+      "videoUrl": "https://archive.org/download/it-welcome-to-derry-s-01-e-06-1080p-rhs/IT-%20Welcome%20to%20Derry%20S01E06_1080p_RHS.mp4"
+    },
+    {
+      "episode": 7,
+      "title": "Черное пятно",
+      "videoUrl": "https://archive.org/download/it-welcome-to-derry-s-01-e-07-1080p-rhs/IT-%20Welcome%20to%20Derry%20S01E07_1080p_RHS.mp4"
+    },
+    {
+      "episode": 8,
+      "title": "Зимний огонь",
+      "videoUrl": "https://archive.org/download/it-welcome-to-derry-s-01-e-08-1080p-rhs/IT-%20Welcome%20to%20Derry%20S01E08_1080p_RHS.mp4"
+    }
+  ],
+  "siteName": "Видеоархив",
+  "siteTagline": "Сезон 1 · 2025",
+  "footerText": "© MOVIES • 2026 • NETFLIX",
+  "heroBg": {
+    "type": "",
+    "value": ""
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "title": "#f3e4e4",
+    "accentText": "#b21218",
+    "btn": "#b21218",
+    "shape": "#e63946",
+    "bgPrimary": "#0a0506",
+    "bgSecondary": "#1f0c0e"
+  }
+}
