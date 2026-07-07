@@ -1,0 +1,73 @@
+{
+  "title": "Одни из нас · сезон 2",
+  "poster": "posters/hbomax/odd48w06.jpg",
+  "fields": {
+    "hero-eyebrow": "▮ Сезон 2 · Полный · 2025",
+    "hero-title": "Одни из насСезон 2",
+    "hero-desc": "Прошло пять лет после событий первого сезона. Джоэл и Элли обосновались в общине Джексон, но мирная жизнь рушится, когда прошлое настигает их. Элли отправляется в Сиэтл, охваченная жаждой мести, и оказывается втянута в безжалостную войну между WLF и Серафитами. Семь эпизодов продолжения культового постапокалиптического сериала HBO в качестве 1080p с профессиональным дублажом.",
+    "now-playing": "— Выберите серию —",
+    "badge-1": "1080p",
+    "badge-2": "ReadHead Sund",
+    "badge-3": "2 Сезон",
+    "badge-4": "2025"
+  },
+  "videoUrl": "",
+  "season": 2,
+  "episodes": [
+    {
+      "episode": 1,
+      "title": "Грядущие дни",
+      "videoUrl": "https://archive.org/download/the.-last.of.-us.-s-02-e-01-rhs-scarfilm/The.Last.of.Us.S02E01_RHS_%5Bscarfilm%5D.mp4"
+    },
+    {
+      "episode": 2,
+      "title": "Сквозь долину",
+      "videoUrl": "https://archive.org/download/the.-last.of.-us.-s-02-e-02-rhs-scarfilm/The.Last.of.Us.S02E02_RHS_%5Bscarfilm%5D.mp4"
+    },
+    {
+      "episode": 3,
+      "title": "Путь",
+      "videoUrl": "https://archive.org/download/the.-last.of.-us.-s-02-e-03-rhs-scarfilm/The.Last.of.Us.S02E03_RHS_%5Bscarfilm%5D.mp4"
+    },
+    {
+      "episode": 4,
+      "title": "День первый",
+      "videoUrl": "https://archive.org/download/the.-last.of.-us.-s-02-e-04-rhs-scarfilm/The.Last.of.Us.S02E04_RHS_%5Bscarfilm%5D.mp4"
+    },
+    {
+      "episode": 5,
+      "title": "Почувствуй её любовь",
+      "videoUrl": "https://archive.org/download/the.-last.of.-us.-s-02-e-05-rhs-scarfilm/The.Last.of.Us.S02E05_RHS_%5Bscarfilm%5D.mp4"
+    },
+    {
+      "episode": 6,
+      "title": "Цена",
+      "videoUrl": "https://archive.org/download/the.-last.of.-us.-s-02-e-06-rhs-scarfilm/The.Last.of.Us.S02E06_RHS_%5Bscarfilm%5D.mp4"
+    },
+    {
+      "episode": 7,
+      "title": "Конвергенция",
+      "videoUrl": "https://archive.org/download/the.-last.of.-us.-s-02-e-07-rhs-scarfilm/The.Last.of.Us.S02E07_RHS_%5Bscarfilm%5D.mp4"
+    }
+  ],
+  "siteName": "Видеоархив",
+  "siteTagline": "Сезон 2 · 2025",
+  "footerText": "© MOVIES • 2026 • NETFLIX",
+  "heroBg": {
+    "type": "",
+    "value": ""
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "title": "#d4dcd0",
+    "accentText": "#3a5e40",
+    "btn": "#3a5e40",
+    "shape": "#6aab72",
+    "bgPrimary": "#080c0a",
+    "bgSecondary": "#121a16"
+  }
+}
