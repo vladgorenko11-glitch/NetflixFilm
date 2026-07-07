@@ -1,0 +1,83 @@
+{
+  "title": "Одни из нас · сезон 1",
+  "poster": "posters/hbomax/6oj4zz1a.jpg",
+  "fields": {
+    "hero-eyebrow": "▮ Сезон 1 · Полный · 2023",
+    "hero-title": "Одни из насСезон 1",
+    "hero-desc": "Двадцать лет после пандемии кордицепса. Контрабандист Джоэл должен провести девочку-подростка Элли через руины Америки. Она может оказаться ключом к спасению человечества. Девять эпизодов культового постапокалиптического сериала HBO в полном качестве 1080p с профессиональным дублажом.",
+    "now-playing": "— Выберите серию —",
+    "badge-1": "1080p",
+    "badge-2": "Дубляж",
+    "badge-3": "1 Сезон",
+    "badge-4": "2023"
+  },
+  "videoUrl": "",
+  "season": 1,
+  "episodes": [
+    {
+      "episode": 1,
+      "title": "Когда ты заблудился",
+      "videoUrl": "https://archive.org/download/the-last-of-us-s-01-e-01-when-youre-lost-in-the-darkness-1080p-amzn/The_Last_of_Us_S01E01_When_Youre_Lost_in_the_Darkness_1080p_AMZN.mp4"
+    },
+    {
+      "episode": 2,
+      "title": "Заражённые",
+      "videoUrl": "https://archive.org/download/the.-last.of.-us.-s-01-e-02.-infected.-1080p.-amzn.-web-dl-enia-hd/The.Last.of.Us.S01E02.Infected.1080p.AMZN.WEB-DL-EniaHD.mp4"
+    },
+    {
+      "episode": 3,
+      "title": "Долгое-долгое время",
+      "videoUrl": "https://archive.org/download/the-last-of-us-s-01-e-03-long-long-time-1080p-amzn-web-dl-enia-hd/The_Last_of_Us_S01E03_Long_Long_Time_1080p_AMZN_WEB_DL_EniaHD.mp4"
+    },
+    {
+      "episode": 4,
+      "title": "Держи меня за руку",
+      "videoUrl": "https://archive.org/download/the-last-of-us-s-01-e-04-please-hold-to-my-hand-1080p-amzn-web-dl-enia-hd/The_Last_of_Us_S01E04_Please_Hold_to_My_Hand_1080p_AMZN_WEB_DL_EniaHD.mp4"
+    },
+    {
+      "episode": 5,
+      "title": "Выдержать и выжить",
+      "videoUrl": "https://archive.org/download/the-last-of-us-s-01-e-05-endure-and-survive-1080p-amzn-web-dl-enia-hd/The_Last_of_Us_S01E05_Endure_and_Survive_1080p_AMZN_WEB_DL_EniaHD.mp4"
+    },
+    {
+      "episode": 6,
+      "title": "Родня",
+      "videoUrl": "https://archive.org/download/the.-last.of.-us.-s-01-e-06.-kin.-1080p.-amzn.-web-dl-enia-hd/The.Last.of.Us.S01E06.Kin.1080p.AMZN.WEB-DL-EniaHD.mp4"
+    },
+    {
+      "episode": 7,
+      "title": "Оставшиеся позади",
+      "videoUrl": "https://archive.org/download/the.-last.of.-us.-s-01-e-07.-left.-behind.-1080p.-amzn.-web-dl-enia-hd/The.Last.of.Us.S01E07.Left.Behind.1080p.AMZN.WEB-DL-EniaHD.mp4"
+    },
+    {
+      "episode": 8,
+      "title": "Когда мы в нужде",
+      "videoUrl": "https://archive.org/download/the-last-of-us-s-01-e-08-when-we-are-in-need-1080p-amzn-web-dl-enia-hd/The_Last_of_Us_S01E08_When_We_Are_in_Need_1080p_AMZN_WEB_DL_EniaHD.mp4"
+    },
+    {
+      "episode": 9,
+      "title": "Ищи свет",
+      "videoUrl": "https://archive.org/download/the-last-of-us-s-01-e-09-look-for-the-light-1080p-amzn-web-dl-enia-hd/The_Last_of_Us_S01E09_Look_for_the_Light_1080p_AMZN_WEB_DL_EniaHD.mp4"
+    }
+  ],
+  "siteName": "Видеоархив",
+  "siteTagline": "Сезон 1 · 2023",
+  "footerText": "© MOVIES • 2026 • NETFLIX",
+  "heroBg": {
+    "type": "",
+    "value": ""
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "title": "#d4dcd0",
+    "accentText": "#3a5e40",
+    "btn": "#3a5e40",
+    "shape": "#6aab72",
+    "bgPrimary": "#080c0a",
+    "bgSecondary": "#121a16"
+  }
+}
