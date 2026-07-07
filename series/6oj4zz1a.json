@@ -64,8 +64,8 @@
   "siteTagline": "Сезон 1 · 2023",
   "footerText": "© MOVIES • 2026 • NETFLIX",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/6oj4zz1a.png"
   },
   "bgPosition": {
     "x": 50,
