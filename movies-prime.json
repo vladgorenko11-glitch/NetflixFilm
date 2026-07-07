@@ -22,5 +22,12 @@
     "title": "Наша вина",
     "poster": "posters/prime/2vj2ibbr.webp",
     "studio": "prime"
+  },
+  {
+    "id": "9owhxlfg",
+    "title": "Кольца власти · сезон 1",
+    "poster": "posters/prime/9owhxlfg.jpg",
+    "studio": "prime",
+    "type": "series"
   }
 ]
