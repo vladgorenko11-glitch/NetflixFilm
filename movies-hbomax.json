@@ -12,5 +12,12 @@
     "poster": "posters/hbomax/odd48w06.jpg",
     "studio": "hbomax",
     "type": "series"
+  },
+  {
+    "id": "izhtu275",
+    "title": "Дюна: Пророчество",
+    "poster": "posters/hbomax/izhtu275.jpg",
+    "studio": "hbomax",
+    "type": "series"
   }
 ]
