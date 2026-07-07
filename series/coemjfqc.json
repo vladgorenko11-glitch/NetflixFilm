@@ -1,0 +1,79 @@
+{
+  "title": "",
+  "poster": "",
+  "fields": {},
+  "videoUrl": "",
+  "season": 1,
+  "episodes": [
+    {
+      "episode": 1,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 2,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 3,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 4,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 5,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 6,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 7,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 8,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 9,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 10,
+      "title": "",
+      "videoUrl": ""
+    }
+  ],
+  "siteName": "Видеоархив",
+  "siteTagline": "—",
+  "footerText": "© Видеоархив",
+  "heroBg": {
+    "type": "",
+    "value": ""
+  },
+  "bgPosition": {
+    "x": 50,
+    "y": 0,
+    "scale": 1
+  },
+  "colors": {
+    "title": "",
+    "accentText": "",
+    "btn": "",
+    "shape": "",
+    "bgPrimary": "",
+    "bgSecondary": ""
+  }
+}
