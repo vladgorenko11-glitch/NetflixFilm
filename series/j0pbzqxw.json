@@ -58,8 +58,8 @@
   "siteTagline": "Кольца власти 2",
   "footerText": "©  КОЛЬЦА ВЛАСТИ • 2 СЕЗОН • 2024 • PRIME VIDEO",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/j0pbzqxw.jpg"
   },
   "bgPosition": {
     "x": 50,
