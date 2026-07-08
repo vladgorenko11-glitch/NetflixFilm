@@ -17,7 +17,48 @@
   },
   "videoUrl": "",
   "season": 1,
-  "episodes": [],
+  "episodes": [
+    {
+      "episode": 1,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 2,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 3,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 4,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 5,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 6,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 7,
+      "title": "",
+      "videoUrl": ""
+    },
+    {
+      "episode": 8,
+      "title": "",
+      "videoUrl": ""
+    }
+  ],
   "siteName": "Видеоархив 2024",
   "siteTagline": "FALLOUT",
   "footerText": "© FALLOUT • 2024 • PRIME VIDEO",
