@@ -10,7 +10,9 @@
     "badge-3": "2 сезон",
     "badge-4": "1080p",
     "imdb-rating": "6.9",
-    "genre-1": "ФЭНТЕЗИ"
+    "genre-1": "ФЭНТЕЗИ",
+    "genre-2": "БОЕВИК",
+    "genre-3": "ДРАМА"
   },
   "videoUrl": "",
   "season": 1,
