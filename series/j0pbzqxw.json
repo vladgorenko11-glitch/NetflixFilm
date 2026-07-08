@@ -62,7 +62,7 @@
     },
     {
       "episode": 8,
-      "title": "",
+      "title": "Пламя и тень",
       "videoUrl": "",
       "label": "S2E8"
     }
@@ -82,7 +82,7 @@
   "colors": {
     "title": "#ffffff",
     "accentText": "#3b82f6",
-    "btn": "",
+    "btn": "#e50914",
     "shape": "",
     "bgPrimary": "#ffa600",
     "bgSecondary": "#000000"
