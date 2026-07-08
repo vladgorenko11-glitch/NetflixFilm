@@ -1,7 +1,9 @@
 {
-  "title": "",
+  "title": "Кольца власти",
   "poster": "",
-  "fields": {},
+  "fields": {
+    "hero-title": "Кольца власти"
+  },
   "videoUrl": "",
   "season": 1,
   "episodes": [
