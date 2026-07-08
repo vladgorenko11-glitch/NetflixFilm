@@ -17,8 +17,8 @@
   "siteTagline": "FALLOUT",
   "footerText": "© FALLOUT • 2024 • PRIME VIDEO",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/4mnyucxh.webp"
   },
   "bgPosition": {
     "x": 50,
