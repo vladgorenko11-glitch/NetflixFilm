@@ -17,54 +17,65 @@
   },
   "videoUrl": "",
   "season": 1,
+  "seasons": [
+    1
+  ],
   "episodes": [
     {
       "episode": 1,
       "title": "Инноватор",
       "videoUrl": "https://archive.org/download/fallout.-s-02-e-01.1080p.-rhs/Fallout.S02E01.1080p.RHS.mp4",
-      "label": "S2E1"
+      "label": "S2E1",
+      "season": 1
     },
     {
       "episode": 2,
       "title": "Золотое правило",
       "videoUrl": "https://archive.org/download/fallout.-s-02-e-02.1080p.-rhs/Fallout.S02E02.1080p.RHS.mp4",
-      "label": "S2E2"
+      "label": "S2E2",
+      "season": 1
     },
     {
       "episode": 3,
       "title": "Расточитель",
       "videoUrl": "https://archive.org/download/fallout.-s-02-e-03.1080p.-rhs/Fallout.S02E03.1080p.RHS.mp4",
-      "label": "S2E3"
+      "label": "S2E3",
+      "season": 1
     },
     {
       "episode": 4,
       "title": "Демон в снегу",
       "videoUrl": "https://archive.org/download/fallout.-s-02-e-04.1080p.-rhs/Fallout.S02E04.1080p.RHS.mp4",
-      "label": "S2E4"
+      "label": "S2E4",
+      "season": 1
     },
     {
       "episode": 5,
       "title": "Ковбой",
       "videoUrl": "https://archive.org/download/fallout.-s-02-e-05.1080p.-rhs/Fallout.S02E05.1080p.RHS.mp4",
-      "label": "S2E5"
+      "label": "S2E5",
+      "season": 1
     },
     {
       "episode": 6,
       "title": "Другой игрок",
       "videoUrl": "https://archive.org/download/fallout.-s-02-e-06.1080p.-rhs/Fallout.S02E06.1080p.RHS.mp4",
-      "label": "S2E6"
+      "label": "S2E6",
+      "season": 1
     },
     {
       "episode": 7,
       "title": "Передача полномочий",
       "videoUrl": "https://archive.org/download/fallout.-s-02-e-07.1080p.-rhs/Fallout.S02E07.1080p.RHS.mp4",
-      "label": "S2E7"
+      "label": "S2E7",
+      "season": 1
     },
     {
       "episode": 8,
       "title": "Стрип Вегаса",
       "videoUrl": "https://archive.org/download/fallout.-s-02-e-08.1080p.-rhs/Fallout.S02E08.1080p.RHS.mp4",
-      "label": "S2E8"
+      "label": "S2E8",
+      "season": 1
     }
   ],
   "siteName": "Видеоархив 2026",
@@ -79,6 +90,7 @@
     "y": 27.500000000000004,
     "scale": 1
   },
+  "bgDarkness": 52,
   "colors": {
     "title": "#ffffff",
     "accentText": "#3b82f6",
