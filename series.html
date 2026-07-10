@@ -180,6 +180,12 @@ footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:cente
 
 /* ===== СЕРИИ (эпизоды) ===== */
 .episodes-section { margin: 0 0 2.5rem; }
+.season-tabs { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.1rem; }
+.season-tab { background:var(--bg2); border:1px solid var(--border); color:var(--text2); font-size:0.78rem; letter-spacing:0.05em; font-weight:600; padding:0.5rem 1.1rem; border-radius:20px; cursor:pointer; transition:all 0.15s; text-transform:uppercase; }
+.season-tab:hover { border-color:var(--border-pink); color:var(--text); }
+.season-tab.active { background:var(--btn-solid); border-color:var(--btn-solid); color:#fff; box-shadow:0 0 12px rgba(var(--shape-rgb),0.35); }
+.season-tab-add { background:transparent; border:1px dashed var(--border-pink); color:var(--accent-text); font-size:0.78rem; font-weight:600; padding:0.5rem 1rem; border-radius:20px; cursor:pointer; }
+.season-tab-add:hover { background:rgba(var(--shape-rgb),0.1); }
 .episodes-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:0.9rem; }
 .episode-card { background:var(--bg2); border:1px solid var(--border); border-radius:6px; overflow:hidden; position:relative; transition:transform 0.2s,border-color 0.2s,box-shadow 0.2s; }
 .episode-card:hover { transform:translateY(-3px); border-color:var(--border-pink); box-shadow:0 10px 30px rgba(0,0,0,0.55); }
@@ -318,6 +324,7 @@ body.admin-mode .admin-only { display:flex; }
 
   <section class="episodes-section">
     <div class="section-title"><span class="red-bar"></span>Серии<span class="line"></span></div>
+    <div id="season-tabs" class="season-tabs"></div>
     <div class="episodes-grid" id="episodes-grid"></div>
   </section>
 
@@ -354,14 +361,9 @@ body.admin-mode .admin-only { display:flex; }
     <button class="btn primary" onclick="saveSiteConfig()" style="margin-top:0.25rem;">💾 Сохранить текст сайта</button>
 
     <div class="admin-section-label" style="margin-top:1.5rem;">🎬 Серии</div>
-    <div class="admin-subtitle">Сайт не хранит сами видеофайлы. Каждая серия — отдельная карточка в разделе «Серии» на странице. Нажмите «+ Добавить серию», чтобы создать новую — нумерация (S1E1, S1E2…) проставляется автоматически. Название серии меняется прямо в карточке (кликните на текст), а ссылка на видео задаётся кнопкой «🔗 URL» на карточке.</div>
+    <div class="admin-subtitle">Сайт не хранит сами видеофайлы. Каждая серия — отдельная карточка в разделе «Серии» на странице. Нажмите «+ Добавить серию», чтобы создать новую в текущем сезоне — нумерация (S1E1, S1E2…) проставляется автоматически. Чтобы добавить ещё один сезон (со своим отдельным списком серий), используйте кнопку «+ Добавить сезон» над списком серий — она переключит вкладки, и добавленные дальше серии будут относиться к новому сезону. Название серии меняется прямо в карточке (кликните на текст), а ссылка на видео задаётся кнопкой «🔗 URL» на карточке.</div>
     <div class="admin-row">
-      <label style="font-size:0.72rem;color:var(--text2);letter-spacing:0.05em;">Номер сезона:</label>
-      <input type="text" class="url-input" id="season-input" placeholder="1" style="max-width:80px;flex:0 0 80px;">
-      <button class="btn primary" onclick="saveSeasonNumber()">Сохранить сезон</button>
-    </div>
-    <div class="admin-row">
-      <button class="btn primary" onclick="addEpisode()">+ Добавить серию</button>
+      <button class="btn primary" onclick="addEpisode()">+ Добавить серию (текущий сезон)</button>
       <button class="btn danger" onclick="changePassword()">🔑 Изменить пароль</button>
     </div>
 
@@ -429,8 +431,9 @@ let movieData = {
   poster: '',          // путь к постеру в репо (заполняется при создании на главной странице)
   fields: {},           // текстовые поля .adm-editable, ключ = data-field
   videoUrl: '',
-  season: 1,            // номер сезона (для авто-нумерации S{season}E{episode})
-  episodes: [],         // [{ episode: 1, title: '', videoUrl: '' }, ...]
+  season: 1,            // номер сезона по умолчанию (для обратной совместимости со старыми данными)
+  seasons: [1],          // список всех сезонов сериала (для вкладок)
+  episodes: [],         // [{ season: 1, episode: 1, title: '', videoUrl: '' }, ...]
   // Текст шапки и подвала — свой для каждого фильма (не общий с библиотекой и другими фильмами)
   siteName: 'Видеоархив',
   siteTagline: '—',
@@ -488,6 +491,8 @@ async function loadMovieData(){
       movieData.colors = loaded.colors || {};
       movieData.season = (typeof loaded.season === 'number' && loaded.season > 0) ? loaded.season : 1;
       movieData.episodes = Array.isArray(loaded.episodes) ? loaded.episodes : [];
+      movieData.seasons = Array.isArray(loaded.seasons) && loaded.seasons.length ? loaded.seasons.slice() : null;
+      normalizeSeasons();
       movieSha = file.sha;
       setSaveStatus('ok', '✓ Данные загружены из GitHub.');
     } else {
@@ -508,6 +513,7 @@ async function loadMovieData(){
     setSaveStatus('bad', 'Ошибка загрузки: ' + (e.message || e));
   }
   movieLoaded = true;
+  normalizeSeasons();
   applyMovieDataToPage();
 }
 
@@ -668,8 +674,9 @@ function applyMovieDataToPage(){
   renderColorSwatches();
 
   // Серии
-  const seasonInput = document.getElementById('season-input');
-  if (seasonInput) seasonInput.value = movieData.season || 1;
+  normalizeSeasons();
+  if (movieData.seasons.indexOf(activeSeason) === -1) activeSeason = movieData.seasons[0];
+  renderSeasonTabs();
   renderEpisodes();
   // Ничего не выбираем и не проигрываем автоматически — ждём, пока
   // пользователь сам выберет серию из списка ниже.
@@ -677,9 +684,24 @@ function applyMovieDataToPage(){
 
 /* ===== Серии (эпизоды) ===== */
 let currentEpisodeIndex = -1;
+let activeSeason = 1;
+
+/* Приводит movieData.seasons/episodes в согласованный вид:
+   - у каждой серии проставлен season (по умолчанию — старый movieData.season или 1)
+   - movieData.seasons содержит все сезоны, встречающиеся у серий, плюс явно добавленные */
+function normalizeSeasons(){
+  if (!Array.isArray(movieData.episodes)) movieData.episodes = [];
+  movieData.episodes.forEach(e => { if (!e.season || e.season < 1) e.season = movieData.season || 1; });
+  let seasons = Array.isArray(movieData.seasons) ? movieData.seasons.slice() : [];
+  movieData.episodes.forEach(e => { if (seasons.indexOf(e.season) === -1) seasons.push(e.season); });
+  if (!seasons.length) seasons = [movieData.season || 1];
+  seasons = Array.from(new Set(seasons)).sort((a, b) => a - b);
+  movieData.seasons = seasons;
+  if (seasons.indexOf(activeSeason) === -1) activeSeason = seasons[0];
+}
 
 function episodeLabel(ep){
-  const season = movieData.season || 1;
+  const season = (ep && ep.season) ? ep.season : (movieData.season || 1);
   const num = (ep && ep.episode) ? ep.episode : 1;
   return 'S' + season + 'E' + num;
 }
@@ -689,7 +711,17 @@ function episodeLabel(ep){
    и сохранится в GitHub, как только админ что-то в ней изменит (название/URL/добавит ещё). */
 function getEpisodesList(){
   if (Array.isArray(movieData.episodes) && movieData.episodes.length) return movieData.episodes;
-  return [{ episode: 1, title: '', videoUrl: '' }];
+  return [{ season: 1, episode: 1, title: '', videoUrl: '' }];
+}
+
+/* Серии активного сезона вместе с их РЕАЛЬНЫМ индексом в movieData.episodes —
+   этот индекс используется во всех admin-операциях (удаление, URL и т.д.),
+   чтобы переключение вкладок не путало нумерацию. */
+function getActiveSeasonEntries(){
+  const all = getEpisodesList();
+  const entries = [];
+  all.forEach((ep, idx) => { if ((ep.season || 1) === activeSeason) entries.push({ ep, idx }); });
+  return entries;
 }
 
 function ensureRealEpisodesArray(){
@@ -698,23 +730,48 @@ function ensureRealEpisodesArray(){
   }
 }
 
-function saveSeasonNumber(){
-  const input = document.getElementById('season-input');
-  let val = parseInt(input ? input.value : '1', 10);
-  if (!val || val < 1) val = 1;
-  movieData.season = val;
-  if (input) input.value = val;
+function renderSeasonTabs(){
+  const wrap = document.getElementById('season-tabs');
+  if (!wrap) return;
+  normalizeSeasons();
+  wrap.innerHTML = '';
+  movieData.seasons.forEach(s => {
+    const tab = document.createElement('button');
+    tab.type = 'button';
+    tab.className = 'season-tab' + (s === activeSeason ? ' active' : '');
+    tab.textContent = 'Сезон ' + s;
+    tab.addEventListener('click', () => { activeSeason = s; renderEpisodes(); renderSeasonTabs(); });
+    wrap.appendChild(tab);
+  });
+  if (isAdmin) {
+    const add = document.createElement('button');
+    add.type = 'button';
+    add.className = 'season-tab-add';
+    add.textContent = '+ Добавить сезон';
+    add.addEventListener('click', addSeason);
+    wrap.appendChild(add);
+  }
+}
+
+function addSeason(){
+  if (!isAdmin) return;
+  normalizeSeasons();
+  const next = movieData.seasons.length ? Math.max.apply(null, movieData.seasons) + 1 : 1;
+  movieData.seasons.push(next);
+  activeSeason = next;
+  renderSeasonTabs();
   renderEpisodes();
-  toast('✓ Номер сезона сохранён', 'success');
+  toast('✓ Сезон ' + next + ' добавлен', 'success');
   scheduleSaveMovieData();
 }
 
 function renderEpisodes(){
   const grid = document.getElementById('episodes-grid');
   if (!grid) return;
-  const episodes = getEpisodesList();
+  normalizeSeasons();
+  const entries = getActiveSeasonEntries();
   grid.innerHTML = '';
-  episodes.forEach((ep, idx) => {
+  entries.forEach(({ ep, idx }) => {
     const card = document.createElement('div');
     card.className = 'episode-card' + (idx === currentEpisodeIndex ? ' active' : '');
     const hasVideo = !!(ep && ep.videoUrl);
@@ -842,10 +899,11 @@ function playEpisode(idx, userInitiated){
 function addEpisode(){
   if (!isAdmin) return;
   ensureRealEpisodesArray();
-  const nextNum = movieData.episodes.reduce((m, e) => Math.max(m, e.episode || 0), 0) + 1;
-  movieData.episodes.push({ episode: nextNum, title: '', videoUrl: '' });
+  const inSeason = movieData.episodes.filter(e => (e.season || 1) === activeSeason);
+  const nextNum = inSeason.reduce((m, e) => Math.max(m, e.episode || 0), 0) + 1;
+  movieData.episodes.push({ season: activeSeason, episode: nextNum, title: '', videoUrl: '' });
   renderEpisodes();
-  toast('✓ ' + episodeLabel({ episode: nextNum }) + ' добавлена', 'success');
+  toast('✓ ' + episodeLabel({ season: activeSeason, episode: nextNum }) + ' добавлена', 'success');
   scheduleSaveMovieData();
 }
 
@@ -853,11 +911,16 @@ function deleteEpisode(idx){
   if (!isAdmin) return;
   ensureRealEpisodesArray();
   if (movieData.episodes.length <= 1) { toast('Должна остаться хотя бы одна серия', 'error'); return; }
-  if (!confirm('Удалить ' + episodeLabel(movieData.episodes[idx]) + '?')) return;
+  const target = movieData.episodes[idx];
+  if (!target) return;
+  if (!confirm('Удалить ' + episodeLabel(target) + '?')) return;
+  const season = target.season || 1;
   movieData.episodes.splice(idx, 1);
-  movieData.episodes.forEach((e, i) => { e.episode = i + 1; });
-  if (currentEpisodeIndex >= movieData.episodes.length) currentEpisodeIndex = movieData.episodes.length - 1;
-  if (currentEpisodeIndex >= 0) playEpisode(currentEpisodeIndex); else renderEpisodes();
+  let n = 1;
+  movieData.episodes.forEach(e => { if ((e.season || 1) === season) e.episode = n++; });
+  if (currentEpisodeIndex === idx) currentEpisodeIndex = -1;
+  else if (currentEpisodeIndex > idx) currentEpisodeIndex -= 1;
+  renderEpisodes();
   toast('Серия удалена');
   scheduleSaveMovieData();
 }
@@ -1160,6 +1223,7 @@ function setEditableMode(on){
     el.contentEditable = on ? 'true' : 'false';
     el.spellcheck = false;
   });
+  if (typeof renderSeasonTabs === 'function') renderSeasonTabs();
   if (typeof renderEpisodes === 'function') renderEpisodes();
 }
 function initEditableHandlers(){
