@@ -17,56 +17,69 @@
   },
   "videoUrl": "",
   "season": 1,
+  "seasons": [
+    1
+  ],
   "episodes": [
     {
       "episode": 1,
       "title": "Мир императора",
-      "videoUrl": "https://archive.org/download/foundation.-s-01-e-01.-the.-emperors.-peace.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E01.The.Emperors.Peace.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4"
+      "videoUrl": "https://archive.org/download/foundation.-s-01-e-01.-the.-emperors.-peace.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E01.The.Emperors.Peace.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
+      "season": 1
     },
     {
       "episode": 2,
       "title": "Подготовка к жизни",
-      "videoUrl": "https://archive.org/download/foundation.-s-01-e-02.-preparing.to.-live.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E02.Preparing.to.Live.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4"
+      "videoUrl": "https://archive.org/download/foundation.-s-01-e-02.-preparing.to.-live.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E02.Preparing.to.Live.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
+      "season": 1
     },
     {
       "episode": 3,
       "title": "Призрак математика",
-      "videoUrl": "https://archive.org/download/foundation.-s-01-e-03.-the.-mathematicians.-ghost.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E03.The.Mathematicians.Ghost.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4"
+      "videoUrl": "https://archive.org/download/foundation.-s-01-e-03.-the.-mathematicians.-ghost.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E03.The.Mathematicians.Ghost.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
+      "season": 1
     },
     {
       "episode": 4,
       "title": "Варвары у ворот",
-      "videoUrl": "https://archive.org/download/foundation.-s-01-e-04.-barbarians.at.the.-gate.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E04.Barbarians.at.the.Gate.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4"
+      "videoUrl": "https://archive.org/download/foundation.-s-01-e-04.-barbarians.at.the.-gate.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E04.Barbarians.at.the.Gate.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
+      "season": 1
     },
     {
       "episode": 5,
       "title": "При пробуждении",
-      "videoUrl": "https://archive.org/download/foundation.-s-01-e-05.-upon.-awakening.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E05.Upon.Awakening.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4"
+      "videoUrl": "https://archive.org/download/foundation.-s-01-e-05.-upon.-awakening.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E05.Upon.Awakening.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
+      "season": 1
     },
     {
       "episode": 6,
       "title": "Смерть и Дева",
-      "videoUrl": "https://archive.org/download/foundation.-s-01-e-06.-death.and.the.-maiden.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E06.Death.and.the.Maiden.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4"
+      "videoUrl": "https://archive.org/download/foundation.-s-01-e-06.-death.and.the.-maiden.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E06.Death.and.the.Maiden.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
+      "season": 1
     },
     {
       "episode": 7,
       "title": "Тайны и мученики",
-      "videoUrl": "https://archive.org/download/foundation.-s-01-e-07.-mysteries.and.-martyrs.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E07.Mysteries.and.Martyrs.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4"
+      "videoUrl": "https://archive.org/download/foundation.-s-01-e-07.-mysteries.and.-martyrs.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E07.Mysteries.and.Martyrs.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
+      "season": 1
     },
     {
       "episode": 8,
       "title": "Недостающий кусок",
-      "videoUrl": "https://archive.org/download/foundation.-s-01-e-08.-the.-missing.-piece.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E08.The.Missing.Piece.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4"
+      "videoUrl": "https://archive.org/download/foundation.-s-01-e-08.-the.-missing.-piece.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E08.The.Missing.Piece.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
+      "season": 1
     },
     {
       "episode": 9,
       "title": "Первый кризис",
-      "videoUrl": "https://archive.org/download/foundation.-s-01-e-09.-the.-first.-crisis.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E09.The.First.Crisis.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4"
+      "videoUrl": "https://archive.org/download/foundation.-s-01-e-09.-the.-first.-crisis.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E09.The.First.Crisis.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
+      "season": 1
     },
     {
       "episode": 10,
       "title": "Прыжок",
-      "videoUrl": "https://archive.org/download/foundation.-s-01-e-10.-the.-leap.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E10.The.Leap.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4"
+      "videoUrl": "https://archive.org/download/foundation.-s-01-e-10.-the.-leap.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S01E10.The.Leap.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
+      "season": 1
     }
   ],
   "siteName": "Видеоархив 2021",
@@ -81,6 +94,7 @@
     "y": 0,
     "scale": 1
   },
+  "bgDarkness": 56,
   "colors": {
     "title": "#ffffff",
     "accentText": "#ffffff",
