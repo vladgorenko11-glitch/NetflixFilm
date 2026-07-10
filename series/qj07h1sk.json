@@ -1,8 +1,9 @@
 {
-  "title": "",
+  "title": "X",
   "poster": "",
   "fields": {
-    "hero-title": "<br>"
+    "hero-title": "X",
+    "hero-desc": "<br>"
   },
   "videoUrl": "",
   "season": 1,
