@@ -20,8 +20,8 @@
   "siteTagline": "ПАЦАНЫ",
   "footerText": "© ПАЦАНЫ  • PRIME VIDEO",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/qj07h1sk.jpg"
   },
   "bgPosition": {
     "x": 50,
