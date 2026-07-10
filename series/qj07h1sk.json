@@ -30,7 +30,7 @@
   },
   "bgDarkness": 65,
   "colors": {
-    "title": "",
+    "title": "#ffffff",
     "accentText": "",
     "btn": "",
     "shape": "",
