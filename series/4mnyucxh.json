@@ -17,46 +17,57 @@
   },
   "videoUrl": "",
   "season": 1,
+  "seasons": [
+    1
+  ],
   "episodes": [
     {
       "episode": 1,
       "title": "Конец",
-      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-01.-web-dl.-1080p.-rhs/Fallout.2024.S01E01.WEB-DL.1080p.RHS.mp4"
+      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-01.-web-dl.-1080p.-rhs/Fallout.2024.S01E01.WEB-DL.1080p.RHS.mp4",
+      "season": 1
     },
     {
       "episode": 2,
       "title": "Цель",
-      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-02.-web-dl.-1080p.-rhs/Fallout.2024.S01E02.WEB-DL.1080p.RHS.mp4"
+      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-02.-web-dl.-1080p.-rhs/Fallout.2024.S01E02.WEB-DL.1080p.RHS.mp4",
+      "season": 1
     },
     {
       "episode": 3,
       "title": "Голова",
-      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-03.-web-dl.-1080p.-rhs/Fallout.2024.S01E03.WEB-DL.1080p.RHS.mp4"
+      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-03.-web-dl.-1080p.-rhs/Fallout.2024.S01E03.WEB-DL.1080p.RHS.mp4",
+      "season": 1
     },
     {
       "episode": 4,
       "title": "Гули",
-      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-04.-web-dl.-1080p.-rhs/Fallout.2024.S01E04.WEB-DL.1080p.RHS.mp4"
+      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-04.-web-dl.-1080p.-rhs/Fallout.2024.S01E04.WEB-DL.1080p.RHS.mp4",
+      "season": 1
     },
     {
       "episode": 5,
       "title": "Прошлое",
-      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-05.-web-dl.-1080p.-rhs/Fallout.2024.S01E05.WEB-DL.1080p.RHS.mp4"
+      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-05.-web-dl.-1080p.-rhs/Fallout.2024.S01E05.WEB-DL.1080p.RHS.mp4",
+      "season": 1
     },
     {
       "episode": 6,
       "title": "Ловушка",
-      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-06.-web-dl.-1080p.-rhs/Fallout.2024.S01E06.WEB-DL.1080p.RHS.mp4"
+      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-06.-web-dl.-1080p.-rhs/Fallout.2024.S01E06.WEB-DL.1080p.RHS.mp4",
+      "season": 1
     },
     {
       "episode": 7,
       "title": "Радио",
-      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-07.-web-dl.-1080p.-rhs/Fallout.2024.S01E07.WEB-DL.1080p.RHS.mp4"
+      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-07.-web-dl.-1080p.-rhs/Fallout.2024.S01E07.WEB-DL.1080p.RHS.mp4",
+      "season": 1
     },
     {
       "episode": 8,
       "title": "Начало",
-      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-08.-web-dl.-1080p.-rhs/Fallout.2024.S01E08.WEB-DL.1080p.RHS.mp4"
+      "videoUrl": "https://archive.org/download/fallout.-2024.-s-01-e-08.-web-dl.-1080p.-rhs/Fallout.2024.S01E08.WEB-DL.1080p.RHS.mp4",
+      "season": 1
     }
   ],
   "siteName": "Видеоархив 2024",
@@ -71,6 +82,7 @@
     "y": 0,
     "scale": 1
   },
+  "bgDarkness": 0,
   "colors": {
     "title": "#ffffff",
     "accentText": "#3b82f6",
