@@ -58,8 +58,8 @@
   "siteTagline": "fallout 2",
   "footerText": "© FALLOUT • 2 СЕЗОН • 2026 • PRIME VIDEO",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/c8q6ttiz.jpg"
   },
   "bgPosition": {
     "x": 50,
