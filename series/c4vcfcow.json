@@ -19,7 +19,7 @@
   "videoUrl": "",
   "season": 1,
   "seasons": [
-    1
+    2
   ],
   "episodes": [
     {
@@ -27,70 +27,70 @@
       "title": "В тени Сэлдона",
       "videoUrl": "https://archive.org/download/foundation.-s-02-e-01.-in.-seldons.-shadow.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S02E01.In.Seldons.Shadow.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
       "label": "S2E1",
-      "season": 1
+      "season": 2
     },
     {
       "episode": 2,
       "title": "Проблеск тьмы",
       "videoUrl": "https://archive.org/download/foundation.-s-02-e-02.-a.-glimpse.of.-darkness.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S02E02.A.Glimpse.of.Darkness.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
       "label": "S2E2",
-      "season": 1
+      "season": 2
     },
     {
       "episode": 3,
       "title": "Король и простолюдин",
       "videoUrl": "https://archive.org/download/foundation.-2023.-s-02-e-03.-king.and.-commoner.-1080p.-hevc.-web-dlrip/Foundation.2023.S02E03.King.and.Commoner.1080p.HEVC.WEB-DLRip.mp4",
       "label": "S2E3",
-      "season": 1
+      "season": 2
     },
     {
       "episode": 4,
       "title": "Там, где звёзды разбросаны негусто",
       "videoUrl": "https://archive.org/download/foundation.-s-02-e-04.-where.the.-stars.-are.-scattered.-thinly.-1080p.-atvp.-we/Foundation.S02E04.Where.the.Stars.Are.Scattered.Thinly.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
       "label": "S2E4",
-      "season": 1
+      "season": 2
     },
     {
       "episode": 5,
       "title": "Зрячие и видящие",
       "videoUrl": "https://archive.org/download/foundation.-s-02-e-05.-the.-sighted.and.the.-seen.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S02E05.The.Sighted.and.the.Seen.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
       "label": "S2E5",
-      "season": 1
+      "season": 2
     },
     {
       "episode": 6,
       "title": "Для чего боги сотворили вино",
       "videoUrl": "https://archive.org/download/foundation.-s-02-e-06.-why.the.-gods.-made.-wine.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S02E06.Why.the.Gods.Made.Wine.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
       "label": "S2E6",
-      "season": 1
+      "season": 2
     },
     {
       "episode": 7,
       "title": "Необходимая смерть",
       "videoUrl": "https://archive.org/download/foundation.-s-02-e-07.-a.-necessary.-death.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S02E07.A.Necessary.Death.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
       "label": "S2E7",
-      "season": 1
+      "season": 2
     },
     {
       "episode": 8,
       "title": "Последняя императрица",
       "videoUrl": "https://archive.org/download/foundation.-s-02-e-08.-the.-last.-empress.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S02E08.The.Last.Empress.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
       "label": "S2E8",
-      "season": 1
+      "season": 2
     },
     {
       "episode": 9,
       "title": "Давным-давно, не так уж далеко",
       "videoUrl": "https://archive.org/download/foundation.-s-02-e-09.-long.-ago.-not.-far.-away.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S02E09.Long.Ago.Not.Far.Away.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
       "label": "S2E9",
-      "season": 1
+      "season": 2
     },
     {
       "episode": 10,
       "title": "Мифы о сотворении",
       "videoUrl": "https://archive.org/download/foundation.-s-02-e-10.-creation.-myths.-1080p.-atvp.-web-dl.-ddp-5.1.-h.-264-enia-hd/Foundation.S02E10.Creation.Myths.1080p.ATVP.WEB-DL.DDP5.1.H.264-EniaHD.mp4",
       "label": "S2E10",
-      "season": 1
+      "season": 2
     }
   ],
   "siteName": "Видеоархив 2023 ",
