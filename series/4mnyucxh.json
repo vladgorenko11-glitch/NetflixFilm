@@ -82,7 +82,7 @@
     "y": 0,
     "scale": 1
   },
-  "bgDarkness": 0,
+  "bgDarkness": 100,
   "colors": {
     "title": "#ffffff",
     "accentText": "#3b82f6",
