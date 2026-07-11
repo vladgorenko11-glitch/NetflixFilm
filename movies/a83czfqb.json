@@ -27,6 +27,7 @@
     "y": 80,
     "scale": 1
   },
+  "bgDarkness": 64,
   "colors": {
     "title": "#ffffff",
     "accentText": "",
