@@ -88,6 +88,19 @@ header { background:linear-gradient(180deg,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.75) 
 #player-section { background:#000; border-radius:6px; overflow:hidden; margin-bottom:2.5rem; border:1px solid var(--border); box-shadow:0 8px 40px rgba(0,0,0,0.7),0 0 0 1px rgba(var(--shape-rgb),0.08); }
 #player-header { background:linear-gradient(90deg,var(--bg2),var(--bg3)); padding:0.875rem 1.5rem; border-bottom:1px solid var(--border-pink); display:flex; align-items:center; justify-content:space-between; gap:1rem; }
 #now-playing { font-family:'Netflix Sans',sans-serif; font-size:1.2rem; letter-spacing:0.1em; color:var(--accent-text); }
+.hotkeys-hint { flex:0 0 auto; width:28px; height:28px; border-radius:50%; border:1px solid var(--border); color:var(--text3); font-size:0.85rem; display:flex; align-items:center; justify-content:center; cursor:default; transition:all 0.15s; }
+.hotkeys-hint:hover { color:var(--text); border-color:var(--border-pink); background:rgba(var(--shape-rgb),0.12); }
+.continue-watching-banner { display:flex; align-items:center; justify-content:space-between; gap:1rem; background:linear-gradient(90deg,rgba(var(--shape-rgb),0.18),rgba(var(--shape-rgb),0.05)); border:1px solid var(--border-pink); border-radius:6px; padding:0.7rem 1.1rem; margin:0.9rem 0 0; cursor:pointer; transition:background 0.15s; }
+.continue-watching-banner:hover { background:rgba(var(--shape-rgb),0.28); }
+.cw-info { display:flex; align-items:center; gap:0.6rem; font-size:0.82rem; color:var(--text); font-weight:600; }
+.cw-icon { color:var(--accent-text); font-size:0.9rem; }
+.cw-time { color:var(--text3); font-weight:500; }
+.cw-close { background:none; border:none; color:var(--text3); font-size:0.95rem; cursor:pointer; padding:2px 8px; line-height:1; }
+.cw-close:hover { color:var(--text); }
+@media (max-width:600px) {
+  .continue-watching-banner { padding:0.6rem 0.8rem; }
+  .cw-info { font-size:0.72rem; }
+}
 #player-container { background:#000; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; position:relative; }
 #main-video { width:100%; height:100%; display:none; }
 #player-placeholder { text-align:center; padding:4rem; }
@@ -246,6 +259,7 @@ footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:cente
   <div id="player-section">
     <div id="player-header">
       <div id="now-playing" class="adm-editable" data-singleline="1" data-field="now-playing">— Фильм —</div>
+      <span class="hotkeys-hint" title="Пробел — пауза/play&#10;← / → — перемотка на 10 сек&#10;↑ / ↓ — громкость&#10;M — вкл/выкл звук&#10;F — полный экран">⌨</span>
     </div>
     <div id="player-container">
       <video id="main-video" controls preload="metadata" src=""></video>
@@ -254,6 +268,7 @@ footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:cente
         <p>Видео ещё не загружено</p>
       </div>
     </div>
+    <div id="continue-watching-banner-slot"></div>
   </div>
 
   <div class="meta-pills-row">
@@ -563,6 +578,7 @@ function applyMovieDataToPage(){
     if (urlInput) urlInput.value = movieData.videoUrl;
     try { loadVideo(movieData.videoUrl); } catch(e){}
   }
+  renderContinueWatchingBanner();
 
   // Фон (hero background)
   const bg = document.getElementById('hero-bg');
@@ -646,10 +662,112 @@ function changePassword(){
 }
 
 /* ===== Видео ===== */
-function loadVideo(url){
+function loadVideo(url, resumeTime){
   const v=document.getElementById('main-video'); const p=document.getElementById('player-placeholder');
   v.src=url; v.style.display='block'; p.style.display='none';
+  if (typeof resumeTime === 'number' && resumeTime > 0) {
+    const onLoaded = () => { v.currentTime = resumeTime; v.removeEventListener('loadedmetadata', onLoaded); };
+    v.addEventListener('loadedmetadata', onLoaded);
+  }
+  initWatchProgressTracking();
 }
+
+/* ===== Продолжить просмотр (сохраняем позицию локально в браузере) ===== */
+function cwStorageKey(){ return 'cw:' + (window.__movieId || location.pathname); }
+function saveWatchProgress(){
+  const video = document.getElementById('main-video');
+  if (!video || !video.src || !video.duration || isNaN(video.duration)) return;
+  if (video.currentTime > video.duration - 15) { clearWatchProgress(); return; }
+  if (video.currentTime < 5) return;
+  try { localStorage.setItem(cwStorageKey(), JSON.stringify({ time: video.currentTime, ts: Date.now() })); } catch (e) {}
+}
+function clearWatchProgress(){
+  try { localStorage.removeItem(cwStorageKey()); } catch (e) {}
+  const banner = document.getElementById('continue-watching-banner');
+  if (banner) banner.remove();
+}
+function getWatchProgress(){
+  try {
+    const raw = localStorage.getItem(cwStorageKey());
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    if (typeof data.time !== 'number') return null;
+    return data;
+  } catch (e) { return null; }
+}
+function initWatchProgressTracking(){
+  const video = document.getElementById('main-video');
+  if (!video || video.dataset.cwWired) return;
+  video.dataset.cwWired = '1';
+  let lastSave = 0;
+  video.addEventListener('timeupdate', () => {
+    const now = Date.now();
+    if (now - lastSave > 5000) { lastSave = now; saveWatchProgress(); }
+  });
+  video.addEventListener('pause', saveWatchProgress);
+  video.addEventListener('ended', clearWatchProgress);
+}
+function renderContinueWatchingBanner(){
+  const slot = document.getElementById('continue-watching-banner-slot');
+  if (!slot) return;
+  slot.innerHTML = '';
+  const progress = getWatchProgress();
+  if (!progress || !movieData.videoUrl) return;
+  const mins = Math.floor(progress.time / 60);
+  const secs = Math.floor(progress.time % 60);
+  const timeStr = mins + ':' + (secs < 10 ? '0' : '') + secs;
+  const banner = document.createElement('div');
+  banner.id = 'continue-watching-banner';
+  banner.className = 'continue-watching-banner';
+  banner.innerHTML =
+    '<div class="cw-info"><span class="cw-icon">▶</span> Продолжить просмотр <span class="cw-time">(' + timeStr + ')</span></div>' +
+    '<button type="button" class="cw-close" title="Скрыть">✕</button>';
+  banner.querySelector('.cw-info').addEventListener('click', () => {
+    loadVideo(movieData.videoUrl, progress.time);
+    const v = document.getElementById('main-video');
+    const p = v.play(); if (p && p.catch) p.catch(() => {});
+    banner.remove();
+  });
+  banner.querySelector('.cw-close').addEventListener('click', (e) => { e.stopPropagation(); clearWatchProgress(); });
+  slot.appendChild(banner);
+}
+document.addEventListener('keydown', function(e){
+  const t = e.target;
+  const tag = (t && t.tagName || '').toLowerCase();
+  if (tag === 'input' || tag === 'textarea' || (t && t.isContentEditable)) return;
+  const video = document.getElementById('main-video');
+  if (!video || !video.src) return;
+  switch (e.key) {
+    case ' ':
+    case 'Spacebar':
+      e.preventDefault();
+      if (video.paused) video.play(); else video.pause();
+      break;
+    case 'ArrowLeft':
+      e.preventDefault();
+      video.currentTime = Math.max(0, video.currentTime - 10);
+      break;
+    case 'ArrowRight':
+      e.preventDefault();
+      video.currentTime = Math.min(video.duration || video.currentTime + 10, video.currentTime + 10);
+      break;
+    case 'ArrowUp':
+      e.preventDefault();
+      video.volume = Math.min(1, Math.round((video.volume + 0.1) * 10) / 10);
+      break;
+    case 'ArrowDown':
+      e.preventDefault();
+      video.volume = Math.max(0, Math.round((video.volume - 0.1) * 10) / 10);
+      break;
+    case 'm': case 'M':
+      video.muted = !video.muted;
+      break;
+    case 'f': case 'F':
+      if (document.fullscreenElement) document.exitFullscreen();
+      else if (video.requestFullscreen) video.requestFullscreen();
+      break;
+  }
+});
 function saveUrl(){
   const url=document.getElementById('url-input').value.trim();
   if(!url){ toast('Введите URL','error'); return; }
