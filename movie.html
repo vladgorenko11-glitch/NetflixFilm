@@ -90,7 +90,7 @@ header { background:linear-gradient(180deg,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.75) 
 #now-playing { font-family:'Netflix Sans',sans-serif; font-size:1.2rem; letter-spacing:0.1em; color:var(--accent-text); }
 .hotkeys-hint { flex:0 0 auto; width:28px; height:28px; border-radius:50%; border:1px solid var(--border); color:var(--text3); font-size:0.85rem; display:flex; align-items:center; justify-content:center; cursor:default; transition:all 0.15s; }
 .hotkeys-hint:hover { color:var(--text); border-color:var(--border-pink); background:rgba(var(--shape-rgb),0.12); }
-.continue-watching-banner { display:flex; align-items:center; justify-content:space-between; gap:1rem; background:linear-gradient(90deg,rgba(var(--shape-rgb),0.18),rgba(var(--shape-rgb),0.05)); border:1px solid var(--border-pink); border-radius:6px; padding:0.7rem 1.1rem; margin:0.9rem 0 0; cursor:pointer; transition:background 0.15s; }
+.continue-watching-banner { display:flex; align-items:center; justify-content:space-between; gap:1rem; background:linear-gradient(90deg,rgba(var(--shape-rgb),0.18),rgba(var(--shape-rgb),0.05)); border:1px solid var(--border-pink); border-radius:6px; padding:0.7rem 1.1rem; margin-bottom:1rem; cursor:pointer; transition:background 0.15s; }
 .continue-watching-banner:hover { background:rgba(var(--shape-rgb),0.28); }
 .cw-info { display:flex; align-items:center; gap:0.6rem; font-size:0.82rem; color:var(--text); font-weight:600; }
 .cw-icon { color:var(--accent-text); font-size:0.9rem; }
@@ -255,6 +255,7 @@ footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:cente
 
 <div class="container">
 
+  <div id="continue-watching-banner-slot"></div>
 
   <div id="player-section">
     <div id="player-header">
@@ -268,7 +269,6 @@ footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:cente
         <p>Видео ещё не загружено</p>
       </div>
     </div>
-    <div id="continue-watching-banner-slot"></div>
   </div>
 
   <div class="meta-pills-row">

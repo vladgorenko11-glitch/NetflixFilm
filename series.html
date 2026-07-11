@@ -311,6 +311,7 @@ body.admin-mode .admin-only { display:flex; }
 
 <div class="container">
 
+  <div id="continue-watching-banner-slot"></div>
 
   <div id="player-section">
     <div id="player-header">
@@ -994,15 +995,14 @@ function initWatchProgressTracking(){
   video.addEventListener('ended', clearWatchProgress);
 }
 function renderContinueWatchingBanner(){
-  const existing = document.getElementById('continue-watching-banner');
-  if (existing) existing.remove();
+  const slot = document.getElementById('continue-watching-banner-slot');
+  if (!slot) return;
+  slot.innerHTML = '';
   const progress = getWatchProgress();
   if (!progress) return;
   const episodes = getEpisodesList();
   const ep = episodes[progress.idx];
   if (!ep) return;
-  const anchor = document.getElementById('season-tabs');
-  if (!anchor || !anchor.parentNode) return;
   const banner = document.createElement('div');
   banner.id = 'continue-watching-banner';
   banner.className = 'continue-watching-banner';
@@ -1016,7 +1016,7 @@ function renderContinueWatchingBanner(){
     '<button type="button" class="cw-close" title="Скрыть">✕</button>';
   banner.querySelector('.cw-info').addEventListener('click', () => resumeWatchProgress(progress));
   banner.querySelector('.cw-close').addEventListener('click', (e) => { e.stopPropagation(); clearWatchProgress(); });
-  anchor.parentNode.insertBefore(banner, anchor);
+  slot.appendChild(banner);
 }
 function resumeWatchProgress(progress){
   const episodes = getEpisodesList();
