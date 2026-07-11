@@ -61,7 +61,7 @@ header { background:linear-gradient(180deg,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.75) 
 .admin-pill:hover { opacity:0.7; color:var(--text2); }
 .admin-pill.active { opacity:0.85; color:var(--accent-text); }
 .hero-banner { position:relative; overflow:hidden; min-height:520px; display:flex; flex-direction:column; justify-content:flex-end; background:var(--bg2); }
-.hero-bg-img { position:absolute; inset:0; width:100%; height:100%; background-repeat:no-repeat; background-size:cover; background-position: var(--bg-pos-x,50%) var(--bg-pos-y,0%); filter:saturate(1.05) brightness(0.65); display:none; transform:scale(var(--bg-scale,1)); transform-origin:center center; transition:none; }
+.hero-bg-img { position:absolute; inset:0; width:100%; height:100%; background-repeat:no-repeat; background-size:cover; background-position: var(--bg-pos-x,50%) var(--bg-pos-y,0%); filter:saturate(1.05) brightness(calc(1 - var(--hero-darkness,1) * 0.35)); display:none; transform:scale(var(--bg-scale,1)); transform-origin:center center; transition:none; }
 .hero-banner.bg-position-mode { cursor:grab; }
 .hero-banner.bg-position-mode:active { cursor:grabbing; }
 .hero-banner.bg-position-mode .hero-bg-img { pointer-events:none; }
@@ -70,9 +70,9 @@ header { background:linear-gradient(180deg,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.75) 
 .hero-banner.bg-position-mode .hero-overlay-bottom { display:none; }
 .hero-banner.bg-position-mode::after { content:'🖱 Тащите для сдвига · колесо — масштаб'; position:absolute; top:1rem; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.75); color:#fff; font-size:0.72rem; letter-spacing:0.05em; padding:6px 14px; border-radius:4px; z-index:5; text-transform:uppercase; font-weight:700; pointer-events:none; }
 .hero-banner.bg-position-mode { outline:2px dashed rgba(var(--shape-rgb),0.7); outline-offset:-2px; }
-.hero-overlay-top { position:absolute; top:0; left:0; right:0; height:120px; background:linear-gradient(180deg,rgba(5,0,0,0.97) 0%,transparent 100%); z-index:1; }
-.hero-overlay-bottom { position:absolute; bottom:0; left:0; right:0; height:75%; background:linear-gradient(0deg,rgba(5,0,0,1) 0%,rgba(15,0,0,0.9) 30%,rgba(20,0,0,0.45) 60%,transparent 100%); z-index:1; }
-.hero-overlay-sides { position:absolute; inset:0; background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.75) 100%); z-index:1; }
+.hero-overlay-top { position:absolute; top:0; left:0; right:0; height:120px; background:linear-gradient(180deg,rgba(5,0,0,calc(var(--hero-darkness,1) * 0.97)) 0%,transparent 100%); z-index:1; }
+.hero-overlay-bottom { position:absolute; bottom:0; left:0; right:0; height:75%; background:linear-gradient(0deg,rgba(5,0,0,calc(var(--hero-darkness,1) * 1)) 0%,rgba(15,0,0,calc(var(--hero-darkness,1) * 0.9)) 30%,rgba(20,0,0,calc(var(--hero-darkness,1) * 0.45)) 60%,transparent 100%); z-index:1; }
+.hero-overlay-sides { position:absolute; inset:0; background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,calc(var(--hero-darkness,1) * 0.75)) 100%); z-index:1; }
 .hero-content { position:relative; z-index:2; padding:2.5rem 4% 3rem; max-width:1400px; margin:0 auto; width:100%; }
 .hero-eyebrow { font-size:0.68rem; letter-spacing:0.35em; color:var(--accent-text); text-transform:uppercase; margin-bottom:1rem; font-weight:700; text-shadow:0 0 12px var(--accent-textglow); min-height:1em; }
 .hero-title { font-family:'Netflix Sans',sans-serif; font-size:clamp(2rem,4.5vw,3.5rem); letter-spacing:0.06em; color:#fff; line-height:0.95; text-shadow:3px 3px 0px rgba(0,0,0,0.6),0 0 50px rgba(0,0,0,0.9); margin-bottom:1.25rem; text-transform:uppercase; min-height:1em; }
@@ -165,6 +165,9 @@ body.admin-mode .adm-editable:focus { outline:2px solid var(--shape); background
 body.admin-mode .hero-banner.adm-editable-zone { cursor:pointer; }
 .bg-upload-hint { position:absolute; z-index:3; top:1rem; right:1rem; background:rgba(0,0,0,0.85); border:1px solid var(--border-pink); color:var(--text2); font-size:0.68rem; letter-spacing:0.05em; padding:6px 12px; border-radius:4px; display:none; text-transform:uppercase; font-weight:700; }
 body.admin-mode .bg-upload-hint { display:block; }
+.bg-darkness-control { position:absolute; z-index:4; top:1rem; right:1rem; margin-top:36px; background:rgba(0,0,0,0.85); border:1px solid var(--border-pink); color:var(--text2); font-size:0.68rem; letter-spacing:0.03em; padding:8px 12px; border-radius:4px; text-transform:uppercase; font-weight:700; align-items:center; gap:8px; cursor:default; }
+.bg-darkness-control input[type="range"] { width:110px; accent-color:var(--btn-solid); cursor:pointer; }
+.bg-darkness-value { min-width:2.4em; text-align:right; color:var(--text); font-weight:700; }
 #toast { position:fixed; bottom:2rem; right:2rem; background:var(--bg3); border:1px solid var(--border); border-left:3px solid var(--accent-text); border-radius:4px; padding:0.75rem 1.25rem; font-size:0.82rem; color:var(--text); transform:translateY(80px); opacity:0; transition:all 0.28s cubic-bezier(0.34,1.56,0.64,1); z-index:9998; max-width:300px; }
 #toast.show { transform:translateY(0); opacity:1; }
 #toast.success { border-left-color:var(--accent-text); color:var(--accent-text); }
@@ -217,6 +220,11 @@ footer { border-top:1px solid var(--border); padding:1.5rem 4%; text-align:cente
   <div class="hero-overlay-sides"></div>
   <div class="hero-overlay-bottom"></div>
   <div class="bg-upload-hint">🖼 Нажмите, чтобы изменить фон</div>
+  <div class="bg-darkness-control admin-only" onclick="event.stopPropagation()">
+    <span class="bg-darkness-label">🌓 Затемнение фона</span>
+    <input type="range" id="bg-darkness-slider" min="0" max="100" value="100">
+    <span class="bg-darkness-value" id="bg-darkness-value">100%</span>
+  </div>
   <div class="hero-content">
     <div class="hero-eyebrow adm-editable" data-singleline="1" data-field="hero-eyebrow">X</div>
     <h1 class="hero-title adm-editable" data-singleline="1" data-field="hero-title"><span>X</span></h1>
@@ -370,6 +378,7 @@ let movieData = {
   footerText: '© Видеоархив',
   heroBg: { type: '', value: '' }, // type: 'upload' | 'url' ; value: путь в репо ИЛИ внешняя ссылка
   bgPosition: { x: 50, y: 0, scale: 1 },
+  bgDarkness: 100,      // 0-100: сила затемнения фонового изображения (100 = как было изначально)
   colors: { title: '', accentText: '', btn: '', shape: '', bgPrimary: '', bgSecondary: '' }
 };
 let movieSha = null;       // sha файла movies/<id>.json (для корректного обновления)
@@ -418,6 +427,7 @@ async function loadMovieData(){
       movieData.fields = loaded.fields || {};
       movieData.heroBg = loaded.heroBg || { type:'', value:'' };
       movieData.bgPosition = loaded.bgPosition || { x:50, y:0, scale:1 };
+      movieData.bgDarkness = (typeof loaded.bgDarkness === 'number' && loaded.bgDarkness >= 0 && loaded.bgDarkness <= 100) ? loaded.bgDarkness : 100;
       movieData.colors = loaded.colors || {};
       movieSha = file.sha;
       setSaveStatus('ok', '✓ Данные загружены из GitHub.');
@@ -576,6 +586,10 @@ function applyMovieDataToPage(){
     bgScale = movieData.bgPosition.scale || 1;
     applyBgPositionVars();
   }
+
+  // Затемнение фона (свой уровень для каждого фильма)
+  applyBgDarkness(typeof movieData.bgDarkness === 'number' ? movieData.bgDarkness : 100);
+  initBgDarknessSlider();
 
   // Цвета — оборачиваем в try/catch, чтобы ошибка в данных одного фильма
   // никогда не мешала отрисовке палитр (раньше при сбое здесь палитры вообще не появлялись).
@@ -999,6 +1013,29 @@ function applyBgPositionVars(){
   root.setProperty('--bg-pos-x', bgPosX + '%');
   root.setProperty('--bg-pos-y', bgPosY + '%');
   root.setProperty('--bg-scale', bgScale);
+}
+
+/* ===== Затемнение фона (индивидуально для каждого фильма) ===== */
+function applyBgDarkness(val){
+  const pct = Math.max(0, Math.min(100, val));
+  document.documentElement.style.setProperty('--hero-darkness', pct / 100);
+  const slider = document.getElementById('bg-darkness-slider');
+  const label = document.getElementById('bg-darkness-value');
+  if (slider) slider.value = pct;
+  if (label) label.textContent = pct + '%';
+}
+let bgDarknessSaveTimer = null;
+function initBgDarknessSlider(){
+  const slider = document.getElementById('bg-darkness-slider');
+  if (!slider || slider.dataset.wired) return;
+  slider.dataset.wired = '1';
+  slider.addEventListener('input', function(){
+    const val = parseInt(slider.value, 10);
+    applyBgDarkness(val);
+    movieData.bgDarkness = val;
+    clearTimeout(bgDarknessSaveTimer);
+    bgDarknessSaveTimer = setTimeout(() => scheduleSaveMovieData(), 500);
+  });
 }
 function saveBgPosition(){
   movieData.bgPosition = { x: bgPosX, y: bgPosY, scale: bgScale };
