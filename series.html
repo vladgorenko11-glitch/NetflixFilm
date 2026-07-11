@@ -112,24 +112,13 @@ header { background:linear-gradient(180deg,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.75) 
 .info-card { background:var(--bg2); border:1px solid var(--border); border-radius:4px; padding:1rem 1.25rem; }
 .info-label { font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--text3); margin-bottom:0.4rem; font-weight:700; }
 .info-value { font-size:0.9rem; color:var(--text); font-weight:600; min-height:1.2em; }
-#share-section { background:linear-gradient(180deg,var(--bg2) 0%,var(--bg3) 100%); border:1px solid var(--border); border-radius:6px; padding:1.1rem 1.4rem; margin-bottom:2.5rem; box-shadow:0 8px 30px rgba(0,0,0,0.5); }
-.share-title { font-family:'Netflix Sans',sans-serif; font-size:0.98rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--text2); margin-bottom:0.7rem; }
-.share-row { display:flex; gap:0.6rem; flex-wrap:wrap; align-items:stretch; margin-bottom:0.6rem; }
-.share-url-input { flex:1; min-width:160px; padding:0 12px; height:36px; background:var(--bg); border:1px solid var(--border); border-radius:4px; color:var(--text2); font-family:'Netflix Sans',sans-serif; font-size:0.76rem; outline:none; transition:border-color 0.2s; }
-.share-url-input:focus { border-color:var(--shape); }
-.share-btn { padding:0 1rem; height:36px; border-radius:4px; font-family:'Netflix Sans',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer; white-space:nowrap; transition:all 0.18s; }
-.share-btn-copy { background:var(--btn); color:#fff; border:1px solid var(--btn); }
-.share-btn-copy:hover { background:var(--btn-hover); border-color:var(--btn-hover); }
-.share-btn-download { background:rgba(var(--btn-rgb),0.3); color:var(--text); border:1px solid var(--border-pink); }
-.share-btn-download:hover { background:rgba(var(--btn-rgb),0.55); }
+#share-section { margin-bottom:2.5rem; }
+.share-btn-compact { padding:0.55rem 1.1rem; border-radius:20px; font-family:'Netflix Sans',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer; white-space:nowrap; transition:all 0.18s; background:var(--bg2); color:var(--text2); border:1px solid var(--border-pink); }
+.share-btn-compact:hover { background:var(--btn); color:#fff; border-color:var(--btn); }
 .share-desc { font-size:0.7rem; color:var(--text3); line-height:1.45; }
 @media (max-width:600px) {
-  #share-section { padding:0.9rem 1rem; margin-bottom:1.5rem; }
-  .share-title { font-size:0.86rem; letter-spacing:0.08em; margin-bottom:0.55rem; }
-  .share-row { flex-direction:column; gap:0.45rem; margin-bottom:0.5rem; }
-  .share-url-input { height:34px; min-width:0; font-size:0.72rem; }
-  .share-btn { height:34px; width:100%; }
-  .share-desc { font-size:0.66rem; }
+  #share-section { margin-bottom:1.5rem; }
+  .share-btn-compact { width:100%; height:38px; }
 }
 .meta-pills-row { display:flex; flex-wrap:wrap; gap:0.65rem; margin-bottom:2.5rem; }
 .imdb-pill { display:inline-flex; align-items:center; gap:9px; background:#efc944; border-radius:999px; padding:13px 26px; flex-shrink:0; }
@@ -210,8 +199,9 @@ body.admin-mode .ep-badge-edit:focus { outline:1px solid var(--accent-text); bac
 body.admin-mode .ep-title-edit { outline:1px dashed rgba(var(--shape-rgb),0.55); outline-offset:3px; cursor:text; border-radius:2px; }
 body.admin-mode .ep-title-edit:hover { background:rgba(var(--shape-rgb),0.1); }
 body.admin-mode .ep-title-edit:focus { outline:2px solid var(--shape); background:rgba(var(--shape-rgb),0.14); }
-.ep-status { margin-top:4px; font-size:0.66rem; color:var(--text3); }
-.ep-status.has-video { color:var(--shape); }
+.ep-status-dot { position:absolute; top:8px; right:8px; width:10px; height:10px; border-radius:50%; z-index:2; }
+.ep-status-dot.has-video { background:#2ecc71; box-shadow:0 0 6px 1px rgba(46,204,113,0.85); }
+.ep-status-dot.no-video { background:#e74c3c; box-shadow:0 0 6px 1px rgba(231,76,60,0.85); }
 .admin-only { display:none; }
 body.admin-mode .admin-only { display:flex; }
 .ep-admin-row { gap:0.4rem; margin-top:0.6rem; }
@@ -232,7 +222,7 @@ body.admin-mode .admin-only { display:flex; }
   .episodes-grid { grid-template-columns:repeat(2,1fr); gap:0.5rem; }
   .ep-info { padding:0.45rem 0.5rem; }
   .ep-title-edit { font-size:0.7rem; line-height:1.2; }
-  .ep-status { margin-top:2px; font-size:0.58rem; }
+  .ep-status-dot { width:8px; height:8px; top:6px; right:6px; }
   .ep-thumb-badge { font-size:0.52rem; padding:2px 5px; top:5px; left:5px; }
   .ep-num-bg { font-size:1.4rem; }
   .episode-card.active .ep-thumb::after { font-size:0.48rem; padding:2px 5px; top:5px; right:5px; }
@@ -340,19 +330,14 @@ body.admin-mode .admin-only { display:flex; }
   </section>
 
   <div id="share-section">
-    <div class="share-title">Поделиться</div>
-
-    <div class="share-row">
-      <input type="text" class="share-url-input" id="share-url" readonly onclick="this.select()">
-      <button class="share-btn share-btn-copy" onclick="copyShareUrl()">Копировать</button>
-    </div>
-    <p class="share-desc">Поделитесь этой ссылкой — другие люди увидят страницу со всеми вашими изменениями, потому что данные сохраняются прямо в GitHub-репозиторий сайта.</p>
-    <p class="share-desc" id="save-status-line" style="margin-top:0.5rem;"></p>
+    <button class="share-btn-compact" onclick="copyShareUrl()" title="Скопировать ссылку на эту страницу">🔗 Поделиться</button>
+    <input type="text" id="share-url" style="position:absolute;opacity:0;pointer-events:none;left:-9999px;" readonly>
   </div>
 
   <div id="admin-panel">
     <div class="admin-section-label">⚙ Панель администратора</div>
     <div class="admin-subtitle">✎ Совет: в режиме редактирования просто кликните на любой текст на странице (заголовок, бейджи, описание и т.д.) и начните печатать — изменения автоматически сохраняются в GitHub через несколько секунд.</div>
+    <p class="share-desc" id="save-status-line"></p>
 
     <div class="admin-section-label" style="margin-top:0;">🔗 Хранилище (GitHub)</div>
     <div class="admin-subtitle" id="gh-status-text">Настройте подключение к репозиторию на главной странице (кнопка «⚙ GitHub»), чтобы изменения сохранялись для всех.</div>
@@ -834,12 +819,12 @@ function renderEpisodes(){
     card.innerHTML =
       '<div class="ep-thumb" data-idx="' + idx + '">' +
         '<span class="ep-thumb-badge ep-badge-edit" data-idx="' + idx + '" data-auto="' + autoLabel + '">' + label + '</span>' +
+        '<span class="ep-status-dot ' + (hasVideo ? 'has-video' : 'no-video') + '" title="' + (hasVideo ? 'Видео загружено' : 'Видео не загружено') + '"></span>' +
         '<span class="ep-num-bg">' + label + '</span>' +
         '<div class="ep-play-overlay"><div class="ep-play-icon">▶</div></div>' +
       '</div>' +
       '<div class="ep-info">' +
         '<span class="ep-title-edit" data-idx="' + idx + '"></span>' +
-        '<div class="ep-status ' + (hasVideo ? 'has-video' : '') + '">' + (hasVideo ? '✓ видео добавлено' : 'нет видео') + '</div>' +
         '<div class="ep-admin-row admin-only">' +
           '<button type="button" class="ep-admin-btn" data-act="url" data-idx="' + idx + '">🔗 URL</button>' +
           '<button type="button" class="ep-admin-btn danger" data-act="del" data-idx="' + idx + '">✕</button>' +
