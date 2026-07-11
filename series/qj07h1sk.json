@@ -25,7 +25,14 @@
     4,
     5
   ],
-  "episodes": [],
+  "episodes": [
+    {
+      "season": 1,
+      "episode": 1,
+      "title": "",
+      "videoUrl": "https://archive.org/download/the.-boys.-2019.-s-01-e-01.-the.-name.of.the.-game.-web-dl.-1080p.-kv-k/The.Boys.2019.S01E01.The.Name.of.the.Game.WEB-DL.1080p.KvK.mp4"
+    }
+  ],
   "siteName": "Видеоархив",
   "siteTagline": "ПАЦАНЫ 2026",
   "footerText": "© ПАЦАНЫ  • PRIME VIDEO",
