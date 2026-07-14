@@ -15,8 +15,8 @@
   "siteTagline": "Закулисье реальности",
   "footerText": "© Видеоархив",
   "heroBg": {
-    "type": "",
-    "value": ""
+    "type": "upload",
+    "value": "backgrounds/6yucwk3z.webp"
   },
   "bgPosition": {
     "x": 50,
