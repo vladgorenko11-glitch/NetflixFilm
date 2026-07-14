@@ -17,11 +17,11 @@
   "footerText": "© Видеоархив",
   "heroBg": {
     "type": "upload",
-    "value": "backgrounds/6yucwk3z.webp"
+    "value": "backgrounds/6yucwk3z.jpg"
   },
   "bgPosition": {
-    "x": 44.301994301994306,
-    "y": 47.5,
+    "x": 41.52421652421653,
+    "y": 58.07692307692308,
     "scale": 1
   },
   "bgDarkness": 80,
